@@ -50,10 +50,9 @@
     document.body.appendChild(renderer.domElement);
 
     //Camera creation
-
     var ratio = window.innerWidth / window.innerHeight;
     //Create the perspective camera
-    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
+    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
     camera.position.set(60, 25, 60);
 
     //Light addition -> Camera Light
@@ -61,56 +60,24 @@
     camera.add(cameraLight);
     scene.add(camera);
 
+    var geometry_floor = new THREE.BoxGeometry(50, 0.1, 50);
+    var geometry_wall = new THREE.BoxGeometry(40, 10, 1);
 
-    //Texture creation
-    // var imgTexture = new THREE.TextureLoader().load("img/brick_bump.jpg");
-    // imgTexture.wrapS = imgTexture.wrapT = THREE.RepeatWrapping;
-    // imgTexture.anisotropy = 16;
-    // imgTexture = null;
+    var floor = loadTexture('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', geometry_floor);
+    floor.position.z -= 2;
+    scene.add(floor);
 
-    //Create the mesh of a sphere
-    //Texture loader
-    var textureLoader = new THREE.TextureLoader();
-    var geometry_cube = new THREE.BoxGeometry(50, 0.1, 50);
-    var cube;
-    var wall;
-    THREE.ImageUtils.crossOrigin = true;
-    textureLoader.crossOrigin = true;
+    var wall = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall);
+    wall.position.y+=(geometry_wall.parameters.height/2);
+    wall.position.z-=20;
+    scene.add(wall);
+
+    var wall2 = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall);
+    wall2.position.y+=(geometry_wall.parameters.height/2);
+    wall2.position.z+=20;
+    scene.add(wall2);
 
 
-    var wall_cube = new THREE.BoxGeometry(40, 10, 1);
-    textureLoader.load('http://localhost:8000/img/wood_1.jpg', function(texture) {
-          // this code makes the texture repeat
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(1, 1);
-          var material = new THREE.MeshLambertMaterial({
-            map: texture
-          });
-          // set the texture as the map for the material
-          wall = new THREE.Mesh(wall_cube, material);
-          wall.position.y+=(wall_cube.parameters.height/2);
-          wall.position.z-=20;
-          scene.add(wall);
-          // cube.position.z -0 2;
-          render();
-        });
-
-    // function input_texture(){
-    //
-    // }
-
-    textureLoader.load('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', function(texture) {
-          // this code makes the texture repeat
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(1, 1);
-          var material = new THREE.MeshLambertMaterial({
-            map: texture
-          });
-          cube = new THREE.Mesh(geometry_cube, material);
-          scene.add(cube);
-          cube.position.z -= 2;
-          render();
-        });
 
         //Resizing function -> adjust cube position and size to the window size
         var MyResize = function() {
@@ -141,9 +108,22 @@
         requestAnimationFrame(MyUpdateLoop);
         var render = function() {
           requestAnimationFrame(render);
-          // mesh.rotation.x += 0.1;
           renderer.render(scene, camera);
         };
+
+
+        function loadTexture(uri, geometry) {
+          var textureLoader = new THREE.TextureLoader();
+          THREE.ImageUtils.crossOrigin = true;
+          textureLoader.crossOrigin = true;
+          var texture = new THREE.TextureLoader().load(uri);
+          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+          texture.repeat.set(1, 1);
+          var material = new THREE.MeshLambertMaterial({
+                map: texture
+          });
+          return new THREE.Mesh(geometry, material);
+        }
 
   </script>
 
