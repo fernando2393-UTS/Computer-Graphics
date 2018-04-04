@@ -84,7 +84,7 @@
     textureLoader.crossOrigin = true;
 
 
-    var wall_cube = new THREE.BoxGeometry(30, 10, 1);
+    var wall_cube = new THREE.BoxGeometry(40, 10, 1);
     textureLoader.load('http://localhost:8000/img/wood1.jpg', function(texture) {
           // this code makes the texture repeat
           texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -94,7 +94,8 @@
           });
           // set the texture as the map for the material
           wall = new THREE.Mesh(wall_cube, material);
-          wall.position.y+=5;
+          wall.position.y+=(wall_cube.parameters.height/2);
+          wall.position.z-=20;
           scene.add(wall);
           // cube.position.z -0 2;
           render();
