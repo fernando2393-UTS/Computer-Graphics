@@ -2,6 +2,7 @@
 
 <head>
   <title>Final Computer Graphics Project</title>
+  <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 
 <style>
@@ -23,26 +24,19 @@
   <script src="js/OrbitControls.js">
   </script>
 
-  <style>
-    body {
-      font-family: Monospace;
-      background-color: #000;
-      color: #fff;
-      margin: 0px;
-      overflow: hidden;
-    }
+  <!-- <div id="texture">
+  Introduce the texture:
+  <form id="texture_form">
+    <select id="txt">
+      <option value="img/brick_bump.jpg">Bricks</option>
+      <option value="img/wood_1.jpg">Wood 1</option>
+      <option value="img/wood_2.jpg">Wood 2</option>
+    </select>
+  </form>
+  </div> -->
 
-    #info {
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      text-align: center;
-    }
-  </style>
 
-  <div id="info">
-    <p>This is a threeJS Test<br>
-  </div>
+
   <script>
     //Create the scene
     var scene = new THREE.Scene();
@@ -79,42 +73,20 @@
     var textureLoader = new THREE.TextureLoader();
     var geometry_cube = new THREE.BoxGeometry(50, 0.1, 50);
     var cube;
-    var wall;
     THREE.ImageUtils.crossOrigin = true;
     textureLoader.crossOrigin = true;
 
-
-    var wall_cube = new THREE.BoxGeometry(30, 10, 1);
-    textureLoader.load('http://localhost:8000/img/wood1.jpg', function(texture) {
+    textureLoader.load("Final Project/img/wood_2.jpg", function(texture) {
           // this code makes the texture repeat
           texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
           texture.repeat.set(1, 1);
+          // set the texture as the map for the material
           var material = new THREE.MeshLambertMaterial({
             map: texture
           });
-          // set the texture as the map for the material
-          wall = new THREE.Mesh(wall_cube, material);
-          wall.position.y+=5;
-          scene.add(wall);
-          // cube.position.z -0 2;
-          render();
-        });
-
-    // function input_texture(){
-    //
-    // }
-
-    textureLoader.load('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', function(texture) {
-          // this code makes the texture repeat
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(1, 1);
-          var material = new THREE.MeshLambertMaterial({
-            map: texture
-          });
-          // set the texture as the map for the material
           cube = new THREE.Mesh(geometry_cube, material);
           scene.add(cube);
-          // cube.position.z -0 2;
+          cube.position.z -= 2;
           render();
         });
 
@@ -147,11 +119,12 @@
         requestAnimationFrame(MyUpdateLoop);
         var render = function() {
           requestAnimationFrame(render);
-          // mesh.rotation.x += 0.1;
+          mesh.rotation.x += 0.1;
           renderer.render(scene, camera);
         };
 
   </script>
+
 </body>
 
 </html>

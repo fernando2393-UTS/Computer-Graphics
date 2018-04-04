@@ -1,0 +1,19 @@
+body {
+  font-family: Monospace;
+  background-color: #000;
+  color: #fff;
+  margin: 0px;
+  overflow: hidden;
+}
+
+
+#texture {
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+#texture_form{
+  margin-top: 5px;
+  color: #fff;
+}
