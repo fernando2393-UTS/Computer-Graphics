@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Simple Geometry Test</title>
+  <title>Final Computer Graphics Project</title>
 </head>
 
 <style>
@@ -59,8 +59,8 @@
 
     var ratio = window.innerWidth / window.innerHeight;
     //Create the perspective camera
-    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
-    camera.position.set(10, 10, 0.3);
+    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
+    camera.position.set(60, 25, 60);
 
     //Light addition -> Camera Light
     var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (2));
@@ -77,7 +77,7 @@
     //Create the mesh of a sphere
     //Texture loader
     var textureLoader = new THREE.TextureLoader();
-    var geometry_cube = new THREE.BoxGeometry(50, 0.1 , 50);
+    var geometry_cube = new THREE.BoxGeometry(50, 0.1, 50);
     var cube;
     THREE.ImageUtils.crossOrigin = true;
     textureLoader.crossOrigin = true;
@@ -99,23 +99,6 @@
           // cube.position.z -0 2;
           render();
         });
-
-
-        // var color = new THREE.Color("#7833aa");
-        // var material_cube = new THREE.MeshLambertMaterial({
-        //   color: color.getHex()
-        // });
-        // //Set renderer to wireframe
-        // material_cube.wireframe = true;
-        // var geometry_cube = new THREE.SphereGeometry(2, 32, 32);
-        // var cube = new THREE.Mesh(geometry_cube, material_cube);
-        //
-        // scene.add(cube); cube.position.z -= 6;
-
-        //Light addition
-        // var light = new THREE.PointLight( 0xFFFFFF , 1.5);
-        // light.position.set( 10, 0, 80 );
-        // scene.add( light );
 
         //Resizing function -> adjust cube position and size to the window size
         var MyResize = function() {
