@@ -133,27 +133,6 @@
           renderer.render(scene, camera);
         };
 
-
-
-        // Load the background texture
-        var texture = THREE.ImageUtils.loadTexture( 'background.jpg' );
-        var backgroundMesh = new THREE.Mesh(
-          new THREE.PlaneGeometry(2, 2, 0),
-          new THREE.MeshBasicMaterial({
-            map: texture
-          }));
-
-          backgroundMesh.material.depthTest = false;
-          backgroundMesh.material.depthWrite = false;
-
-          // Create your background scene
-          var backgroundScene = new THREE.Scene();
-          var backgroundCamera = new THREE.Camera();
-          backgroundScene.add(backgroundCamera );
-          backgroundScene.add(backgroundMesh );
-
-
-
   </script>
 </body>
 
