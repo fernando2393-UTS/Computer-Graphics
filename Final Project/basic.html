@@ -59,7 +59,7 @@
 
     var ratio = window.innerWidth / window.innerHeight;
     //Create the perspective camera
-    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
+    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
     camera.position.set(10, 10, 0.3);
 
     //Light addition -> Camera Light
@@ -77,14 +77,14 @@
     //Create the mesh of a sphere
     //Texture loader
     var textureLoader = new THREE.TextureLoader();
-    var geometry_cube = new THREE.BoxGeometry(10, 10, 0.3);
+    var geometry_cube = new THREE.BoxGeometry(50, 0.1 , 50);
     var cube;
     THREE.ImageUtils.crossOrigin = true;
     textureLoader.crossOrigin = true;
 
     // function input_texture(){
     //
-    // } 
+    // }
 
     textureLoader.load('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', function(texture) {
           // this code makes the texture repeat
@@ -96,7 +96,7 @@
           });
           cube = new THREE.Mesh(geometry_cube, material);
           scene.add(cube);
-          cube.position.z -= 2;
+          // cube.position.z -0 2;
           render();
         });
 
@@ -146,9 +146,30 @@
         requestAnimationFrame(MyUpdateLoop);
         var render = function() {
           requestAnimationFrame(render);
-          mesh.rotation.x += 0.1;
+          // mesh.rotation.x += 0.1;
           renderer.render(scene, camera);
         };
+
+
+
+        // Load the background texture
+        var texture = THREE.ImageUtils.loadTexture( 'background.jpg' );
+        var backgroundMesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(2, 2, 0),
+          new THREE.MeshBasicMaterial({
+            map: texture
+          }));
+
+          backgroundMesh.material.depthTest = false;
+          backgroundMesh.material.depthWrite = false;
+
+          // Create your background scene
+          var backgroundScene = new THREE.Scene();
+          var backgroundCamera = new THREE.Camera();
+          backgroundScene.add(backgroundCamera );
+          backgroundScene.add(backgroundMesh );
+
+
 
   </script>
 </body>
