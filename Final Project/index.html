@@ -39,7 +39,12 @@
 
   <script>
 
-  // var floor_width =
+    var FLOOR_WIDTH = 60; //x-axis
+    var FLOOR_HEIGHT = 0.1; //y-axis
+    var FLOOR_LENGTH = 90; //z-axis
+
+    var WALL_HEIGHT = 15;
+    var WALL_THICKNESS = 1;
 
     //Create the scene
     var scene = new THREE.Scene();
@@ -63,23 +68,32 @@
     camera.add(cameraLight);
     scene.add(camera);
 
-    var geometry_floor = new THREE.BoxGeometry(50, 0.1, 50);
-    var geometry_wall = new THREE.BoxGeometry(40, 10, 1);
+    var geometry_floor = new THREE.BoxGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
+    var geometry_wall_parallel = new THREE.BoxGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
+    var geometry_wall_orthogonal = new THREE.BoxGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH);
 
     var floor = loadTexture('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', geometry_floor);
-    floor.position.z -= 2;
     scene.add(floor);
 
-    var wall = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall);
-    wall.position.y+=(geometry_wall.parameters.height/2);
-    wall.position.z-=20;
-    scene.add(wall);
+    var wall_back = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel);
+    wall_back.position.y+=(geometry_wall_parallel.parameters.height/2);
+    wall_back.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
+    scene.add(wall_back);
 
-    var wall2 = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall);
-    wall2.position.y+=(geometry_wall.parameters.height/2);
-    wall2.position.z+=20;
-    scene.add(wall2);
+    var wall_front = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel);
+    wall_front.position.y+=(geometry_wall_parallel.parameters.height/2);
+    wall_front.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
+    scene.add(wall_front);
 
+    var wall_left = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal);
+    wall_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+    wall_left.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+    scene.add(wall_left);
+
+    var wall_right = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal);
+    wall_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+    wall_right.position.x+=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+    scene.add(wall_right);
 
 
         //Resizing function -> adjust cube position and size to the window size
