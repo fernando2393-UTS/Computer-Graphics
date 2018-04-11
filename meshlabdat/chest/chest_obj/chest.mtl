@@ -1,0 +1,59 @@
+# Blender MTL File: 'chest.blend'
+# Material Count: 6
+
+newmtl komod_narujn
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd H:\PROJECT\komnata\komod\komod narujn_cr.jpg
+
+newmtl komod_poloski
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.044433 0.005375 0.001068
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd H:\PROJECT\komnata\komod\komod narujn_cr.jpg
+
+newmtl komod_vnutr
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd H:\PROJECT\komnata\komod\komod vnutr_cr.jpg
+
+newmtl napravlyauch
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+
+newmtl niz
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+
+newmtl ruchki
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
