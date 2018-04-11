@@ -72,25 +72,25 @@
     var geometry_wall_parallel = new THREE.BoxGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_orthogonal = new THREE.BoxGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH);
 
-    var floor = loadTexture('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', geometry_floor);
+    var floor = loadTexture('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', geometry_floor, 1);
     scene.add(floor);
 
-    var wall_back = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel);
+    var wall_back = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel, 2);
     wall_back.position.y+=(geometry_wall_parallel.parameters.height/2);
     wall_back.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
     scene.add(wall_back);
 
-    var wall_front = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel);
+    var wall_front = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_parallel, 2);
     wall_front.position.y+=(geometry_wall_parallel.parameters.height/2);
     wall_front.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
     scene.add(wall_front);
 
-    var wall_left = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal);
+    var wall_left = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal, 2);
     wall_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
     wall_left.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
     scene.add(wall_left);
 
-    var wall_right = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal);
+    var wall_right = loadTexture('http://localhost:8000/img/wood_1.jpg', geometry_wall_orthogonal, 2);
     wall_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
     wall_right.position.x+=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
     scene.add(wall_right);
@@ -129,13 +129,13 @@
         };
 
 
-        function loadTexture(uri, geometry) {
+        function loadTexture(uri, geometry, rep) {
           var textureLoader = new THREE.TextureLoader();
           THREE.ImageUtils.crossOrigin = true;
           textureLoader.crossOrigin = true;
           var texture = new THREE.TextureLoader().load(uri);
           texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          texture.repeat.set(1, 1);
+          texture.repeat.set(rep, rep);
           var material = new THREE.MeshLambertMaterial({
                 map: texture
           });
