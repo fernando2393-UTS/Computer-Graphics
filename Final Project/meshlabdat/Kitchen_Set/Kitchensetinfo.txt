@@ -1,0 +1,23 @@
+              Set Name:   Kitchen Set info
+
+  Model---------Uved--------Poly/tri count---------Image---------Type
+
+Cabinet 1        Yes           54/118             Yes            OBJ
+
+Cabinet 2        Yes           78/158             Yes            OBJ
+
+Cabinet 3        Yes           97/194             Yes            OBJ
+  
+Cabinet 4        Yes           76/156             Yes            OBJ
+ 
+Cabinet 5        Yes           96/192             Yes            OBJ       
+
+Sink             Yes           294/588            Yes            OBJ
+
+Microwave        Yes           94/189             Yes            OBJ
+
+Refrigerator     Yes           182/364            Yes            OBJ
+
+Stove            Yes           399/798            Yes            OBJ
+
+Dishwasher       Yes           192/376            Yes            OBJ
