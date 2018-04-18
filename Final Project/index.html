@@ -63,9 +63,11 @@
     var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
     camera.position.set(60, 25, 60);
 
-    var light = new THREE.PointLight( 0xffffff, 2, 50 );
-    light.position.set( 0, 0, 50 );
-    scene.add( light );
+    var pointLight = new THREE.PointLight( 0xffffff );
+    pointLight.position.set(1,1,2);
+    camera.add(pointLight);
+    // light.position.set( 0, 0, 50 );
+    // scene.add( light );
 
     // //Light addition -> Camera Light
     // var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (2));
