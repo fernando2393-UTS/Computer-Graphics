@@ -190,17 +190,18 @@
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
-      //  var center = geometry.boundingBox.getCenter();
+      var center = geometry.boundingBox.getCenter();
       var size = geometry.boundingBox.getSize();
 
       var sca = new THREE.Matrix4();
-      //  var tra = new THREE.Matrix4();
-      //  var combined = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
 
       sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
-      //  tra.makeTranslation (-center.x,-center.y,-center.z);
-      //  combined.multiply(sca);
-      //  combined.multiply(tra);
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
 
       bed_mesh = new THREE.Mesh(geometry, bed_material);
 
@@ -218,9 +219,9 @@
 
     function onDocumentMouseDown(event) {
 
-      var mouse = new THREE.Vector2();
+      var mouse = new THREE.Vector2;
       mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-      mouse.y = (event.clientY / renderer.domElement.clientHeight) * 2 - 1;
+      mouse.y = - (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
 
@@ -237,7 +238,6 @@
           var pos = intersects[0].point;
           console.log("Item placed");
           bed_mesh.position.x = pos.x;
-          bed_mesh.position.y = pos.y;
           bed_mesh.position.z = pos.z;
           selectedObj = false;
         }
