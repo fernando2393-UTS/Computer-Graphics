@@ -82,7 +82,6 @@
     // camera.add(cameraLight);
     scene.add(camera);
 
-<<<<<<< HEAD
     var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
     var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH-0.2, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_03 = new THREE.CubeGeometry(FLOOR_WIDTH*WALL_TOP_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
@@ -93,14 +92,6 @@
     var geometry_wall_orthogonal_04 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH*WALL_LEFT2_LENGTH-0.2);
     var geometry_wall_orthogonal_02 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH*WALL_LEFT3_LENGTH);
     var geometry_wall_diagonal = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH*0.287);
-=======
-    var geometry_floor = new THREE.BoxGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
-    var geometry_wall_parallel = new THREE.BoxGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
-    var geometry_wall_parallel_03 = new THREE.BoxGeometry(FLOOR_WIDTH * WALL_TOP_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
-    var geometry_wall_orthogonal = new THREE.BoxGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH);
-    var geometry_wall_orthogonal_08 = new THREE.BoxGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * WALL_RIGHT_LENGTH);
-    var geometry_wall_orthogonal_06 = new THREE.BoxGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * WALL_LEFT_LENGTH);
->>>>>>> cf5f89310460131ac88174b81b71fd00ee2274f7
 
     var floor = loadTexture('https://static.pexels.com/photos/235985/pexels-photo-235985.jpeg', geometry_floor, 1);
     scene.add(floor);
@@ -116,18 +107,10 @@
     wall_bottom2.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
     scene.add(wall_bottom2);
 
-<<<<<<< HEAD
     var wall_top = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1);
     wall_top.position.y+=(geometry_wall_parallel.parameters.height/2);
     //wall_top.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH);
     wall_top.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
-=======
-
-    var wall_top = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1);
-    wall_top.position.y += (geometry_wall_parallel.parameters.height / 2);
-    wall_top.position.x -= FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH);
-    wall_top.position.z -= FLOOR_LENGTH / 2 - FLOOR_LENGTH * (1 - WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth / 2;
->>>>>>> cf5f89310460131ac88174b81b71fd00ee2274f7
     scene.add(wall_top);
 
     var wall_top2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1);
@@ -137,7 +120,6 @@
     scene.add(wall_top2);
 
     // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-<<<<<<< HEAD
     var wall_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1);
     wall_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
     wall_left.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
@@ -149,20 +131,6 @@
     wall_left2.position.y+=(geometry_wall_orthogonal.parameters.height/2);
     wall_left2.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
     wall_left2.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - 0.1;
-=======
-    var wall_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_06, 1);
-    wall_left.position.y += (geometry_wall_orthogonal.parameters.height / 2);
-    wall_left.position.x -= FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
-    wall_left.position.z += FLOOR_LENGTH / 2 * (1 - WALL_LEFT_LENGTH);
-    scene.add(wall_left);
-
-    // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-    var wall_left2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_06, 1);
-    wall_left2.position.y += (geometry_wall_orthogonal.parameters.height / 2);
-    wall_left2.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) - 2;
-    wall_left2.position.z += FLOOR_LENGTH / 2 * (1 - WALL_LEFT_LENGTH);
-    // - FLOOR_LENGTH*0.2
->>>>>>> cf5f89310460131ac88174b81b71fd00ee2274f7
     scene.add(wall_left2);
 
     var wall_left3 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1);
