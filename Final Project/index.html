@@ -242,7 +242,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
+      sca.makeScale(25 / size.length(), 25 / size.length(), 25 / size.length());
       tra.makeTranslation (-center.x,-center.y,-center.z);
 
       combined.multiply(tra);
@@ -252,6 +252,8 @@
 
       bed_mesh.applyMatrix(sca);
       bed_mesh.name = "loaded_mesh";
+      bed_mesh.position.x -= FLOOR_WIDTH/3;
+      bed_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH)-2.5;
 
       bed_mesh.castShadow = true;
       scene.add(bed_mesh);
@@ -287,20 +289,109 @@
       car_mesh = new THREE.Mesh(geometry, car_material);
 
       car_mesh.applyMatrix(sca);
-      // car_mesh.position.y = (geometry.parameters.height / 2);
       car_mesh.name = "loaded_mesh_1";
+
+      car_mesh.position.x += FLOOR_WIDTH/3 + 2.5;
+      car_mesh.position.z += FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
 
       car_mesh.castShadow = true;
       scene.add(car_mesh);
     });
 
 
+    //Shelf model
+
+    var shelf_color = new THREE.Color(0.8, 1, 0.6);
+    var shelf_material = new THREE.MeshPhongMaterial();
+
+    shelf_material.color = shelf_color;
+    shelf_material.shininess = 0;
+
+    var loader2 = new THREE.PLYLoader();
+    var shelf_mesh = null;
+    loader2.load('Final Models/shelf1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(40 / size.length(), 40 / size.length(), 40 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      shelf_mesh = new THREE.Mesh(geometry, shelf_material);
+
+      shelf_mesh.applyMatrix(sca);
+      shelf_mesh.name = "loaded_mesh_2";
+      shelf_mesh.position.x -= FLOOR_WIDTH/3-FLOOR_WIDTH/3 + 4;
+      shelf_mesh.position.z -= FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - 10.45;
+
+
+      shelf_mesh.castShadow = true;
+      scene.add(shelf_mesh);
+    });
+
+    //Fridge model
+
+    var fridge_color = new THREE.Color(0.8, 1, 0.6);
+    var fridge_material = new THREE.MeshPhongMaterial();
+
+    fridge_material.color = fridge_color;
+    fridge_material.shininess = 0;
+
+    var loader3 = new THREE.PLYLoader();
+    var fridge_mesh = null;
+    loader3.load('Final Models/fridge1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      fridge_mesh = new THREE.Mesh(geometry, fridge_material);
+
+      fridge_mesh.applyMatrix(sca);
+      fridge_mesh.applyMatrix(rot);
+      fridge_mesh.name = "loaded_mesh_3";
+
+      fridge_mesh.position.x -= FLOOR_WIDTH/2-3.75;
+      fridge_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) + 3.5;
+
+      fridge_mesh.castShadow = true;
+      scene.add(fridge_mesh);
+    });
+
+
+
 /*---------------------Selector of models in the scene--------------------*/
 
     var raycaster = new THREE.Raycaster();
 
+    //Boolean variables of each of the items
+
     var selectedObj_bed = false;
     var selectedObj_car = false;
+    var selectedObj_shelf = false;
+    var selectedObj_fridge = false;
 
     function onDocumentMouseDown(event) {
 
@@ -344,6 +435,38 @@
           car_mesh.position.x = pos.x;
           car_mesh.position.z = pos.z;
           selectedObj_car = false;
+        }
+
+        //Self selector
+
+        if ((intersects[0].object.name == "loaded_mesh_2") && (!selectedObj_shelf)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_shelf = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_2") && (selectedObj_shelf)) {
+          shelf_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          shelf_mesh.position.x = pos.x;
+          shelf_mesh.position.z = pos.z;
+          selectedObj_shelf = false;
+        }
+
+        //Fridge selector
+
+        if ((intersects[0].object.name == "loaded_mesh_3") && (!selectedObj_fridge)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_fridge = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_3") && (selectedObj_fridge)) {
+          fridge_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          fridge_mesh.position.x = pos.x;
+          fridge_mesh.position.z = pos.z;
+          selectedObj_fridge = false;
         }
 
       }
