@@ -380,6 +380,45 @@
       scene.add(fridge_mesh);
     });
 
+    //Lamp model
+
+    var lamp_color = new THREE.Color(0.8, 1, 0.6);
+    var lamp_material = new THREE.MeshPhongMaterial();
+
+    lamp_material.color = lamp_color;
+    lamp_material.shininess = 100;
+
+    var loader4 = new THREE.PLYLoader();
+    var lamp_mesh = null;
+    loader4.load('Final Models/lamp1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      lamp_mesh = new THREE.Mesh(geometry, lamp_material);
+
+      lamp_mesh.applyMatrix(sca);
+      lamp_mesh.name = "loaded_mesh_4";
+
+      // lamp_mesh.position.x -= FLOOR_WIDTH/2-3.75;
+      // lamp_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) + 3.5;
+
+      lamp_mesh.castShadow = true;
+      scene.add(lamp_mesh);
+    });
+
 
 
 /*---------------------Selector of models in the scene--------------------*/
@@ -392,6 +431,7 @@
     var selectedObj_car = false;
     var selectedObj_shelf = false;
     var selectedObj_fridge = false;
+    var selectedObj_lamp = false;
 
     function onDocumentMouseDown(event) {
 
@@ -467,6 +507,22 @@
           fridge_mesh.position.x = pos.x;
           fridge_mesh.position.z = pos.z;
           selectedObj_fridge = false;
+        }
+
+        //Lamp selector
+
+        if ((intersects[0].object.name == "loaded_mesh_4") && (!selectedObj_lamp)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_lamp = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_4") && (selectedObj_lamp)) {
+          lamp_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          lamp_mesh.position.x = pos.x;
+          lamp_mesh.position.z = pos.z;
+          selectedObj_lamp = false;
         }
 
       }
