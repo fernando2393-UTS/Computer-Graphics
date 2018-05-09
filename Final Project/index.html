@@ -221,6 +221,7 @@
 
     /*---------------------Addition of all models to the scene--------------------*/
 
+    //Bed model
 
     var bed_color = new THREE.Color(0.8, 1, 0.6);
     var bed_material = new THREE.MeshPhongMaterial();
@@ -256,10 +257,50 @@
       scene.add(bed_mesh);
     });
 
+    //Car model
+
+    var car_color = new THREE.Color(0.8, 1, 0.6);
+    var car_material = new THREE.MeshPhongMaterial();
+
+    car_material.color = car_color;
+    car_material.shininess = 0;
+
+    var loader1 = new THREE.PLYLoader();
+    var car_mesh = null;
+    loader1.load('Final Models/car1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      car_mesh = new THREE.Mesh(geometry, car_material);
+
+      car_mesh.applyMatrix(sca);
+      // car_mesh.position.y = (geometry.parameters.height / 2);
+      car_mesh.name = "loaded_mesh_1";
+
+      car_mesh.castShadow = true;
+      scene.add(car_mesh);
+    });
+
+
+/*---------------------Selector of models in the scene--------------------*/
 
     var raycaster = new THREE.Raycaster();
 
-    var selectedObj = false;
+    var selectedObj_bed = false;
+    var selectedObj_car = false;
 
     function onDocumentMouseDown(event) {
 
@@ -272,19 +313,39 @@
       var intersects = raycaster.intersectObjects(scene.children, false);
 
       if (intersects.length > 0) {
-        if ((intersects[0].object.name == "loaded_mesh") && (!selectedObj)) {
+
+        //Bed selector
+
+        if ((intersects[0].object.name == "loaded_mesh") && (!selectedObj_bed)) {
           console.log("Item selected");
           intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
-          selectedObj = true;
+          selectedObj_bed = true;
         }
-        if ((intersects[0].object.name != "loaded_mesh") && (selectedObj)) {
+        if ((intersects[0].object.name != "loaded_mesh") && (selectedObj_bed)) {
           bed_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
           var pos = intersects[0].point;
           console.log("Item placed");
           bed_mesh.position.x = pos.x;
           bed_mesh.position.z = pos.z;
-          selectedObj = false;
+          selectedObj_bed = false;
         }
+
+        //Car selector
+
+        if ((intersects[0].object.name == "loaded_mesh_1") && (!selectedObj_car)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_car = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_1") && (selectedObj_car)) {
+          car_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          car_mesh.position.x = pos.x;
+          car_mesh.position.z = pos.z;
+          selectedObj_car = false;
+        }
+
       }
     }
 
