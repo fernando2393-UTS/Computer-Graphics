@@ -488,11 +488,96 @@
       table_mesh.name = "loaded_mesh_5";
 
       table_mesh.position.x += 10;
-      // table_mesh.position.z -= 5;
 
       table_mesh.castShadow = true;
       scene.add(table_mesh);
     });
+
+    //Chair model
+
+    var chair_color_1 = new THREE.Color(0.8, 1, 0.6);
+    var chair_material_1 = new THREE.MeshPhongMaterial();
+
+    chair_material_1.color = chair_color_1;
+    chair_material_1.shininess = 0;
+
+    //Chair 1
+
+    var loader6 = new THREE.PLYLoader();
+    var chair_mesh_1 = null;
+    loader6.load('Final Models/chair1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(-Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      chair_mesh_1 = new THREE.Mesh(geometry, chair_material_1);
+
+      chair_mesh_1.applyMatrix(sca);
+      chair_mesh_1.applyMatrix(rot);
+      chair_mesh_1.name = "loaded_mesh_6";
+
+      chair_mesh_1.position.x += 2;
+
+      chair_mesh_1.castShadow = true;
+      scene.add(chair_mesh_1);
+    });
+
+    //Chair 2
+
+    var chair_color_2 = new THREE.Color(0.8, 1, 0.6);
+    var chair_material_2 = new THREE.MeshPhongMaterial();
+
+    chair_material_2.color = chair_color_2;
+    chair_material_2.shininess = 0;
+
+    var loader7 = new THREE.PLYLoader();
+    var chair_mesh_2 = null;
+    loader7.load('Final Models/chair1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      chair_mesh_2 = new THREE.Mesh(geometry, chair_material_2);
+
+      chair_mesh_2.applyMatrix(sca);
+      chair_mesh_2.applyMatrix(rot);
+      chair_mesh_2.name = "loaded_mesh_7";
+
+      chair_mesh_2.position.x += 14;
+
+      chair_mesh_2.castShadow = true;
+      scene.add(chair_mesh_2);
+    });
+
+
 
 
 
@@ -508,6 +593,8 @@
     var selectedObj_fridge = false;
     var selectedObj_lamp = false;
     var selectedObj_table = false;
+    var selectedObj_chair_1 = false;
+    var selectedObj_chair_2 = false;
 
     function onDocumentMouseDown(event) {
 
@@ -615,6 +702,38 @@
           table_mesh.position.x = pos.x;
           table_mesh.position.z = pos.z;
           selectedObj_table = false;
+        }
+
+        //Chair_1 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_6") && (!selectedObj_chair_1)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_chair_1 = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_6") && (selectedObj_chair_1)) {
+          chair_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          chair_mesh_1.position.x = pos.x;
+          chair_mesh_1.position.z = pos.z;
+          selectedObj_chair_1 = false;
+        }
+
+        //Chair_2 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_7") && (!selectedObj_chair_2)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_chair_2 = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_7") && (selectedObj_chair_2)) {
+          chair_mesh_2.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          chair_mesh_2.position.x = pos.x;
+          chair_mesh_2.position.z = pos.z;
+          selectedObj_chair_2 = false;
         }
 
       }
