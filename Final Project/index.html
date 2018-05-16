@@ -387,9 +387,9 @@
       var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      sca.makeScale(15 / size.length(), 15 / size.length(), 15 / size.length());
       tra.makeTranslation (-center.x,-center.y,-center.z);
-      rot.makeRotationY(Math.PI/2);
+      rot.makeRotationY(2*Math.PI);
 
       combined.multiply(tra);
       combined.multiply(sca);
@@ -400,13 +400,142 @@
       fridge_mesh.applyMatrix(rot);
       fridge_mesh.name = "loaded_mesh_3";
 
-      fridge_mesh.position.x -= FLOOR_WIDTH/2-3.75;
-      fridge_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) + 3.5;
+      fridge_mesh.position.x -= FLOOR_WIDTH/2-76.4;
+      fridge_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) -15.7;
 
       fridge_mesh.castShadow = true;
       scene.add(fridge_mesh);
     });
 
+  //dishwasher model
+
+    var dishwasher_color = new THREE.Color(0.8, 1, 0.6);
+    var dishwasher_material = new THREE.MeshPhongMaterial();
+
+    dishwasher_material.color = dishwasher_color;
+    dishwasher_material.shininess = 0;
+
+    var loaderA = new THREE.PLYLoader();
+    var dishwasher_mesh = null;
+    loaderA.load('Final Models/dishwasher1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+     // rot.makeRotationY(-3*Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      dishwasher_mesh = new THREE.Mesh(geometry, dishwasher_material);
+
+      dishwasher_mesh.applyMatrix(sca);
+     // dishwasher_mesh.applyMatrix(rot);
+      dishwasher_mesh.name = "loaded_mesh_A";
+
+      dishwasher_mesh.position.x -= FLOOR_WIDTH/2-69.8 ;
+      dishwasher_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 14.3;
+
+      dishwasher_mesh.castShadow = true;
+      scene.add(dishwasher_mesh);
+    });
+    
+    //sink model
+
+    var sink_color = new THREE.Color(0.8, 1, 0.6);
+    var sink_material = new THREE.MeshPhongMaterial();
+
+    sink_material.color = sink_color;
+    sink_material.shininess = 0;
+
+    var loaderB = new THREE.PLYLoader();
+    var sink_mesh = null;
+    loaderB.load('Final Models/sink1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(13 / size.length(), 13 / size.length(), 13 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+     // rot.makeRotationY(-3*Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      sink_mesh = new THREE.Mesh(geometry, sink_material);
+
+     sink_mesh.applyMatrix(sca);
+	
+     // sink_mesh.applyMatrix(rot);
+      sink_mesh.name = "loaded_mesh_B";
+
+      sink_mesh.position.x -= FLOOR_WIDTH/2-62.4 ;
+      sink_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 15;
+
+      sink_mesh.castShadow = true;
+      scene.add(sink_mesh);
+    });
+    
+     //stove model
+
+    var stove_color = new THREE.Color(0.8, 1, 0.6);
+    var stove_material = new THREE.MeshPhongMaterial();
+
+    stove_material.color = stove_color;
+   stove_material.shininess = 0;
+
+    var loaderC = new THREE.PLYLoader();
+    var stove_mesh = null;
+    loaderC.load('Final Models/stove1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(11 / size.length(), 11 / size.length(), 11 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(1.5*Math.PI);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      stove_mesh = new THREE.Mesh(geometry, stove_material);
+
+     stove_mesh.applyMatrix(sca);
+	
+     stove_mesh.applyMatrix(rot);
+     stove_mesh.name = "loaded_mesh_C";
+
+      stove_mesh.position.x -= FLOOR_WIDTH/2-76.9 ;
+     stove_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 27;
+
+      stove_mesh.castShadow = true;
+      scene.add(stove_mesh);
+    });
+    
+    
     //Lamp model
 
     var lamp_color = new THREE.Color(0.8, 1, 0.6);
@@ -459,6 +588,9 @@
     var selectedObj_shelf = false;
     var selectedObj_fridge = false;
     var selectedObj_lamp = false;
+    var selectedObj_dishwasher = false;
+    var selectedObj_sink = false;
+    var selectedObj_stove = false;
 
     function onDocumentMouseDown(event) {
 
@@ -534,6 +666,54 @@
           fridge_mesh.position.x = pos.x;
           fridge_mesh.position.z = pos.z;
           selectedObj_fridge = false;
+        }
+	  
+	   //Dishwasher selector
+
+        if ((intersects[0].object.name == "loaded_mesh_A") && (!selectedObj_dishwasher)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_dishwasher = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_A") && (selectedObj_dishwasher)) {
+          dishwasher_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          dishwasher_mesh.position.x = pos.x;
+          dishwasher_mesh.position.z = pos.z;
+          selectedObj_dishwasher = false;
+        }
+	  
+	   //Sink selector
+
+        if ((intersects[0].object.name == "loaded_mesh_B") && (!selectedObj_sink)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_sink = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_B") && (selectedObj_sink)) {
+          sink_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          sink_mesh.position.x = pos.x;
+          sink_mesh.position.z = pos.z;
+          selectedObj_sink= false;
+        }
+	  
+	    //Stove selector
+
+        if ((intersects[0].object.name == "loaded_mesh_C") && (!selectedObj_stove)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_stove= true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_C") && (selectedObj_stove)) {
+          stove_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          stove_mesh.position.x = pos.x;
+          stove_mesh.position.z = pos.z;
+          selectedObj_stove= false;
         }
 
         //Lamp selector
