@@ -324,6 +324,7 @@
       car_mesh.name = "loaded_mesh_1";
 
       car_mesh.position.x += FLOOR_WIDTH/3 + 2.5;
+      car_mesh.position.y += 1.5;
       car_mesh.position.z += FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
 
       car_mesh.castShadow = true;
@@ -444,11 +445,53 @@
       lamp_mesh.applyMatrix(sca);
       lamp_mesh.name = "loaded_mesh_4";
 
-      // lamp_mesh.position.x -= FLOOR_WIDTH/2-3.75;
-      // lamp_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) + 3.5;
+      CENTER_X = lamp_mesh.position.x;
+      CENTER_Z = lamp_mesh.position.z;
 
       lamp_mesh.castShadow = true;
       scene.add(lamp_mesh);
+    });
+
+    //Table model
+
+    var table_color = new THREE.Color(0.8, 1, 0.6);
+    var table_material = new THREE.MeshPhongMaterial();
+
+    table_material.color = table_color;
+    table_material.shininess = 0;
+
+    var loader5 = new THREE.PLYLoader();
+    var table_mesh = null;
+    loader5.load('Final Models/tablestyle1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(-Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      table_mesh = new THREE.Mesh(geometry, table_material);
+
+      table_mesh.applyMatrix(sca);
+      table_mesh.applyMatrix(rot);
+      table_mesh.name = "loaded_mesh_5";
+
+      table_mesh.position.x += CENTER_X;
+      table_mesh.position.z += CENTER_Z;
+
+      table_mesh.castShadow = true;
+      scene.add(table_mesh);
     });
 
 
@@ -464,6 +507,7 @@
     var selectedObj_shelf = false;
     var selectedObj_fridge = false;
     var selectedObj_lamp = false;
+    var selectedObj_table = false;
 
     function onDocumentMouseDown(event) {
 
@@ -555,6 +599,22 @@
           lamp_mesh.position.x = pos.x;
           lamp_mesh.position.z = pos.z;
           selectedObj_lamp = false;
+        }
+
+        //Sofa selector
+
+        if ((intersects[0].object.name == "loaded_mesh_5") && (!selectedObj_table)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_table = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_5") && (selectedObj_table)) {
+          table_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          table_mesh.position.x = pos.x;
+          table_mesh.position.z = pos.z;
+          selectedObj_table = false;
         }
 
       }
