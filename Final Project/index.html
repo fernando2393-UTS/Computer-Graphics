@@ -22,9 +22,9 @@
   <script src="js/three.js">
   </script>
   <!--and the trackball code-->
-  <script src="js/OrbitControls.js">
-  </script>
+  <script src="js/OrbitControls.js"></script>
   <script src="js/PLYLoader.js"></script>
+  <script src="js/dat.gui.min.js"></script>
 
   <!-- <div id="texture">
   Introduce the texture:
@@ -102,87 +102,7 @@
     var floor = loadTexture('http://localhost:8000/img/txtr_floor.jpg', geometry_floor, 5, WallSideEnum.none);
     scene.add(floor);
 
-    // var wall_back = loadTexture('http://localhost:8000/img/txtr_wood1.jpg', geometry_wall_parallel, 1);
-    var wall_bottom = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_out, 1, WallSideEnum.front);
-    wall_bottom.position.y += (geometry_wall_parallel.parameters.height / 2);
-    wall_bottom.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
-    scene.add(wall_bottom);
-
-    var wall_bottom2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1,WallSideEnum.none);
-    wall_bottom2.position.y += (geometry_wall_parallel.parameters.height / 2);
-    wall_bottom2.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-    scene.add(wall_bottom2);
-
-    var wall_top = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1, WallSideEnum.back);
-    wall_top.position.y+=(geometry_wall_parallel.parameters.height/2);
-    //wall_top.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH);
-    wall_top.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
-    scene.add(wall_top);
-
-    var wall_top_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1, WallSideEnum.none);
-    wall_top_left.position.y+=(geometry_wall_parallel.parameters.height/2);
-    wall_top_left.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - OFFSET;
-    wall_top_left.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
-    scene.add(wall_top_left);
-
-    var wall_top_right= loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_02, 1, WallSideEnum.none);
-    wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
-    wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
-    wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
-    scene.add(wall_top_right);
-
-    // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-    var wall_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.left);
-    wall_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
-    wall_left.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH) - OFFSET;
-    scene.add(wall_left);
-
-    // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-    var wall_left2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_04, 1, WallSideEnum.none);
-    wall_left2.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left2.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
-    wall_left2.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - OFFSET;
-    scene.add(wall_left2);
-
-    var wall_left3 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
-    wall_left3.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left3.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
-    wall_left3.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
-    scene.add(wall_left3);
-
-    var wall_left4 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
-    wall_left4.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left4.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
-    wall_left4.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
-    scene.add(wall_left4);
-
-    var wall_diagonaltop_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.right);
-    var rot = new THREE.Matrix4();
-    rot.makeRotationY(0.8);
-    wall_diagonaltop_right.applyMatrix(rot);
-    wall_diagonaltop_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_diagonaltop_right.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
-    wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
-    scene.add(wall_diagonaltop_right);
-
-    var wall_diagonaltop_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.left);
-    var rot = new THREE.Matrix4();
-    rot.makeRotationY(-0.8);
-    wall_diagonaltop_left.applyMatrix(rot);
-    wall_diagonaltop_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_diagonaltop_left.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
-    wall_diagonaltop_left.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
-    scene.add(wall_diagonaltop_left);
-
-    // var wall_right = loadTexture('http://localhost:8000/img/txtr_wood2.jpg', geometry_wall_orthogonal, 1);
-    var wall_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.right);
-    wall_right.position.y += (geometry_wall_orthogonal.parameters.height / 2);
-    wall_right.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
-    wall_right.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH) - OFFSET;
-    scene.add(wall_right);
-
-
+    buildWalls();
 
     //Resizing function -> adjust cube position and size to the window size
     var MyResize = function() {
@@ -620,8 +540,103 @@
       }
     }
 
+    function buildWalls() {
+      var wall_bottom_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_out, 1, WallSideEnum.front);
+      wall_bottom_out.position.y += (geometry_wall_parallel.parameters.height / 2);
+      wall_bottom_out.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+      scene.add(wall_bottom_out);
+
+      var wall_top_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1, WallSideEnum.back);
+      wall_top_out.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_out.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
+      scene.add(wall_top_out);
+
+      var wall_left_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.left);
+      wall_left_out.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_out.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+      wall_left_out.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH) - OFFSET;
+      scene.add(wall_left_out);
+
+      var wall_right_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.right);
+      wall_right_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
+      wall_right_out.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+      wall_right_out.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH) - OFFSET;
+      scene.add(wall_right_out);
+
+      var wall_bottom_10 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1, WallSideEnum.none);
+      wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
+      wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      scene.add(wall_bottom_10);
+
+      var wall_top_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1, WallSideEnum.none);
+      wall_top_left.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_left.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - OFFSET;
+      wall_top_left.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
+      scene.add(wall_top_left);
+
+      var wall_top_right= loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_02, 1, WallSideEnum.none);
+      wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
+      wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
+      scene.add(wall_top_right);
+
+
+      var wall_left_04 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_04, 1, WallSideEnum.none);
+      wall_left_04.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_04.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
+      wall_left_04.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - OFFSET;
+      scene.add(wall_left_04);
+
+      var wall_left_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      wall_left_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_02.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
+      wall_left_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+      scene.add(wall_left_02);
+
+      var wall_right_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      wall_right_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_right_02.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
+      wall_right_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+      scene.add(wall_right_02);
+
+      var wall_diagonaltop_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.right);
+      var rot = new THREE.Matrix4();
+      rot.makeRotationY(0.8);
+      wall_diagonaltop_right.applyMatrix(rot);
+      wall_diagonaltop_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_diagonaltop_right.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
+      wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+      scene.add(wall_diagonaltop_right);
+
+      var wall_diagonaltop_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.left);
+      var rot = new THREE.Matrix4();
+      rot.makeRotationY(-0.8);
+      wall_diagonaltop_left.applyMatrix(rot);
+      wall_diagonaltop_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_diagonaltop_left.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
+      wall_diagonaltop_left.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+      scene.add(wall_diagonaltop_left);
+    }
+
+    var gui;
+    function buildGui() {
+       gui = new dat.GUI();
+       var params = {
+         cameralight_intensity: cameraLight.intensity,
+       }
+       gui.add( params, 'cameralight_intensity', 0, 3 ).onChange( function ( val ) {
+         cameraLight.intensity=val;
+       } );
+
+       //TODO Add Texture Changer
+
+       gui.open();
+     }
+
     //This allows to capture the clicks of the mouse for moving elements
     document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+    buildGui();
 
   </script>
 
