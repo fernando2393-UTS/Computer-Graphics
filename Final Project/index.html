@@ -482,8 +482,8 @@
       table_mesh.applyMatrix(rot);
       table_mesh.name = "loaded_mesh_5";
 
-      table_mesh.position.x += CENTER_X;
-      table_mesh.position.z += CENTER_Z;
+      table_mesh.position.x -= CENTER_X;
+      table_mesh.position.z -= CENTER_Z;
 
       table_mesh.castShadow = true;
       scene.add(table_mesh);
@@ -596,7 +596,7 @@
           selectedObj_lamp = false;
         }
 
-        //Sofa selector
+        //Table selector
 
         if ((intersects[0].object.name == "loaded_mesh_5") && (!selectedObj_table)) {
           console.log("Item selected");
