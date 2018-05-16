@@ -22,9 +22,9 @@
   <script src="js/three.js">
   </script>
   <!--and the trackball code-->
-  <script src="js/OrbitControls.js">
-  </script>
+  <script src="js/OrbitControls.js"></script>
   <script src="js/PLYLoader.js"></script>
+  <script src="js/dat.gui.min.js"></script>
 
   <!-- <div id="texture">
   Introduce the texture:
@@ -50,6 +50,8 @@
     var WALL_LEFT3_LENGTH = 0.2;
     var WALL_RIGHT_LENGTH = 0.8;
     var WALL_TOP_WIDTH = 0.35;
+
+    var OFFSET = 0.1;
 
     var WallSideEnum = Object.freeze({"none":-1, "right":0, "left":1, "top":2, "bottom":3, "front":4, "back":5});
 
@@ -86,6 +88,7 @@
 
     var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
     var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH-0.2, WALL_HEIGHT, WALL_THICKNESS);
+    var geometry_wall_parallel_out = new THREE.CubeGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_02 = new THREE.CubeGeometry(FLOOR_WIDTH*0.25, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_03 = new THREE.CubeGeometry(FLOOR_WIDTH*WALL_TOP_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_04 = new THREE.CubeGeometry(FLOOR_WIDTH*0.434, WALL_HEIGHT, WALL_THICKNESS);
@@ -99,87 +102,11 @@
     var floor = loadTexture('http://localhost:8000/img/txtr_floor.jpg', geometry_floor, 5, WallSideEnum.none);
     scene.add(floor);
 
-    // var wall_back = loadTexture('http://localhost:8000/img/txtr_wood1.jpg', geometry_wall_parallel, 1);
-    var wall_bottom = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1, WallSideEnum.front);
-    wall_bottom.position.y += (geometry_wall_parallel.parameters.height / 2);
-    wall_bottom.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
-    scene.add(wall_bottom);
+    buildWalls();
 
-    var wall_bottom2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1,WallSideEnum.none);
-    wall_bottom2.position.y += (geometry_wall_parallel.parameters.height / 2);
-    wall_bottom2.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-    scene.add(wall_bottom2);
-
-    var wall_top = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1, WallSideEnum.back);
-    wall_top.position.y+=(geometry_wall_parallel.parameters.height/2);
-    //wall_top.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH);
-    wall_top.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
-    scene.add(wall_top);
-
-    var wall_top2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1, WallSideEnum.none);
-    wall_top2.position.y+=(geometry_wall_parallel.parameters.height/2);
-    wall_top2.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH);
-    wall_top2.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
-    scene.add(wall_top2);
-
-    var wall_top3 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_02, 1, WallSideEnum.none);
-    wall_top3.position.y+=(geometry_wall_parallel.parameters.height/2);
-    wall_top3.position.x+=FLOOR_WIDTH/2*(1-0.25);
-    wall_top3.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
-    scene.add(wall_top3);
-
-    // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-    var wall_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.left);
-    wall_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
-    wall_left.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH);
-    scene.add(wall_left);
-
-    // var wall_left = loadTexture('http://localhost:8000/img/txtr_stone.jpg', geometry_wall_orthogonal, 1);
-    var wall_left2 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_04, 1, WallSideEnum.none);
-    wall_left2.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left2.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
-    wall_left2.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - 0.1;
-    scene.add(wall_left2);
-
-    var wall_left3 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
-    wall_left3.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left3.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
-    wall_left3.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
-    scene.add(wall_left3);
-
-    var wall_left4 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
-    wall_left4.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_left4.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
-    wall_left4.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
-    scene.add(wall_left4);
-
-    var wall_diagonaltop_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.right);
-    var rot = new THREE.Matrix4();
-    rot.makeRotationY(0.8);
-    wall_diagonaltop_right.applyMatrix(rot);
-    wall_diagonaltop_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_diagonaltop_right.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
-    wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + 0.1;
-    scene.add(wall_diagonaltop_right);
-
-    var wall_diagonaltop_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.left);
-    var rot = new THREE.Matrix4();
-    rot.makeRotationY(-0.8);
-    wall_diagonaltop_left.applyMatrix(rot);
-    wall_diagonaltop_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
-    wall_diagonaltop_left.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
-    wall_diagonaltop_left.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + 0.1;
-    scene.add(wall_diagonaltop_left);
-
-    // var wall_right = loadTexture('http://localhost:8000/img/txtr_wood2.jpg', geometry_wall_orthogonal, 1);
-    var wall_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.right);
-    wall_right.position.y += (geometry_wall_orthogonal.parameters.height / 2);
-    wall_right.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
-    wall_right.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH);
-    scene.add(wall_right);
-
-
+    var livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), 1, 100);
+    livingroom_light.position.set(3, 3, 0);
+    scene.add(livingroom_light);
 
     //Resizing function -> adjust cube position and size to the window size
     var MyResize = function() {
@@ -244,6 +171,8 @@
 
       return new THREE.Mesh(geometry, materials);
     }
+
+
 
 
     /*---------------------Addition of all models to the scene--------------------*/
@@ -319,6 +248,7 @@
       car_mesh.name = "loaded_mesh_1";
 
       car_mesh.position.x += FLOOR_WIDTH/3 + 2.5;
+      car_mesh.position.y += 1.5;
       car_mesh.position.z += FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
 
       car_mesh.castShadow = true;
@@ -568,12 +498,178 @@
       lamp_mesh.applyMatrix(sca);
       lamp_mesh.name = "loaded_mesh_4";
 
-      // lamp_mesh.position.x -= FLOOR_WIDTH/2-3.75;
-      // lamp_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) + 3.5;
+      lamp_mesh.position.x += 2;
+      lamp_mesh.position.y += 5;
 
       lamp_mesh.castShadow = true;
       scene.add(lamp_mesh);
     });
+
+    //Table model
+
+    var table_color = new THREE.Color(0.8, 1, 0.6);
+    var table_material = new THREE.MeshPhongMaterial();
+
+    table_material.color = table_color;
+    table_material.shininess = 0;
+
+    var loader5 = new THREE.PLYLoader();
+    var table_mesh = null;
+    loader5.load('Final Models/tablestyle1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(-Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      table_mesh = new THREE.Mesh(geometry, table_material);
+
+      table_mesh.applyMatrix(sca);
+      table_mesh.applyMatrix(rot);
+      table_mesh.name = "loaded_mesh_5";
+
+      table_mesh.position.x += 10;
+
+      table_mesh.castShadow = true;
+      scene.add(table_mesh);
+    });
+
+    //Chair model
+
+    var chair_color_1 = new THREE.Color(0.8, 1, 0.6);
+    var chair_material_1 = new THREE.MeshPhongMaterial();
+
+    chair_material_1.color = chair_color_1;
+    chair_material_1.shininess = 0;
+
+    //Chair 1
+
+    var loader6 = new THREE.PLYLoader();
+    var chair_mesh_1 = null;
+    loader6.load('Final Models/chair1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(-Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      chair_mesh_1 = new THREE.Mesh(geometry, chair_material_1);
+
+      chair_mesh_1.applyMatrix(sca);
+      chair_mesh_1.applyMatrix(rot);
+      chair_mesh_1.name = "loaded_mesh_6";
+
+      chair_mesh_1.position.x += 2;
+
+      chair_mesh_1.castShadow = true;
+      scene.add(chair_mesh_1);
+    });
+
+    //Chair 2
+
+    var chair_color_2 = new THREE.Color(0.8, 1, 0.6);
+    var chair_material_2 = new THREE.MeshPhongMaterial();
+
+    chair_material_2.color = chair_color_2;
+    chair_material_2.shininess = 0;
+
+    var loader7 = new THREE.PLYLoader();
+    var chair_mesh_2 = null;
+    loader7.load('Final Models/chair1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(Math.PI/2);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      chair_mesh_2 = new THREE.Mesh(geometry, chair_material_2);
+
+      chair_mesh_2.applyMatrix(sca);
+      chair_mesh_2.applyMatrix(rot);
+      chair_mesh_2.name = "loaded_mesh_7";
+
+      chair_mesh_2.position.x += 14;
+
+      chair_mesh_2.castShadow = true;
+      scene.add(chair_mesh_2);
+    });
+
+    //Lamp_1 model
+
+    var lamp_color_1 = new THREE.Color(0.8, 1, 0.6);
+    var lamp_material_1 = new THREE.MeshPhongMaterial();
+
+    lamp_material_1.color = lamp_color_1;
+    lamp_material_1.shininess = 100;
+
+    var loader8 = new THREE.PLYLoader();
+    var lamp_mesh_1 = null;
+    loader4.load('Final Models/lamp1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      lamp_mesh_1 = new THREE.Mesh(geometry, lamp_material_1);
+
+      lamp_mesh_1.applyMatrix(sca);
+      lamp_mesh_1.name = "loaded_mesh_8";
+
+      lamp_mesh_1.position.x -= FLOOR_WIDTH/3+6;
+      lamp_mesh_1.position.y += 5;
+
+      lamp_mesh_1.castShadow = true;
+      scene.add(lamp_mesh_1);
+    });
+
+
 
 
 
@@ -588,9 +684,12 @@
     var selectedObj_shelf = false;
     var selectedObj_fridge = false;
     var selectedObj_lamp = false;
-    var selectedObj_dishwasher = false;
-    var selectedObj_sink = false;
-    var selectedObj_stove = false;
+
+    var selectedObj_table = false;
+    var selectedObj_chair_1 = false;
+    var selectedObj_chair_2 = false;
+    var selectedObj_lamp_1 = false;
+
 
     function onDocumentMouseDown(event) {
 
@@ -732,11 +831,173 @@
           selectedObj_lamp = false;
         }
 
+        //Table selector
+
+        if ((intersects[0].object.name == "loaded_mesh_5") && (!selectedObj_table)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_table = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_5") && (selectedObj_table)) {
+          table_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          table_mesh.position.x = pos.x;
+          table_mesh.position.z = pos.z;
+          selectedObj_table = false;
+        }
+
+        //Chair_1 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_6") && (!selectedObj_chair_1)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_chair_1 = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_6") && (selectedObj_chair_1)) {
+          chair_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          chair_mesh_1.position.x = pos.x;
+          chair_mesh_1.position.z = pos.z;
+          selectedObj_chair_1 = false;
+        }
+
+        //Chair_2 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_7") && (!selectedObj_chair_2)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_chair_2 = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_7") && (selectedObj_chair_2)) {
+          chair_mesh_2.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          chair_mesh_2.position.x = pos.x;
+          chair_mesh_2.position.z = pos.z;
+          selectedObj_chair_2 = false;
+        }
+
+        //Lamp_1 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_8") && (!selectedObj_lamp_1)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_lamp_1 = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_8") && (selectedObj_lamp_1)) {
+          lamp_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          lamp_mesh_1.position.x = pos.x;
+          lamp_mesh_1.position.z = pos.z;
+          selectedObj_lamp_1 = false;
+        }
+
       }
     }
 
+    function buildWalls() {
+      var wall_bottom_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_out, 1, WallSideEnum.front);
+      wall_bottom_out.position.y += (geometry_wall_parallel.parameters.height / 2);
+      wall_bottom_out.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+      scene.add(wall_bottom_out);
+
+      var wall_top_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1, WallSideEnum.back);
+      wall_top_out.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_out.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
+      scene.add(wall_top_out);
+
+      var wall_left_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.left);
+      wall_left_out.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_out.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+      wall_left_out.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH) - OFFSET;
+      scene.add(wall_left_out);
+
+      var wall_right_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.right);
+      wall_right_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
+      wall_right_out.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+      wall_right_out.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH) - OFFSET;
+      scene.add(wall_right_out);
+
+      var wall_bottom_10 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1, WallSideEnum.none);
+      wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
+      wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      scene.add(wall_bottom_10);
+
+      var wall_top_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1, WallSideEnum.none);
+      wall_top_left.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_left.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - OFFSET;
+      wall_top_left.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
+      scene.add(wall_top_left);
+
+      var wall_top_right= loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_02, 1, WallSideEnum.none);
+      wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
+      wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
+      wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
+      scene.add(wall_top_right);
+
+
+      var wall_left_04 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_04, 1, WallSideEnum.none);
+      wall_left_04.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_04.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
+      wall_left_04.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - OFFSET;
+      scene.add(wall_left_04);
+
+      var wall_left_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      wall_left_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_left_02.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
+      wall_left_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+      scene.add(wall_left_02);
+
+      var wall_right_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      wall_right_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_right_02.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
+      wall_right_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+      scene.add(wall_right_02);
+
+      var wall_diagonaltop_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.right);
+      var rot = new THREE.Matrix4();
+      rot.makeRotationY(0.8);
+      wall_diagonaltop_right.applyMatrix(rot);
+      wall_diagonaltop_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_diagonaltop_right.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
+      wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+      scene.add(wall_diagonaltop_right);
+
+      var wall_diagonaltop_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.left);
+      var rot = new THREE.Matrix4();
+      rot.makeRotationY(-0.8);
+      wall_diagonaltop_left.applyMatrix(rot);
+      wall_diagonaltop_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
+      wall_diagonaltop_left.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
+      wall_diagonaltop_left.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+      scene.add(wall_diagonaltop_left);
+    }
+
+    var gui;
+    function buildGui() {
+       gui = new dat.GUI();
+       var params = {
+         cameralight_intensity: cameraLight.intensity,
+         livingroom_light: livingroom_light.intensity,
+       }
+       gui.add( params, 'cameralight_intensity', 0, 3 ).onChange( function ( val ) {
+         cameraLight.intensity=val;
+       } );
+       gui.add( params, 'livingroom_light', 0, 3 ).onChange( function ( val ) {
+         livingroom_light.intensity=val;
+       } );
+       //TODO Add Texture Changer
+
+       gui.close();
+     }
+
     //This allows to capture the clicks of the mouse for moving elements
     document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+    buildGui();
 
   </script>
 
