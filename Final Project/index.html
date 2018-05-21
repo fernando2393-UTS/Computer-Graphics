@@ -74,16 +74,12 @@
     camera.position.set(60, 25, 60);
 
 
-    var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (1.2));
+    var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.2));
     camera.add(cameraLight);
 
     var axesHelper = new THREE.AxesHelper(300,300,300);
     scene.add( axesHelper );
 
-
-    // //Light addition -> Camera Light
-    // var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (2));
-    // camera.add(cameraLight);
     scene.add(camera);
 
     var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
@@ -104,8 +100,8 @@
 
     buildWalls();
 
-    var livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), 1, 100);
-    livingroom_light.position.set(3, 3, 0);
+    var livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (10) ,(0.8));
+    livingroom_light.position.set(5, 10, 0);
     scene.add(livingroom_light);
 
     //Resizing function -> adjust cube position and size to the window size
@@ -812,7 +808,7 @@
        } );
        //TODO Add Texture Changer
 
-       gui.close();
+       gui.open();
      }
 
     //This allows to capture the clicks of the mouse for moving elements
