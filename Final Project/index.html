@@ -692,6 +692,35 @@
     var selectedObj_chair_2 = false;
     var selectedObj_lamp_1 = false;
 
+    document.onkeydown = function(evt) {
+      if (evt.keyCode == 27) {
+        selectedObj_bed = false;
+        bed_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_car = false;
+        car_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_shelf = false;
+        shelf_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_fridge = false;
+        fridge_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_lamp = false;
+        lamp_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_dishwasher = false;
+        dishwasher_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_sink= false;
+        sink_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_stove= false;
+        stove_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_table = false;
+        table_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_chair_1 = false;
+        chair_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_chair_2 = false;
+        chair_mesh_2.material.color = new THREE.Color(0.8, 1, 0.6);
+        selectedObj_lamp_1 = false;
+        lamp_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+      }
+    };
+
 
     function onDocumentMouseDown(event) {
 
