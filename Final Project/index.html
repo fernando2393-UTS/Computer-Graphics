@@ -95,7 +95,7 @@
     var geometry_wall_orthogonal_02 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH*WALL_LEFT3_LENGTH);
     var geometry_wall_diagonal = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH*0.287);
 
-    var floor = loadTexture('http://localhost:8000/img/txtr_floor.jpg', geometry_floor, 5, WallSideEnum.none);
+    var floor = new THREE.Mesh(geometry_floor, loadTexture('http://localhost:8000/img/txtr_floor.jpg', 5, WallSideEnum.none));
     scene.add(floor);
 
     buildWalls();
@@ -123,7 +123,7 @@
       //Call the render with the scene and the camera
       renderer.render(scene, camera);
       //Finally perform a recursive call to update again
-      //THis must be called because the mouse changes the camera position
+      //This must be called because the mouse changes the camera position
       requestAnimationFrame(MyUpdateLoop);
     };
 
@@ -134,41 +134,35 @@
     };
 
 
-    function loadTexture(uri, geometry, rep, outsideWall) {
-      var textureLoader = new THREE.TextureLoader();
-      THREE.ImageUtils.crossOrigin = true;
-      textureLoader.crossOrigin = true;
-      var texture = new THREE.TextureLoader().load(uri);
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(rep, rep);
-      var material = new THREE.MeshLambertMaterial({
-        map: texture
-      });
-      var materials = createMaterialsArray(material, 'http://localhost:8000/img/txtr_brick_brown_light.jpg', outsideWall);
-      return new THREE.Mesh(geometry, materials);
+    function loadTexture(uri, rep, outsideWall) {
+      return createMaterialsArray(createTextureMaterial(uri, rep), 'http://localhost:8000/img/txtr_brick_brown_light.jpg', outsideWall);
     }
 
-
     function createMaterialsArray(baseMaterial, specialTexture, side) {
-      var texture = new THREE.TextureLoader().load(specialTexture);
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(8, 8);
-      var specialMaterial = new THREE.MeshLambertMaterial({
-        map: texture
-      });
       var materials = [
-        baseMaterial, // Right side
-        baseMaterial, // Left side
-        baseMaterial, // Top side
-        baseMaterial, // Bottom side
-        baseMaterial, // Front side
-        baseMaterial  // Back side
+        baseMaterial, // Right side 0
+        baseMaterial, // Left side 1
+        baseMaterial, // Top side 2
+        baseMaterial, // Bottom side 3
+        baseMaterial, // Front side 4
+        baseMaterial  // Back side 5
       ];
       if (side != WallSideEnum.none)
-        materials[side] = specialMaterial;
+        materials[side] = createTextureMaterial(specialTexture, 8);
       return materials;
     }
 
+    function createTextureMaterial(uri, repeats) {
+      THREE.ImageUtils.crossOrigin = true;
+      var texture = new THREE.TextureLoader().load(uri);
+      texture.crossOrigin = true;
+      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(repeats, repeats);
+      var material = new THREE.MeshLambertMaterial({
+        map: texture
+      });
+      return material;
+    }
 
 
     /*---------------------Addition of all models to the scene--------------------*/
@@ -1229,65 +1223,68 @@
     }
 
     function buildWalls() {
-      var wall_bottom_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_out, 1, WallSideEnum.front);
+      var basicTextureUri = 'http://localhost:8000/img/txtr_white_wall.jpg';
+
+      var wall_bottom_out = new THREE.Mesh(geometry_wall_parallel_out, loadTexture(basicTextureUri, 1, WallSideEnum.front));
       wall_bottom_out.position.y += (geometry_wall_parallel.parameters.height / 2);
       wall_bottom_out.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
       scene.add(wall_bottom_out);
 
-      var wall_top_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_04, 1, WallSideEnum.back);
+      var topMaterial = loadTexture(basicTextureUri, 1, WallSideEnum.back);
+      topMaterial[WallSideEnum.front] = createTextureMaterial('http://localhost:8000/img/bubbles_pattern.jpg');
+      var wall_top_out =  new THREE.Mesh(geometry_wall_parallel_04, topMaterial);
       wall_top_out.position.y+=(geometry_wall_parallel.parameters.height/2);
       wall_top_out.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
       scene.add(wall_top_out);
 
-      var wall_left_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.left);
+      var wall_left_out =  new THREE.Mesh(geometry_wall_orthogonal_08, loadTexture(basicTextureUri, 1, WallSideEnum.left));
       wall_left_out.position.y+=(geometry_wall_orthogonal.parameters.height/2);
       wall_left_out.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
       wall_left_out.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH) - OFFSET;
       scene.add(wall_left_out);
 
-      var wall_right_out = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_08, 1, WallSideEnum.right);
+      var wall_right_out =  new THREE.Mesh(geometry_wall_orthogonal_08, loadTexture(basicTextureUri, 1, WallSideEnum.right));
       wall_right_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
       wall_right_out.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
       wall_right_out.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH) - OFFSET;
       scene.add(wall_right_out);
 
-      var wall_bottom_10 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel, 1, WallSideEnum.none);
+      var wall_bottom_10 =  new THREE.Mesh(geometry_wall_parallel, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
       wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
       scene.add(wall_bottom_10);
 
-      var wall_top_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_03, 1, WallSideEnum.none);
+      var wall_top_left =  new THREE.Mesh(geometry_wall_parallel_03, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_top_left.position.y+=(geometry_wall_parallel.parameters.height/2);
       wall_top_left.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - OFFSET;
       wall_top_left.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
       scene.add(wall_top_left);
 
-      var wall_top_right= loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_parallel_02, 1, WallSideEnum.none);
+      var wall_top_right=  new THREE.Mesh(geometry_wall_parallel_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
       wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
       wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
       scene.add(wall_top_right);
 
-
-      var wall_left_04 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_04, 1, WallSideEnum.none);
+      var wall_left_04 =  new THREE.Mesh(geometry_wall_orthogonal_04, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_left_04.position.y+=(geometry_wall_orthogonal.parameters.height/2);
       wall_left_04.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
       wall_left_04.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - OFFSET;
       scene.add(wall_left_04);
 
-      var wall_left_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      var wall_left_02 =  new THREE.Mesh( geometry_wall_orthogonal_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_left_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
       wall_left_02.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
       wall_left_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
       scene.add(wall_left_02);
 
-      var wall_right_02 = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_orthogonal_02, 1, WallSideEnum.none);
+      var wall_right_02 =  new THREE.Mesh(geometry_wall_orthogonal_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_right_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
       wall_right_02.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
       wall_right_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
       scene.add(wall_right_02);
 
-      var wall_diagonaltop_right = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.right);
+      var wall_diagonaltop_right =  new THREE.Mesh(geometry_wall_diagonal, loadTexture(basicTextureUri, 1, WallSideEnum.right));
       var rot = new THREE.Matrix4();
       rot.makeRotationY(0.8);
       wall_diagonaltop_right.applyMatrix(rot);
@@ -1296,7 +1293,7 @@
       wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
       scene.add(wall_diagonaltop_right);
 
-      var wall_diagonaltop_left = loadTexture('http://localhost:8000/img/txtr_white_wall.jpg', geometry_wall_diagonal, 1, WallSideEnum.left);
+      var wall_diagonaltop_left =  new THREE.Mesh(geometry_wall_diagonal, loadTexture(basicTextureUri, 1, WallSideEnum.left));
       var rot = new THREE.Matrix4();
       rot.makeRotationY(-0.8);
       wall_diagonaltop_left.applyMatrix(rot);
