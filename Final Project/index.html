@@ -175,7 +175,7 @@
 
     //Bed model
 
-    var bed_color = new THREE.Color(0.8, 1, 0.6);
+    var bed_color = new THREE.Color(1, 1, 1);
     var bed_material = new THREE.MeshPhongMaterial();
 
     bed_material.color = bed_color;
@@ -254,7 +254,7 @@
 
     //Shelf model
 
-    var shelf_color = new THREE.Color(0.8, 1, 0.6);
+    var shelf_color = new THREE.Color(0.6, 0.3, 0.2);
     var shelf_material = new THREE.MeshPhongMaterial();
 
     shelf_material.color = shelf_color;
@@ -293,7 +293,7 @@
 
     //Fridge model
 
-    var fridge_color = new THREE.Color(0.8, 1, 0.6);
+    var fridge_color = new THREE.Color(1, 1, 1);
     var fridge_material = new THREE.MeshPhongMaterial();
 
     fridge_material.color = fridge_color;
@@ -464,7 +464,7 @@
 
     //Lamp model
 
-    var lamp_color = new THREE.Color(0.8, 1, 0.6);
+    var lamp_color = new THREE.Color(1, 0.8, 0);
     var lamp_material = new THREE.MeshPhongMaterial();
 
     lamp_material.color = lamp_color;
@@ -503,7 +503,7 @@
 
     //Table model
 
-    var table_color = new THREE.Color(0.8, 1, 0.6);
+    var table_color = new THREE.Color(0, 0.75, 0.65);
     var table_material = new THREE.MeshPhongMaterial();
 
     table_material.color = table_color;
@@ -545,7 +545,7 @@
 
     //Chair model
 
-    var chair_color_1 = new THREE.Color(0.8, 1, 0.6);
+    var chair_color_1 = new THREE.Color(1, 1, 1);
     var chair_material_1 = new THREE.MeshPhongMaterial();
 
     chair_material_1.color = chair_color_1;
@@ -588,7 +588,7 @@
 
     //Chair 2
 
-    var chair_color_2 = new THREE.Color(0.8, 1, 0.6);
+    var chair_color_2 = new THREE.Color(1, 1, 1);
     var chair_material_2 = new THREE.MeshPhongMaterial();
 
     chair_material_2.color = chair_color_2;
@@ -629,7 +629,7 @@
 
     //Lamp_1 model
 
-    var lamp_color_1 = new THREE.Color(0.8, 1, 0.6);
+    var lamp_color_1 = new THREE.Color(1, 0.8, 0);
     var lamp_material_1 = new THREE.MeshPhongMaterial();
 
     lamp_material_1.color = lamp_color_1;
@@ -637,7 +637,7 @@
 
     var loader8 = new THREE.PLYLoader();
     var lamp_mesh_1 = null;
-    loader4.load('Final Models/lamp1.ply', function(geometry) {
+    loader8.load('Final Models/lamp1.ply', function(geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -666,6 +666,47 @@
       scene.add(lamp_mesh_1);
     });
 
+    //Television model
+
+    var tv_color = new THREE.Color(0.5, 0.5, 0.5);
+    var tv_material = new THREE.MeshPhongMaterial();
+
+    tv_material.color = tv_color;
+    tv_material.shininess = 10;
+
+    var loader9 = new THREE.PLYLoader();
+    var tv_mesh = null;
+    loader9.load('Final Models/tv.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+      rot.makeRotationX(-Math.PI/2);
+
+      tv_mesh = new THREE.Mesh(geometry, tv_material);
+
+      tv_mesh.applyMatrix(sca);
+      tv_mesh.applyMatrix(rot);
+      tv_mesh.name = "loaded_mesh_9";
+
+      tv_mesh.position.z -= FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - 2;
+
+      tv_mesh.castShadow = true;
+      scene.add(tv_mesh);
+    });
+
 
 
 
@@ -688,19 +729,20 @@
     var selectedObj_chair_1 = false;
     var selectedObj_chair_2 = false;
     var selectedObj_lamp_1 = false;
+    var selectedObj_tv = false;
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
         selectedObj_bed = false;
-        bed_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        bed_mesh.material.color = new THREE.Color(1, 1, 1);
         selectedObj_car = false;
         car_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
         selectedObj_shelf = false;
-        shelf_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        shelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
         selectedObj_fridge = false;
-        fridge_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        fridge_mesh.material.color = new THREE.Color(1, 1, 1);
         selectedObj_lamp = false;
-        lamp_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        lamp_mesh.material.color = new THREE.Color(1, 0.8, 0);
         selectedObj_dishwasher = false;
         dishwasher_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
         selectedObj_sink= false;
@@ -708,13 +750,15 @@
         selectedObj_stove= false;
         stove_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
         selectedObj_table = false;
-        table_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+        table_mesh.material.color = new THREE.Color(0, 0.75, 0.65);
         selectedObj_chair_1 = false;
-        chair_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+        chair_mesh_1.material.color = new THREE.Color(1, 1, 1);
         selectedObj_chair_2 = false;
-        chair_mesh_2.material.color = new THREE.Color(0.8, 1, 0.6);
+        chair_mesh_2.material.color = new THREE.Color(1, 1, 1);
         selectedObj_lamp_1 = false;
-        lamp_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+        lamp_mesh_1.material.color = new THREE.Color(1, 0.8, 0);
+        selectedObj_tv = false;
+        tv_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
       }
     };
 
@@ -739,7 +783,7 @@
           selectedObj_bed = true;
         }
         if ((intersects[0].object.name != "loaded_mesh") && (selectedObj_bed)) {
-          bed_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          bed_mesh.material.color = new THREE.Color(1, 1, 1);
           var pos = intersects[0].point;
           console.log("Item placed");
           bed_mesh.position.x = pos.x;
@@ -771,7 +815,7 @@
           selectedObj_shelf = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_2") && (selectedObj_shelf)) {
-          shelf_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          shelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
           var pos = intersects[0].point;
           console.log("Item placed");
           shelf_mesh.position.x = pos.x;
@@ -787,7 +831,7 @@
           selectedObj_fridge = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_3") && (selectedObj_fridge)) {
-          fridge_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          fridge_mesh.material.color = new THREE.Color(1, 1, 1);
           var pos = intersects[0].point;
           console.log("Item placed");
           fridge_mesh.position.x = pos.x;
@@ -851,7 +895,7 @@
           selectedObj_lamp = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_4") && (selectedObj_lamp)) {
-          lamp_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          lamp_mesh.material.color = new THREE.Color(1, 0.8, 0);
           var pos = intersects[0].point;
           console.log("Item placed");
           lamp_mesh.position.x = pos.x;
@@ -867,7 +911,7 @@
           selectedObj_table = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_5") && (selectedObj_table)) {
-          table_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          table_mesh.material.color = new THREE.Color(0, 0.75, 0.65);
           var pos = intersects[0].point;
           console.log("Item placed");
           table_mesh.position.x = pos.x;
@@ -883,7 +927,7 @@
           selectedObj_chair_1 = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_6") && (selectedObj_chair_1)) {
-          chair_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+          chair_mesh_1.material.color = new THREE.Color(1, 1, 1);
           var pos = intersects[0].point;
           console.log("Item placed");
           chair_mesh_1.position.x = pos.x;
@@ -899,7 +943,7 @@
           selectedObj_chair_2 = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_7") && (selectedObj_chair_2)) {
-          chair_mesh_2.material.color = new THREE.Color(0.8, 1, 0.6);
+          chair_mesh_2.material.color = new THREE.Color(1, 1, 1);
           var pos = intersects[0].point;
           console.log("Item placed");
           chair_mesh_2.position.x = pos.x;
@@ -915,12 +959,28 @@
           selectedObj_lamp_1 = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_8") && (selectedObj_lamp_1)) {
-          lamp_mesh_1.material.color = new THREE.Color(0.8, 1, 0.6);
+          lamp_mesh_1.material.color = new THREE.Color(1, 0.8, 0);
           var pos = intersects[0].point;
           console.log("Item placed");
           lamp_mesh_1.position.x = pos.x;
           lamp_mesh_1.position.z = pos.z;
           selectedObj_lamp_1 = false;
+        }
+
+        //TV selector
+
+        if ((intersects[0].object.name == "loaded_mesh_9") && (!selectedObj_tv)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_tv = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_9") && (selectedObj_tv)) {
+          tv_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          tv_mesh.position.x = pos.x;
+          tv_mesh.position.z = pos.z;
+          selectedObj_tv = false;
         }
 
       }
