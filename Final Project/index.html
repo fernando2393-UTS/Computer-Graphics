@@ -772,6 +772,7 @@
     var selectedObj_chair_2 = false;
     var selectedObj_lamp_1 = false;
     var selectedObj_tv = false;
+    var selectedObj_painting = false;
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
@@ -801,6 +802,8 @@
         lamp_mesh_1.material.color = new THREE.Color(1, 0.8, 0);
         selectedObj_tv = false;
         tv_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
+        selectedObj_painting = false;
+        painting_mesh.material.color = new THREE.Color(0.8, 0.5, 0.8);
       }
     };
 
@@ -1023,6 +1026,22 @@
           tv_mesh.position.x = pos.x;
           tv_mesh.position.z = pos.z;
           selectedObj_tv = false;
+        }
+
+        //Painting selector
+
+        if ((intersects[0].object.name == "loaded_mesh_10") && (!selectedObj_painting)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_painting = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_10") && (selectedObj_painting)) {
+          painting_mesh.material.color = new THREE.Color(0.8, 0.5, 0.8);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          painting_mesh.position.x = pos.x;
+          painting_mesh.position.z = pos.z;
+          selectedObj_painting = false;
         }
 
       }
