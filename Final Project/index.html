@@ -701,6 +701,48 @@
       scene.add(tv_mesh);
     });
 
+    //Painting model
+
+    var painting_color = new THREE.Color(0.8, 0.5, 0.8);
+    var painting_material = new THREE.MeshPhongMaterial();
+
+    painting_material.color = painting_color;
+    painting_material.shininess = 0;
+
+    var loader10 = new THREE.PLYLoader();
+    var painting_mesh = null;
+    loader10.load('Final Models/painting1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(0.8);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      painting_mesh = new THREE.Mesh(geometry, painting_material);
+
+      painting_mesh.applyMatrix(sca);
+      painting_mesh.applyMatrix(rot);
+      painting_mesh.name = "loaded_mesh_10";
+      
+      painting_mesh.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 13.75 ;
+      painting_mesh.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+
+      painting_mesh.castShadow = true;
+      scene.add(painting_mesh);
+    });
+
 
 
 
@@ -724,6 +766,7 @@
     var selectedObj_chair_2 = false;
     var selectedObj_lamp_1 = false;
     var selectedObj_tv = false;
+    var selectedObj_painting = false;
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
@@ -753,6 +796,8 @@
         lamp_mesh_1.material.color = new THREE.Color(1, 0.8, 0);
         selectedObj_tv = false;
         tv_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
+        selectedObj_painting = false;
+        painting_mesh.material.color = new THREE.Color(0.8, 0.5, 0.8);
       }
     };
 
@@ -975,6 +1020,22 @@
           tv_mesh.position.x = pos.x;
           tv_mesh.position.z = pos.z;
           selectedObj_tv = false;
+        }
+
+        //Painting selector
+
+        if ((intersects[0].object.name == "loaded_mesh_10") && (!selectedObj_painting)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_painting = true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_10") && (selectedObj_painting)) {
+          painting_mesh.material.color = new THREE.Color(0.8, 0.5, 0.8);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          painting_mesh.position.x = pos.x;
+          painting_mesh.position.z = pos.z;
+          selectedObj_painting = false;
         }
 
       }
