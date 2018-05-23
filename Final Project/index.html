@@ -101,7 +101,6 @@
     buildWalls();
     addLighting();
 
-
     //Resizing function -> adjust cube position and size to the window size
     var MyResize = function() {
       var width = window.innerWidth;
@@ -1008,12 +1007,12 @@
     var livingroom_light;
     var bedroom_light;
     function addLighting() {
-      livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (70) ,(0.8));
-      livingroom_light.position.set(5, 10, 0);
+      livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
+      livingroom_light.position.set(5, 13, 0);
       scene.add(livingroom_light);
 
-      var bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (70) ,(0.8));
-      bedroom_light.position.set(5, 10, 0);
+      bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
+      bedroom_light.position.set(-10, 13, 0);
       scene.add(bedroom_light);
     }
 
@@ -1037,6 +1036,7 @@
        } );
        gui.add( params, 'turn_off_lights', 0, 3 ).onChange( function ( val ) {
          livingroom_light.intensity=!val;
+         bedroom_light.intensity=!val;
        } );
 
        //TODO Add Texture Changer
