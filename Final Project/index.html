@@ -146,8 +146,9 @@
       texture.repeat.set(rep, rep);
       var material = new THREE.MeshLambertMaterial({
         map: texture
-      });
-
+      })
+	  
+//outside walls pattern
       var wall_texture = new THREE.TextureLoader().load('http://localhost:8000/img/txtr_brick_brown_light.jpg');
       wall_texture.wrapS = wall_texture.wrapT = THREE.RepeatWrapping;
       wall_texture.repeat.set(8, 8);
