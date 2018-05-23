@@ -542,7 +542,7 @@
      cabinet2_mesh.name = "loaded_mesh_E";
 
       cabinet2_mesh.position.x -= FLOOR_WIDTH/2-76.9 ;
-      cabinet2_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 42.1;
+      cabinet2_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 44.1;
 
       cabinet2_mesh.castShadow = true;
       scene.add(cabinet2_mesh);
@@ -952,7 +952,7 @@
           selectedObj_cabinet1= false;
         }
 	  
-	   //cabinet1 selector
+	   //cabinet2 selector
 
         if ((intersects[0].object.name == "loaded_mesh_E") && (!selectedObj_cabinet2)) {
           console.log("Item selected");
