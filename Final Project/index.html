@@ -355,9 +355,9 @@
       var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(10.2 / size.length(), 10.2 / size.length(), 10.2 / size.length());
       tra.makeTranslation (-center.x,-center.y,-center.z);
-     // rot.makeRotationY(-3*Math.PI/2);
+      rot.makeRotationY(3*Math.PI/2);
 
       combined.multiply(tra);
       combined.multiply(sca);
@@ -365,11 +365,11 @@
       dishwasher_mesh = new THREE.Mesh(geometry, dishwasher_material);
 
       dishwasher_mesh.applyMatrix(sca);
-     // dishwasher_mesh.applyMatrix(rot);
+      dishwasher_mesh.applyMatrix(rot);
       dishwasher_mesh.name = "loaded_mesh_A";
 
-      dishwasher_mesh.position.x -= FLOOR_WIDTH/2-69.8 ;
-      dishwasher_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 14.3;
+      dishwasher_mesh.position.x -= FLOOR_WIDTH/2-77.5 ;
+      dishwasher_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 32.5;
 
       dishwasher_mesh.castShadow = true;
       scene.add(dishwasher_mesh);
@@ -411,7 +411,7 @@
      // sink_mesh.applyMatrix(rot);
       sink_mesh.name = "loaded_mesh_B";
 
-      sink_mesh.position.x -= FLOOR_WIDTH/2-62.4 ;
+      sink_mesh.position.x -= FLOOR_WIDTH/2-68.2 ;
       sink_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 15;
 
       sink_mesh.castShadow = true;
@@ -454,13 +454,141 @@
      stove_mesh.applyMatrix(rot);
      stove_mesh.name = "loaded_mesh_C";
 
-      stove_mesh.position.x -= FLOOR_WIDTH/2-76.9 ;
+      stove_mesh.position.x -= FLOOR_WIDTH/2-76.7 ;
      stove_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 27;
 
       stove_mesh.castShadow = true;
       scene.add(stove_mesh);
     });
+    
+    /*aboveoven1 model
 
+    var aboveoven1_color = new THREE.Color(0.8, 1, 0.6);
+    var aboveoven1_material = new THREE.MeshPhongMaterial();
+
+    aboveoven1_material.color = aboveoven1_color;
+   aboveoven1_material.shininess = 0;
+
+    var loaderF = new THREE.PLYLoader();
+    var aboveoven1_mesh = null;
+    loaderF.load('Final Models/aboveoven1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(11 / size.length(), 11 / size.length(), 11 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(1.5*Math.PI);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      aboveoven1_mesh = new THREE.Mesh(geometry, aboveoven1_material);
+
+     aboveoven1_mesh.applyMatrix(sca);
+
+     aboveoven1_mesh.applyMatrix(rot);
+     aboveoven1_mesh.name = "loaded_mesh_F";
+
+      aboveoven1_mesh.position.x -= FLOOR_WIDTH/2-76.7 ;
+     aboveoven1_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 27;
+
+      aboveoven1_mesh.castShadow = true;
+      scene.add(aboveoven1_mesh);
+    });
+*/
+	 //cabinet1 model
+
+      var cabinet1_color = new THREE.Color(0.8, 1, 0.6);
+      var cabinet1_material = new THREE.MeshPhongMaterial();
+
+      cabinet1_material.color = cabinet1_color;
+      cabinet1_material.shininess = 0;
+
+      var loaderD= new THREE.PLYLoader();
+      var cabinet1_mesh = null;
+      loaderD.load('Final Models/cabinet1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10/ size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(1.5*Math.PI);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      cabinet1_mesh = new THREE.Mesh(geometry, cabinet1_material);
+
+      cabinet1_mesh.applyMatrix(sca);
+
+      cabinet1_mesh.applyMatrix(rot);
+      cabinet1_mesh.name = "loaded_mesh_D";
+
+      cabinet1_mesh.position.x -= FLOOR_WIDTH/2-76.7 ;
+      cabinet1_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 43.3;
+
+      cabinet1_mesh.castShadow = true;
+      scene.add(cabinet1_mesh);
+    });
+    
+     //cabinet2 model
+
+    var cabinet2_color = new THREE.Color(0.8, 1, 0.6);
+    var cabinet2_material = new THREE.MeshPhongMaterial();
+
+    cabinet2_material.color = cabinet2_color;
+    cabinet2_material.shininess = 0;
+
+     var loaderE= new THREE.PLYLoader();
+     var cabinet2_mesh = null;
+     loaderE.load('Final Models/cabinet2.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(1.5*Math.PI);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      cabinet2_mesh = new THREE.Mesh(geometry, cabinet2_material);
+
+     cabinet2_mesh.applyMatrix(sca);
+
+     cabinet2_mesh.applyMatrix(rot);
+     cabinet2_mesh.name = "loaded_mesh_E";
+
+      cabinet2_mesh.position.x -= FLOOR_WIDTH/2-76.7 ;
+      cabinet2_mesh.position.z -= FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - 38.4;
+
+      cabinet2_mesh.castShadow = true;
+      scene.add(cabinet2_mesh);
+    });
 
 
     //Lamp model
@@ -774,6 +902,9 @@
     var selectedObj_lamp_1 = false;
     var selectedObj_tv = false;
     var selectedObj_painting = false;
+    var selectedObj_cabinet1=false;
+    var selectedObj_cabinet2=false;
+    var selectedObj_aboveoven1=false;
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
@@ -932,7 +1063,55 @@
           stove_mesh.position.z = pos.z;
           selectedObj_stove= false;
         }
+	  
+	   //aboveoven1 selector
 
+        if ((intersects[0].object.name == "loaded_mesh_F") && (!selectedObj_aboveoven1)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_aboveoven1= true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_F") && (selectedObj_aboveoven1)) {
+         aboveoven1_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          aboveoven1_mesh.position.x = pos.x;
+          aboveoven1_mesh.position.z = pos.z;
+          selectedObj_aboveoven1= false;
+        }
+	  
+	   //cabinet1 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_D") && (!selectedObj_cabinet1)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_cabinet1= true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_D") && (selectedObj_cabinet1)) {
+          cabinet1_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          cabinet1_mesh.position.x = pos.x;
+          cabinet1_mesh.position.z = pos.z;
+          selectedObj_cabinet1= false;
+        }
+	  
+	   //cabinet2 selector
+
+        if ((intersects[0].object.name == "loaded_mesh_E") && (!selectedObj_cabinet2)) {
+          console.log("Item selected");
+          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
+          selectedObj_cabinet2= true;
+        }
+        if ((intersects[0].object.name != "loaded_mesh_E") && (selectedObj_cabinet2)) {
+          cabinet2_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
+          var pos = intersects[0].point;
+          console.log("Item placed");
+          cabinet2_mesh.position.x = pos.x;
+          cabinet2_mesh.position.z = pos.z;
+          selectedObj_cabinet2= false;
+        }
+ 
 
         //Lamp selector
 
