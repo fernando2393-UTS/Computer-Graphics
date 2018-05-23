@@ -942,41 +942,7 @@
           stove_mesh.position.z = pos.z;
           selectedObj_stove= false;
         }
-<<<<<<< HEAD
-	  
-	   //cabinet1 selector
 
-        if ((intersects[0].object.name == "loaded_mesh_D") && (!selectedObj_cabinet1)) {
-          console.log("Item selected");
-          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
-          selectedObj_cabinet1= true;
-        }
-        if ((intersects[0].object.name != "loaded_mesh_D") && (selectedObj_cabinet1)) {
-          cabinet1_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
-          var pos = intersects[0].point;
-          console.log("Item placed");
-          cabinet1_mesh.position.x = pos.x;
-          cabinet1_mesh.position.z = pos.z;
-          selectedObj_cabinet1= false;
-        }
-	  
-	   //cabinet2 selector
-
-        if ((intersects[0].object.name == "loaded_mesh_E") && (!selectedObj_cabinet2)) {
-          console.log("Item selected");
-          intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
-          selectedObj_cabinet2= true;
-        }
-        if ((intersects[0].object.name != "loaded_mesh_E") && (selectedObj_cabinet2)) {
-          cabinet2_mesh.material.color = new THREE.Color(0.8, 1, 0.6);
-          var pos = intersects[0].point;
-          console.log("Item placed");
-          cabinet2_mesh.position.x = pos.x;
-          cabinet2_mesh.position.z = pos.z;
-          selectedObj_cabinet2= false;
-        }
-=======
->>>>>>> 526296e77877f0b80867949b18f7f327dc738ae0
 
         //Lamp selector
 
