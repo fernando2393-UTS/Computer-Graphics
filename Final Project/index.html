@@ -99,10 +99,7 @@
     scene.add(floor);
 
     buildWalls();
-
-    var livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (10) ,(0.8));
-    livingroom_light.position.set(5, 10, 0);
-    scene.add(livingroom_light);
+    addLighting();
 
     //Resizing function -> adjust cube position and size to the window size
     var MyResize = function() {
@@ -146,29 +143,31 @@
       texture.repeat.set(rep, rep);
       var material = new THREE.MeshLambertMaterial({
         map: texture
-      })
-	  
-//outside walls pattern
-      var wall_texture = new THREE.TextureLoader().load('http://localhost:8000/img/txtr_brick_brown_light.jpg');
-      wall_texture.wrapS = wall_texture.wrapT = THREE.RepeatWrapping;
-      wall_texture.repeat.set(8, 8);
-      var material_outsidewall = new THREE.MeshLambertMaterial({
-        map: wall_texture
       });
-      var materials = [
-        material, // Right side
-        material, // Left side
-        material, // Top side
-        material, // Bottom side
-        material, // Front side
-        material  // Back side
-      ];
-      if (outsideWall != WallSideEnum.none)
-        materials[outsideWall] = material_outsidewall;
-
+      var materials = createMaterialsArray(material, 'http://localhost:8000/img/txtr_brick_brown_light.jpg', outsideWall);
       return new THREE.Mesh(geometry, materials);
     }
 
+
+    function createMaterialsArray(baseMaterial, specialTexture, side) {
+      var texture = new THREE.TextureLoader().load(specialTexture);
+      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(8, 8);
+      var specialMaterial = new THREE.MeshLambertMaterial({
+        map: texture
+      });
+      var materials = [
+        baseMaterial, // Right side
+        baseMaterial, // Left side
+        baseMaterial, // Top side
+        baseMaterial, // Bottom side
+        baseMaterial, // Front side
+        baseMaterial  // Back side
+      ];
+      if (side != WallSideEnum.none)
+        materials[side] = specialMaterial;
+      return materials;
+    }
 
 
 
@@ -375,7 +374,7 @@
       dishwasher_mesh.castShadow = true;
       scene.add(dishwasher_mesh);
     });
-    
+
     //sink model
 
     var sink_color = new THREE.Color(0.8, 1, 0.6);
@@ -408,7 +407,7 @@
       sink_mesh = new THREE.Mesh(geometry, sink_material);
 
      sink_mesh.applyMatrix(sca);
-	
+
      // sink_mesh.applyMatrix(rot);
       sink_mesh.name = "loaded_mesh_B";
 
@@ -418,7 +417,7 @@
       sink_mesh.castShadow = true;
       scene.add(sink_mesh);
     });
-    
+
      //stove model
 
     var stove_color = new THREE.Color(0.8, 1, 0.6);
@@ -451,7 +450,7 @@
       stove_mesh = new THREE.Mesh(geometry, stove_material);
 
      stove_mesh.applyMatrix(sca);
-	
+
      stove_mesh.applyMatrix(rot);
      stove_mesh.name = "loaded_mesh_C";
 
@@ -461,8 +460,8 @@
       stove_mesh.castShadow = true;
       scene.add(stove_mesh);
     });
-    
-    
+
+
     //Lamp model
 
     var lamp_color = new THREE.Color(1, 0.8, 0);
@@ -881,7 +880,7 @@
           fridge_mesh.position.z = pos.z;
           selectedObj_fridge = false;
         }
-	  
+
 	   //Dishwasher selector
 
         if ((intersects[0].object.name == "loaded_mesh_A") && (!selectedObj_dishwasher)) {
@@ -897,7 +896,7 @@
           dishwasher_mesh.position.z = pos.z;
           selectedObj_dishwasher = false;
         }
-	  
+
 	   //Sink selector
 
         if ((intersects[0].object.name == "loaded_mesh_B") && (!selectedObj_sink)) {
@@ -913,7 +912,7 @@
           sink_mesh.position.z = pos.z;
           selectedObj_sink= false;
         }
-	  
+
 	    //Stove selector
 
         if ((intersects[0].object.name == "loaded_mesh_C") && (!selectedObj_stove)) {
@@ -1107,12 +1106,26 @@
       scene.add(wall_diagonaltop_left);
     }
 
+    var livingroom_light;
+    var bedroom_light;
+    function addLighting() {
+      livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
+      livingroom_light.position.set(5, 13, 0);
+      scene.add(livingroom_light);
+
+      bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
+      bedroom_light.position.set(-10, 13, 0);
+      scene.add(bedroom_light);
+    }
+
     var gui;
     function buildGui() {
        gui = new dat.GUI();
        var params = {
          cameralight_intensity: cameraLight.intensity,
          livingroom_light: livingroom_light.intensity,
+         bedroom_light: bedroom_light.intensity,
+         turn_off_lights: false
        }
        gui.add( params, 'cameralight_intensity', 0, 3 ).onChange( function ( val ) {
          cameraLight.intensity=val;
@@ -1120,6 +1133,14 @@
        gui.add( params, 'livingroom_light', 0, 3 ).onChange( function ( val ) {
          livingroom_light.intensity=val;
        } );
+       gui.add( params, 'bedroom_light', 0, 3 ).onChange( function ( val ) {
+         bedroom_light.intensity=val;
+       } );
+       gui.add( params, 'turn_off_lights', 0, 3 ).onChange( function ( val ) {
+         livingroom_light.intensity=!val;
+         bedroom_light.intensity=!val;
+       } );
+
        //TODO Add Texture Changer
 
        gui.open();
