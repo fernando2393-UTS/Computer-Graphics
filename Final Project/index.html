@@ -708,6 +708,48 @@
       scene.add(tv_mesh);
     });
 
+    //Painting model
+
+    var painting_color = new THREE.Color(0.8, 0.5, 0.8);
+    var painting_material = new THREE.MeshPhongMaterial();
+
+    painting_material.color = painting_color;
+    painting_material.shininess = 0;
+
+    var loader10 = new THREE.PLYLoader();
+    var painting_mesh = null;
+    loader10.load('Final Models/painting1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(20 / size.length(), 20 / size.length(), 20 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+      rot.makeRotationY(0.8);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      painting_mesh = new THREE.Mesh(geometry, painting_material);
+
+      painting_mesh.applyMatrix(sca);
+      painting_mesh.applyMatrix(rot);
+      painting_mesh.name = "loaded_mesh_10";
+      
+      painting_mesh.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 13.75 ;
+      painting_mesh.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+
+      painting_mesh.castShadow = true;
+      scene.add(painting_mesh);
+    });
+
 
 
 
