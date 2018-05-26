@@ -59,6 +59,9 @@
     var WINDOW_HEIGHT = WALL_HEIGHT * 0.55;
     var WINDOW_WIDTH = WINDOW_HEIGHT + 4;
 
+    var WINDOW_HEIGHT_TALL = WALL_HEIGHT * 0.8;
+    var WINDOW_WIDTH_TALL = WINDOW_HEIGHT_TALL - 4.5;
+
     var OFFSET = 0.1;
 
     var WallSideEnum = Object.freeze({"none":-1, "right":0, "left":1, "top":2, "bottom":3, "front":4, "back":5});
@@ -106,36 +109,109 @@
     var geometry_door = new THREE.CubeGeometry(DOOR_WIDTH, DOOR_HEIGHT, DOOR_THICKNESS);
 
     var geometry_window = new THREE.CubeGeometry(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_THICKNESS);
+    var geometry_window_large = new THREE.CubeGeometry(WINDOW_WIDTH * 2 - 8, WINDOW_HEIGHT, WINDOW_THICKNESS);
+    var geometry_window_tall = new THREE.CubeGeometry(WINDOW_WIDTH_TALL, WINDOW_HEIGHT_TALL, WINDOW_THICKNESS);
+
+    var rotate90Degrees = new THREE.Matrix4();
+    rotate90Degrees.makeRotationY(Math.PI/2);
+
+
+
+    // our code
+        var box = new THREE.BoxGeometry(1, 1, 1);
+        var sphere = new THREE.SphereGeometry(.65, 32, 32);
+
+        var singleGeometry = new THREE.Geometry();
+
+        var boxMesh = new THREE.Mesh(box);
+        var sphereMesh = new THREE.Mesh(sphere);
+
+        boxMesh.updateMatrix(); // as needed
+        singleGeometry.merge(boxMesh.geometry, boxMesh.matrix);
+
+        sphereMesh.updateMatrix(); // as needed
+        singleGeometry.merge(sphereMesh.geometry, sphereMesh.matrix);
+
+        var material = new THREE.MeshPhongMaterial({color: 0xFF0000});
+        var mesh = new THREE.Mesh(singleGeometry, material);
+        scene.add(mesh);
+
+
+
 
     function addDoors() {
       var door_bedroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-      var rotate = new THREE.Matrix4();
-      rotate.makeRotationY(Math.PI/2);
-      door_bedroom.applyMatrix(rotate);
+      door_bedroom.applyMatrix(rotate90Degrees);
       door_bedroom.position.y+=DOOR_HEIGHT/2;
       door_bedroom.position.z+=26.5;
       door_bedroom.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
       scene.add(door_bedroom);
+
+      var door_toilet = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
+      door_toilet.applyMatrix(rotate90Degrees);
+      door_toilet.position.y+=DOOR_HEIGHT/2;
+      door_toilet.position.z+=45.5;
+      door_toilet.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
+      scene.add(door_toilet);
+
+      var door_storeroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
+      door_storeroom.position.y+=DOOR_HEIGHT/2;
+      door_storeroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      door_storeroom.position.x+=14;
+      scene.add(door_storeroom);
+
+      var door_garage = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
+      door_garage.position.y+=DOOR_HEIGHT/2;
+      door_garage.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      door_garage.position.x+=24;
+      scene.add(door_garage);
     }
 
     function addWindows() {
-      var window_bedroom = new THREE.Mesh(geometry_window, loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none));
-      var rotate = new THREE.Matrix4();
-      rotate.makeRotationY(Math.PI/2);
-      window_bedroom.applyMatrix(rotate);
+      var mat = createTextureMaterial('http://localhost:8000/img/txtr_window.png', 1);
+      mat.transparent = true;
+      var materials = createMaterialsArray(mat, '', WallSideEnum.none);
+
+      //loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none)
+
+      var window_bedroom = new THREE.Mesh(geometry_window, materials);
+      window_bedroom.applyMatrix(rotate90Degrees);
       window_bedroom.position.y+=WALL_HEIGHT/2 + 1.3;
       window_bedroom.position.z+=10;
       window_bedroom.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
       scene.add(window_bedroom);
 
       var window_toilet = new THREE.Mesh(geometry_window, loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none));
-      var rotate = new THREE.Matrix4();
-      rotate.makeRotationY(Math.PI/2);
-      window_toilet.applyMatrix(rotate);
+      window_toilet.applyMatrix(rotate90Degrees);
       window_toilet.position.y+=WALL_HEIGHT/2 + 1.3;
       window_toilet.position.z+=45;
       window_toilet.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
       scene.add(window_toilet);
+
+      var window_toilet2 = new THREE.Mesh(geometry_window, loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none));
+      window_toilet2.position.y+=WALL_HEIGHT/2 + 1.3;
+      window_toilet2.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+      window_toilet2.position.x-=30;
+      scene.add(window_toilet2);
+
+      var window_storeroom = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
+      window_storeroom.position.y+=WALL_HEIGHT/2 + 1.3;
+      window_storeroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+      scene.add(window_storeroom);
+
+      var window_kitchen = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
+      window_kitchen.applyMatrix(rotate90Degrees);
+      window_kitchen.position.y+=WALL_HEIGHT/2 + 1.3;
+      window_kitchen.position.z+=15;
+      window_kitchen.position.x+=FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+      scene.add(window_kitchen);
+
+      var window_livingroom = new THREE.Mesh(geometry_window_tall, loadTexture('http://localhost:8000/img/txtr_window_tall.png', 1, WallSideEnum.none));
+      window_livingroom.applyMatrix(rotate90Degrees);
+      window_livingroom.position.y+=WALL_HEIGHT/2;
+      window_livingroom.position.z-=15;
+      window_livingroom.position.x+=FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+      scene.add(window_livingroom);
     }
 
     var floor = new THREE.Mesh(geometry_floor, loadTexture('http://localhost:8000/img/txtr_floor.jpg', 5, WallSideEnum.none));
@@ -499,7 +575,7 @@
       stove_mesh.castShadow = true;
       scene.add(stove_mesh);
     });
-    
+
     /*aboveoven1 model
 
     var aboveoven1_color = new THREE.Color(0.8, 1, 0.6);
@@ -585,7 +661,7 @@
       cabinet1_mesh.castShadow = true;
       scene.add(cabinet1_mesh);
     });
-    
+
      //cabinet2 model
 
     var cabinet2_color = new THREE.Color(0.8, 1, 0.6);
@@ -1102,7 +1178,7 @@
           stove_mesh.position.z = pos.z;
           selectedObj_stove= false;
         }
-	  
+
 	   //aboveoven1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_F") && (!selectedObj_aboveoven1)) {
@@ -1118,7 +1194,7 @@
           aboveoven1_mesh.position.z = pos.z;
           selectedObj_aboveoven1= false;
         }
-	  
+
 	   //cabinet1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_D") && (!selectedObj_cabinet1)) {
@@ -1134,7 +1210,7 @@
           cabinet1_mesh.position.z = pos.z;
           selectedObj_cabinet1= false;
         }
-	  
+
 	   //cabinet2 selector
 
         if ((intersects[0].object.name == "loaded_mesh_E") && (!selectedObj_cabinet2)) {
@@ -1150,7 +1226,7 @@
           cabinet2_mesh.position.z = pos.z;
           selectedObj_cabinet2= false;
         }
- 
+
 
         //Lamp selector
 
