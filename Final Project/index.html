@@ -125,10 +125,9 @@
       scene.add(door_bedroom);
 
       var door_toilet = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-      door_toilet.applyMatrix(rotate90Degrees);
       door_toilet.position.y+=DOOR_HEIGHT/2;
-      door_toilet.position.z+=45.5;
-      door_toilet.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
+      door_toilet.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      door_toilet.position.x-=26;
       scene.add(door_toilet);
 
       var door_bathroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
