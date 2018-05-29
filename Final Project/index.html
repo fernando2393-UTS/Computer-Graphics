@@ -116,29 +116,6 @@
     rotate90Degrees.makeRotationY(Math.PI/2);
 
 
-
-    // our code
-        var box = new THREE.BoxGeometry(1, 1, 1);
-        var sphere = new THREE.SphereGeometry(.65, 32, 32);
-
-        var singleGeometry = new THREE.Geometry();
-
-        var boxMesh = new THREE.Mesh(box);
-        var sphereMesh = new THREE.Mesh(sphere);
-
-        boxMesh.updateMatrix(); // as needed
-        singleGeometry.merge(boxMesh.geometry, boxMesh.matrix);
-
-        sphereMesh.updateMatrix(); // as needed
-        singleGeometry.merge(sphereMesh.geometry, sphereMesh.matrix);
-
-        var material = new THREE.MeshPhongMaterial({color: 0xFF0000});
-        var mesh = new THREE.Mesh(singleGeometry, material);
-        scene.add(mesh);
-
-
-
-
     function addDoors() {
       var door_bedroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
       door_bedroom.applyMatrix(rotate90Degrees);
@@ -154,11 +131,11 @@
       door_toilet.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
       scene.add(door_toilet);
 
-      var door_storeroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-      door_storeroom.position.y+=DOOR_HEIGHT/2;
-      door_storeroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-      door_storeroom.position.x+=14;
-      scene.add(door_storeroom);
+      var door_bathroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
+      door_bathroom.position.y+=DOOR_HEIGHT/2;
+      door_bathroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      door_bathroom.position.x+=2;
+      scene.add(door_bathroom);
 
       var door_garage = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
       door_garage.position.y+=DOOR_HEIGHT/2;
@@ -194,10 +171,10 @@
       window_toilet2.position.x-=30;
       scene.add(window_toilet2);
 
-      var window_storeroom = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
-      window_storeroom.position.y+=WALL_HEIGHT/2 + 1.3;
-      window_storeroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
-      scene.add(window_storeroom);
+      var window_bathroom = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
+      window_bathroom.position.y+=WALL_HEIGHT/2 + 1.3;
+      window_bathroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+      scene.add(window_bathroom);
 
       var window_kitchen = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
       window_kitchen.applyMatrix(rotate90Degrees);
@@ -326,7 +303,7 @@
       bed_mesh.castShadow = true;
       scene.add(bed_mesh);
     });
-	
+
 	  //Lamp_1 bedroom model
 
     var lamp_color_1 = new THREE.Color(1, 0.8, 0);
@@ -365,7 +342,7 @@
       lamp_mesh_1.castShadow = true;
       scene.add(lamp_mesh_1);
     });
-    
+
     //treasurechest2 bedroom Model
     var treasurechest2_color = new THREE.Color(0.6, 0.3, 0.2);
     var treasurechest2_material = new THREE.MeshPhongMaterial();
@@ -407,7 +384,7 @@
       treasurechest2_mesh.castShadow = true;
       scene.add(treasurechest2_mesh);
     });
-    
+
     //nightstand1 bedroom Model
     var nightstand1_color = new THREE.Color(0.6, 0.3, 0.2);
     var nightstand1_material = new THREE.MeshPhongMaterial();
@@ -449,7 +426,7 @@
       nightstand1_mesh.castShadow = true;
       scene.add(nightstand1_mesh);
     });
-    
+
     //nightstand2 bedroom Model
     var nightstand2_color = new THREE.Color(0.6, 0.3, 0.2);
     var nightstand2_material = new THREE.MeshPhongMaterial();
@@ -491,7 +468,7 @@
       nightstand2_mesh.castShadow = true;
       scene.add(nightstand2_mesh);
     });
-    
+
     //bookshelf2 bedroom model
 
     var bookshelf2_color = new THREE.Color(0.6, 0.3, 0.2);
@@ -520,7 +497,7 @@
 
       combined.multiply(tra);
       combined.multiply(sca);
-	
+
       bookshelf2_mesh = new THREE.Mesh(geometry, bookshelf2_material);
 
       bookshelf2_mesh.applyMatrix(sca);
@@ -532,8 +509,8 @@
       bookshelf2_mesh.castShadow = true;
       scene.add(bookshelf2_mesh);
     });
-    
-	
+
+
     //Extraroom
      //bookshelf model
 
@@ -563,7 +540,7 @@
 
       combined.multiply(tra);
       combined.multiply(sca);
-	
+
 
       bookshelf_mesh = new THREE.Mesh(geometry, bookshelf_material);
 
@@ -578,7 +555,7 @@
       bookshelf_mesh.castShadow = true;
       scene.add(bookshelf_mesh);
     });
-	
+
 	//fancychair1 model
 
     var fancychair1_color= new THREE.Color(1, 0.647, 0);
@@ -618,7 +595,7 @@
       fancychair1_mesh.name = "loaded_mesh_P";
 
       fancychair1_mesh.position.x -= 35;
-	fancychair1_mesh.position.z+= 51;	
+	fancychair1_mesh.position.z+= 51;
 
       fancychair1_mesh.castShadow = true;
       scene.add(fancychair1_mesh);
@@ -668,7 +645,7 @@
       fancychair2_mesh.castShadow = true;
       scene.add(fancychair2_mesh);
     });
-    
+
      //smalltable extra room model
 
     var smalltable_color= new THREE.Color(1, 1, 1);
@@ -710,10 +687,10 @@
       smalltable_mesh.castShadow = true;
       scene.add(smalltable_mesh);
     });
-    
-    
-	
-	
+
+
+
+
     //Car model
 
     var car_color = new THREE.Color(0.6,0,0);
@@ -964,7 +941,7 @@
       stove_mesh.castShadow = true;
       scene.add(stove_mesh);
     });
-    
+
     //aboveoven1 model
 
     var aboveoven1_color = new THREE.Color(0.5,0.5,0.5);
@@ -1053,7 +1030,7 @@
       cabinet1_mesh.castShadow = true;
       scene.add(cabinet1_mesh);
     });
-    
+
      //cabinet2 model
 
     var cabinet2_color = new THREE.Color(0.5,0.5,0.5);
@@ -1099,7 +1076,7 @@
 
     //Bathroom
     //bathtube1 Model
-    
+
     var bathtube1_color = new THREE.Color(0, 0.75, 0.65);
     var bathtube1_material = new THREE.MeshPhongMaterial();
 
@@ -1140,7 +1117,7 @@
       bathtube1_mesh.castShadow = true;
       scene.add(bathtube1_mesh);
     });
-    
+
     //sink3 Model
     var sink3_color = new THREE.Color(0.5,0.5,0.5);
     var sink3_material = new THREE.MeshPhongMaterial();
@@ -1185,7 +1162,7 @@
       sink3_mesh.castShadow = true;
       scene.add(sink3_mesh);
     });
-    
+
     //toilet1 Model
     var toilet1_color = new THREE.Color(1, 1, 1);
     var toilet1_material = new THREE.MeshPhongMaterial();
@@ -1212,7 +1189,7 @@
       tra.makeTranslation (-center.x,-center.y,-center.z);
       rot1.makeRotationX(3*Math.PI/2);
 	rot.makeRotationY(2.5*Math.PI);
-	
+
       combined.multiply(tra);
       combined.multiply(sca);
 
@@ -1230,7 +1207,7 @@
       toilet1_mesh.castShadow = true;
       scene.add(toilet1_mesh);
     });
-    
+
     //treasurechest bathroom Model
     var treasurechest_color = new THREE.Color(0.6, 0.3, 0.2);
     var treasurechest_material = new THREE.MeshPhongMaterial();
@@ -1272,7 +1249,7 @@
       treasurechest_mesh.castShadow = true;
       scene.add(treasurechest_mesh);
     });
-    
+
     //carpet1 Model
     var carpet1_color = new THREE.Color(0,1,1);
     var carpet1_material = new THREE.MeshPhongMaterial();
@@ -1314,7 +1291,7 @@
       carpet1_mesh.castShadow = true;
       scene.add(carpet1_mesh);
     });
-    
+
      //carpet2 Model
     var carpet2_color = new THREE.Color(0,1,1);
     var carpet2_material = new THREE.MeshPhongMaterial();
@@ -1356,7 +1333,7 @@
       carpet2_mesh.castShadow = true;
       scene.add(carpet2_mesh);
     });
-    
+
     //lampbathroom model
 
     var lampbathroom_color = new THREE.Color(1, 0.8, 0);
@@ -1392,12 +1369,12 @@
       lampbathroom_mesh.position.x += -8;
       lampbathroom_mesh.position.y += 5;
 	lampbathroom_mesh.position.z +=43;
-	
+
 
       lampbathroom_mesh.castShadow = true;
       scene.add(lampbathroom_mesh);
     });
-    
+
      //clothesrack1 Model
     var clothesrack1_color = new THREE.Color(0.6, 0.3, 0.2);
     var clothesrack1_material = new THREE.MeshPhongMaterial();
@@ -1517,7 +1494,7 @@
       table_mesh.position.x += 10;
 	table_mesh.position.z += 15;
       table_mesh.position.y += 0.05;
-	
+
 
       table_mesh.castShadow = true;
       scene.add(table_mesh);
@@ -1561,7 +1538,7 @@
       chair_mesh_1.name = "loaded_mesh_6";
 
       chair_mesh_1.position.x += 2.9;
-	chair_mesh_1.position.z+= 14;	
+	chair_mesh_1.position.z+= 14;
 
       chair_mesh_1.castShadow = true;
       scene.add(chair_mesh_1);
@@ -1609,7 +1586,7 @@
       scene.add(chair_mesh_2);
     });
 
-  
+
     //Television model
 
     var tv_color = new THREE.Color(0.5, 0.5, 0.5);
@@ -1735,8 +1712,8 @@
     var selectedObj_clothesrack1=false;
     var selectedObj_treasurechest2=false;
     var selectedObj_nightstand1=false;
-    var selectedObj_nightstand2=false; 
-    
+    var selectedObj_nightstand2=false;
+
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
@@ -1862,7 +1839,7 @@
           shelf_mesh.position.z = pos.z;
           selectedObj_shelf = false;
         }
-	  
+
 	   //bookshelf extraroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_0") && (!selectedObj_bookshelf)) {
@@ -1878,7 +1855,7 @@
           bookshelf_mesh.position.z = pos.z;
           selectedObj_bookshelf = false;
         }
-	  
+
 	    //bookshelf2 bedroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_U") && (!selectedObj_bookshelf2)) {
@@ -1973,8 +1950,8 @@
           aboveoven1_mesh.position.x = pos.x;
           aboveoven1_mesh.position.z = pos.z;
           selectedObj_aboveoven1= false;
-        } 
-	  
+        }
+
 	   //cabinet1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_D") && (!selectedObj_cabinet1)) {
@@ -2007,7 +1984,7 @@
           selectedObj_cabinet2= false;
         }
 
-	  
+
 	  //bathtube1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_F") && (!selectedObj_bathtube1)) {
@@ -2023,7 +2000,7 @@
           bathtube1_mesh.position.z = pos.z;
           selectedObj_bathtube1= false;
         }
-	  
+
 	  //sink3 selector
 
         if ((intersects[0].object.name == "loaded_mesh_G") && (!selectedObj_sink3)) {
@@ -2039,7 +2016,7 @@
           sink3_mesh.position.z = pos.z;
           selectedObj_sink3= false;
         }
-	  
+
 	   //toilet1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_H") && (!selectedObj_toilet1)) {
@@ -2055,7 +2032,7 @@
           toilet1_mesh.position.z = pos.z;
           selectedObj_toilet1= false;
         }
-	  
+
 	  //treasurechest bathroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_I") && (!selectedObj_treasurechest)) {
@@ -2071,7 +2048,7 @@
           treasurechest_mesh.position.z = pos.z;
           selectedObj_treasurechest= false;
         }
-	  
+
 	  //treasurechest2 bedroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_N") && (!selectedObj_treasurechest2)) {
@@ -2087,7 +2064,7 @@
           treasurechest2_mesh.position.z = pos.z;
           selectedObj_treasurechest2= false;
         }
-	  
+
 	  //nightstand1 bedroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_S") && (!selectedObj_nightstand1)) {
@@ -2103,7 +2080,7 @@
           nightstand1_mesh.position.z = pos.z;
           selectedObj_nightstand1= false;
         }
-	  
+
 	  //nightstand2 bedroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_T") && (!selectedObj_nightstand2)) {
@@ -2119,7 +2096,7 @@
           nightstand2_mesh.position.z = pos.z;
           selectedObj_nightstand2= false;
         }
-	  
+
 	   //carpet1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_J") && (!selectedObj_carpet1)) {
@@ -2135,7 +2112,7 @@
           carpet1_mesh.position.z = pos.z;
           selectedObj_carpet1= false;
         }
-	  
+
 	  //carpet2 selector
 
         if ((intersects[0].object.name == "loaded_mesh_K") && (!selectedObj_carpet2)) {
@@ -2151,7 +2128,7 @@
           carpet2_mesh.position.z = pos.z;
           selectedObj_carpet2= false;
         }
-	  
+
 	    //lampbathroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_L") && (!selectedObj_lampbathroom)) {
@@ -2167,11 +2144,8 @@
           lampbathroom_mesh.position.z = pos.z;
           selectedObj_lampbathroom = false;
         }
-	  
-	  //clothesrack1 selector
-=======
 
->>>>>>> 05351c1fb80e0f1c9b29d870afa0ce9db0b9c872
+	  //clothesrack1 selector
 
         if ((intersects[0].object.name == "loaded_mesh_M") && (!selectedObj_clothesrack1)) {
           console.log("Item selected");
@@ -2186,7 +2160,7 @@
           clothesrack1_mesh.position.z = pos.z;
           selectedObj_clothesrack1= false;
         }
- 
+
         //Lamp selector
 
         if ((intersects[0].object.name == "loaded_mesh_4") && (!selectedObj_lamp)) {
@@ -2218,7 +2192,7 @@
           table_mesh.position.z = pos.z;
           selectedObj_table = false;
         }
-	  
+
 	   //smalltable extraroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_R") && (!selectedObj_smalltable)) {
@@ -2266,7 +2240,7 @@
           chair_mesh_2.position.z = pos.z;
           selectedObj_chair_2 = false;
         }
-	  
+
 	   //fancychair1 extraroom selector
 
         if ((intersects[0].object.name == "loaded_mesh_P") && (!selectedObj_fancychair1)) {
@@ -2440,11 +2414,11 @@
       livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
       livingroom_light.position.set(5, 13, 0);
       scene.add(livingroom_light);
-	
+
       bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
       bedroom_light.position.set(-10, 13, 0);
       scene.add(bedroom_light);
-	
+
 	bathroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
       bathroom_light.position.set(-3, 13, 43);
       scene.add(bathroom_light);
@@ -2476,7 +2450,7 @@
          livingroom_light.intensity=!val;
          bedroom_light.intensity=!val;
 	   bathroom_light.intensity=!val;
-	   
+
        } );
 
        //TODO Add Texture Changer
