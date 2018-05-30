@@ -96,7 +96,7 @@
     var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
     var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH-0.2, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_out = new THREE.CubeGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
-    var geometry_wall_parallel_02 = new THREE.CubeGeometry(FLOOR_WIDTH*0.25, WALL_HEIGHT, WALL_THICKNESS);
+    var geometry_wall_parallel_02 = new THREE.CubeGeometry(FLOOR_WIDTH*0.25-3.6, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_03 = new THREE.CubeGeometry(FLOOR_WIDTH*WALL_TOP_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_parallel_04 = new THREE.CubeGeometry(FLOOR_WIDTH*0.434, WALL_HEIGHT, WALL_THICKNESS);
     var geometry_wall_orthogonal = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH);
@@ -487,12 +487,10 @@
 
       var sca = new THREE.Matrix4();
       var tra = new THREE.Matrix4();
-	//var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
       sca.makeScale(21.5/ size.length(), 21.5/ size.length(), 21.5/ size.length());
       tra.makeTranslation (-center.x,-center.y,-center.z);
-	//rot.makeRotationY(Math.PI);
 
       combined.multiply(tra);
       combined.multiply(sca);
@@ -500,7 +498,6 @@
       bookshelf2_mesh = new THREE.Mesh(geometry, bookshelf2_material);
 
       bookshelf2_mesh.applyMatrix(sca);
-	//bookshelf2_mesh.applyMatrix(rot);
       bookshelf2_mesh.name = "loaded_mesh_U";
       bookshelf2_mesh.position.x +=125;
       bookshelf2_mesh.position.z +=21;
@@ -2365,7 +2362,7 @@
 
       var wall_top_right=  new THREE.Mesh(geometry_wall_parallel_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
       wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
-      wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
+      wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) + 1.8 - OFFSET;
       wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
       scene.add(wall_top_right);
 
