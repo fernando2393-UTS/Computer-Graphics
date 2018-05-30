@@ -520,7 +520,7 @@
     bookshelf_material.color = bookshelf_color;
     bookshelf_material.shininess = 0;
 
-    var loaderO = new THREE.PLYLoader();
+     var loaderO = new THREE.PLYLoader();
     var bookshelf_mesh = null;
     loaderO.load('Final Models/bookshelf2.ply', function(geometry) {
       geometry.computeVertexNormals();
@@ -686,89 +686,6 @@
 
       smalltable_mesh.castShadow = true;
       scene.add(smalltable_mesh);
-    });
-
-
-
-
-    //Car model
-
-    var car_color = new THREE.Color(0.6,0,0);
-    var car_material = new THREE.MeshPhongMaterial();
-
-    car_material.color = car_color;
-    car_material.shininess = 0;
-
-    var loader1 = new THREE.PLYLoader();
-    var car_mesh = null;
-    loader1.load('Final Models/car1.ply', function(geometry) {
-      geometry.computeVertexNormals();
-      geometry.computeBoundingBox();
-
-      var center = geometry.boundingBox.getCenter();
-      var size = geometry.boundingBox.getSize();
-
-      var sca = new THREE.Matrix4();
-      var tra = new THREE.Matrix4();
-      var combined = new THREE.Matrix4();
-
-      sca.makeScale(24/ size.length(), 24/ size.length(), 24/ size.length());
-      tra.makeTranslation (-center.x,-center.y,-center.z);
-
-      combined.multiply(tra);
-      combined.multiply(sca);
-
-      car_mesh = new THREE.Mesh(geometry, car_material);
-
-      car_mesh.applyMatrix(sca);
-      car_mesh.name = "loaded_mesh_1";
-
-      car_mesh.position.x += FLOOR_WIDTH/3+2.5;
-      car_mesh.position.y += 1.8;
-      car_mesh.position.z += FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 +0.5;
-
-      car_mesh.castShadow = true;
-      scene.add(car_mesh);
-    });
-
-
-    //Shelf model
-
-    var shelf_color = new THREE.Color(0.6, 0.3, 0.2);
-    var shelf_material = new THREE.MeshPhongMaterial();
-
-    shelf_material.color = shelf_color;
-    shelf_material.shininess = 0;
-
-    var loader2 = new THREE.PLYLoader();
-    var shelf_mesh = null;
-    loader2.load('Final Models/shelf1.ply', function(geometry) {
-      geometry.computeVertexNormals();
-      geometry.computeBoundingBox();
-
-      var center = geometry.boundingBox.getCenter();
-      var size = geometry.boundingBox.getSize();
-
-      var sca = new THREE.Matrix4();
-      var tra = new THREE.Matrix4();
-      var combined = new THREE.Matrix4();
-
-      sca.makeScale(40 / size.length(), 40 / size.length(), 40 / size.length());
-      tra.makeTranslation (-center.x,-center.y,-center.z);
-
-      combined.multiply(tra);
-      combined.multiply(sca);
-
-      shelf_mesh = new THREE.Mesh(geometry, shelf_material);
-
-      shelf_mesh.applyMatrix(sca);
-      shelf_mesh.name = "loaded_mesh_2";
-      shelf_mesh.position.x -= FLOOR_WIDTH/3-FLOOR_WIDTH/3 + 4;
-      shelf_mesh.position.z -= FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - 10.45;
-
-
-      shelf_mesh.castShadow = true;
-      scene.add(shelf_mesh);
     });
 
      //Kitchen
@@ -1416,7 +1333,8 @@
       clothesrack1_mesh.castShadow = true;
       scene.add(clothesrack1_mesh);
     });
-
+    
+    //Living room
     //Lamp model
 
     var lamp_color = new THREE.Color(1, 0.8, 0);
@@ -1454,6 +1372,45 @@
 
       lamp_mesh.castShadow = true;
       scene.add(lamp_mesh);
+    });
+    
+    //Shelf model
+
+    var shelf_color = new THREE.Color(0.6, 0.3, 0.2);
+    var shelf_material = new THREE.MeshPhongMaterial();
+
+    shelf_material.color = shelf_color;
+    shelf_material.shininess = 0;
+
+    var loader2 = new THREE.PLYLoader();
+    var shelf_mesh = null;
+    loader2.load('Final Models/shelf1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(40 / size.length(), 40 / size.length(), 40 / size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      shelf_mesh = new THREE.Mesh(geometry, shelf_material);
+
+      shelf_mesh.applyMatrix(sca);
+      shelf_mesh.name = "loaded_mesh_2";
+      shelf_mesh.position.x -= FLOOR_WIDTH/3-FLOOR_WIDTH/3 + 4;
+      shelf_mesh.position.z -= FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - 10.45;
+
+
+      shelf_mesh.castShadow = true;
+      scene.add(shelf_mesh);
     });
 
     //Table model
@@ -1670,6 +1627,46 @@
       scene.add(painting_mesh);
     });
 
+     //car room
+     //Car model
+
+    var car_color = new THREE.Color(0.6,0,0);
+    var car_material = new THREE.MeshPhongMaterial();
+
+    car_material.color = car_color;
+    car_material.shininess = 0;
+
+    var loader1 = new THREE.PLYLoader();
+    var car_mesh = null;
+    loader1.load('Final Models/car1.ply', function(geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(24/ size.length(), 24/ size.length(), 24/ size.length());
+      tra.makeTranslation (-center.x,-center.y,-center.z);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      car_mesh = new THREE.Mesh(geometry, car_material);
+
+      car_mesh.applyMatrix(sca);
+      car_mesh.name = "loaded_mesh_1";
+
+      car_mesh.position.x += FLOOR_WIDTH/3+2.5;
+      car_mesh.position.y += 1.8;
+      car_mesh.position.z += FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 +0.5;
+
+      car_mesh.castShadow = true;
+      scene.add(car_mesh);
+    });
 
 
 
