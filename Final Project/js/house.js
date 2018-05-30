@@ -6,7 +6,7 @@ var FLOOR_WIDTH = 80; //x-axis
 var FLOOR_HEIGHT = 0.1; //y-axis
 var FLOOR_LENGTH = 110; //z-axis
 
-var WALL_HEIGHT = 15;
+var WALL_HEIGHT = 17;
 var WALL_THICKNESS = 0.4;
 
 var WALL_LEFT_LENGTH = 0.65;
@@ -15,9 +15,9 @@ var WALL_LEFT3_LENGTH = 0.2;
 var WALL_RIGHT_LENGTH = 0.8;
 var WALL_TOP_WIDTH = 0.35;
 
-var DOOR_THICKNESS = WALL_THICKNESS + 0.2;
+var DOOR_THICKNESS = WALL_THICKNESS + 2*OFFSET;
 var DOOR_HEIGHT = WALL_HEIGHT*0.85;
-var DOOR_WIDTH = 6;
+var DOOR_WIDTH = DOOR_HEIGHT * 0.5;
 
 var WINDOW_THICKNESS = WALL_THICKNESS + 0.08;
 var WINDOW_HEIGHT = WALL_HEIGHT * 0.55;
@@ -62,74 +62,54 @@ var rotate90Degrees = new THREE.Matrix4().makeRotationY(Math.PI/2);
 function addDoors() {
   var door_bedroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
   door_bedroom.applyMatrix(rotate90Degrees);
-  door_bedroom.position.y+=DOOR_HEIGHT/2;
-  door_bedroom.position.z+=26.5;
-  door_bedroom.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
+  door_bedroom.position.set(-(FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2), DOOR_HEIGHT/2, 26.5);
   scene.add(door_bedroom);
 
   var door_toilet = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-  door_toilet.position.y+=DOOR_HEIGHT/2;
-  door_toilet.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-  door_toilet.position.x-=26;
+  door_toilet.position.set(-26, DOOR_HEIGHT/2, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2);
   scene.add(door_toilet);
 
   var door_bathroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-  door_bathroom.position.y+=DOOR_HEIGHT/2;
-  door_bathroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-  door_bathroom.position.x+=2;
+  door_bathroom.position.set(2, DOOR_HEIGHT/2, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2);
   scene.add(door_bathroom);
 
   var door_garage = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-  door_garage.position.y+=DOOR_HEIGHT/2;
-  door_garage.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
-  door_garage.position.x+=24;
+  door_garage.position.set(24, DOOR_HEIGHT/2, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2);
   scene.add(door_garage);
 }
 
 function addWindows() {
+  var Y_POS = WALL_HEIGHT/2 + 1.3;
   var mat = createTextureMaterial('http://localhost:8000/img/txtr_window.png', 1);
   mat.transparent = true;
   var materials = createMaterialsArray(mat, '', WallSideEnum.none);
 
-  //loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none)
-
   var window_bedroom = new THREE.Mesh(geometry_window, materials);
   window_bedroom.applyMatrix(rotate90Degrees);
-  window_bedroom.position.y+=WALL_HEIGHT/2 + 1.3;
-  window_bedroom.position.z+=10;
-  window_bedroom.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+  window_bedroom.position.set(FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2, Y_POS, 10);
   scene.add(window_bedroom);
 
   var window_toilet = new THREE.Mesh(geometry_window, loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none));
   window_toilet.applyMatrix(rotate90Degrees);
-  window_toilet.position.y+=WALL_HEIGHT/2 + 1.3;
-  window_toilet.position.z+=45;
-  window_toilet.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
+  window_toilet.position.set(-(FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2), Y_POS, 45);
   scene.add(window_toilet);
 
   var window_toilet2 = new THREE.Mesh(geometry_window, loadTexture('http://localhost:8000/img/txtr_window.png', 1, WallSideEnum.none));
-  window_toilet2.position.y+=WALL_HEIGHT/2 + 1.3;
-  window_toilet2.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
-  window_toilet2.position.x-=30;
+  window_toilet2.position.set(-30, Y_POS , FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2);
   scene.add(window_toilet2);
 
   var window_bathroom = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
-  window_bathroom.position.y+=WALL_HEIGHT/2 + 1.3;
-  window_bathroom.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+  window_bathroom.position.set(0, Y_POS, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2);
   scene.add(window_bathroom);
 
   var window_kitchen = new THREE.Mesh(geometry_window_large, loadTexture('http://localhost:8000/img/txtr_window_large.png', 1, WallSideEnum.none));
   window_kitchen.applyMatrix(rotate90Degrees);
-  window_kitchen.position.y+=WALL_HEIGHT/2 + 1.3;
-  window_kitchen.position.z+=15;
-  window_kitchen.position.x+=FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+  window_kitchen.position.set(FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2, Y_POS, 15);
   scene.add(window_kitchen);
 
   var window_livingroom = new THREE.Mesh(geometry_window_tall, loadTexture('http://localhost:8000/img/txtr_window_tall.png', 1, WallSideEnum.none));
   window_livingroom.applyMatrix(rotate90Degrees);
-  window_livingroom.position.y+=WALL_HEIGHT/2;
-  window_livingroom.position.z-=15;
-  window_livingroom.position.x+=FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
+  window_livingroom.position.set(FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2, Y_POS, -15);
   scene.add(window_livingroom);
 }
 
@@ -139,6 +119,7 @@ function addWalls() {
   var wall_bottom_out = new THREE.Mesh(geometry_wall_parallel_out, loadTexture(basicTextureUri, 1, WallSideEnum.front));
   wall_bottom_out.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_bottom_out.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
+  wall_bottom_out.castShadow = true;
   scene.add(wall_bottom_out);
 
   var wallMaterial = loadTexture(basicTextureUri, 1, WallSideEnum.back);
@@ -146,23 +127,27 @@ function addWalls() {
   var wall_top_out =  new THREE.Mesh(geometry_wall_parallel_04, wallMaterial);
   wall_top_out.position.y+=(geometry_wall_parallel.parameters.height/2);
   wall_top_out.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2;
+  wall_top_out.castShadow = true;
   scene.add(wall_top_out);
 
   var wall_left_out =  new THREE.Mesh(geometry_wall_orthogonal_08, loadTexture(basicTextureUri, 1, WallSideEnum.left));
   wall_left_out.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_left_out.position.x-=FLOOR_WIDTH/2 - geometry_wall_orthogonal.parameters.width/2;
   wall_left_out.position.z+=FLOOR_LENGTH/2*(1-WALL_RIGHT_LENGTH) - OFFSET;
+  wall_left_out.castShadow = true;
   scene.add(wall_left_out);
 
   var wall_right_out =  new THREE.Mesh(geometry_wall_orthogonal_08, loadTexture(basicTextureUri, 1, WallSideEnum.right));
   wall_right_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_right_out.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
   wall_right_out.position.z += FLOOR_LENGTH / 2 * (1 - WALL_RIGHT_LENGTH) - OFFSET;
+  wall_right_out.castShadow = true;
   scene.add(wall_right_out);
 
   var wall_bottom_10 =  new THREE.Mesh(geometry_wall_parallel, loadTexture(basicTextureUri, 1, WallSideEnum.none));
   wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+  wall_bottom_10.castShadow = true;
   scene.add(wall_bottom_10);
 
   wallMaterial = loadTexture(basicTextureUri, 1, WallSideEnum.none);
@@ -171,30 +156,35 @@ function addWalls() {
   wall_top_left.position.y+=(geometry_wall_parallel.parameters.height/2);
   wall_top_left.position.x-=FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - OFFSET;
   wall_top_left.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2;
+  wall_top_left.castShadow = true;
   scene.add(wall_top_left);
 
   var wall_top_right=  new THREE.Mesh(geometry_wall_parallel_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
   wall_top_right.position.y+=(geometry_wall_parallel.parameters.height/2);
   wall_top_right.position.x+=FLOOR_WIDTH/2*(1-0.25) - OFFSET;
   wall_top_right.position.z-=FLOOR_LENGTH/2-FLOOR_LENGTH*(1-WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth/2 - 12;
+  wall_top_right.castShadow = true;
   scene.add(wall_top_right);
 
   var wall_left_04 =  new THREE.Mesh(geometry_wall_orthogonal_04, loadTexture(basicTextureUri, 1, WallSideEnum.none));
   wall_left_04.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_left_04.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) - 2;
   wall_left_04.position.z+=FLOOR_LENGTH/2*(1-WALL_LEFT_LENGTH) - FLOOR_LENGTH*0.1 - OFFSET;
+  wall_left_04.castShadow = true;
   scene.add(wall_left_04);
 
   var wall_left_02 =  new THREE.Mesh( geometry_wall_orthogonal_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
   wall_left_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_left_02.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
   wall_left_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+  wall_left_02.castShadow = true;
   scene.add(wall_left_02);
 
   var wall_right_02 =  new THREE.Mesh(geometry_wall_orthogonal_02, loadTexture(basicTextureUri, 1, WallSideEnum.none));
   wall_right_02.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_right_02.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 5 ;
   wall_right_02.position.z+=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2;
+  wall_right_02.castShadow = true;
   scene.add(wall_right_02);
 
   var wall_diagonaltop_right =  new THREE.Mesh(geometry_wall_diagonal, loadTexture(basicTextureUri, 1, WallSideEnum.right));
@@ -204,6 +194,7 @@ function addWalls() {
   wall_diagonaltop_right.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_diagonaltop_right.position.x+=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
   wall_diagonaltop_right.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+  wall_diagonaltop_right.castShadow = true;
   scene.add(wall_diagonaltop_right);
 
   var wall_diagonaltop_left =  new THREE.Mesh(geometry_wall_diagonal, loadTexture(basicTextureUri, 1, WallSideEnum.left));
@@ -213,6 +204,7 @@ function addWalls() {
   wall_diagonaltop_left.position.y+=(geometry_wall_orthogonal.parameters.height/2);
   wall_diagonaltop_left.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 14.5 ;
   wall_diagonaltop_left.position.z-=FLOOR_LENGTH/2 - geometry_wall_parallel.parameters.depth/2 - (FLOOR_LENGTH*0.2)/2 + OFFSET;
+  wall_diagonaltop_left.castShadow = true;
   scene.add(wall_diagonaltop_left);
 }
 
@@ -227,7 +219,7 @@ var bathroom_light;
 
 function addLighting() {
   livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-  livingroom_light.position.set(5, 13, 0);
+  livingroom_light.position.set(2, 5, 0);
   scene.add(livingroom_light);
 
   bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);

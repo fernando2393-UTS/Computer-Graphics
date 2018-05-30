@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <title>Final Computer Graphics Project</title>
   <link rel="stylesheet" type="text/css" href="CSS/style.css">
@@ -17,27 +16,12 @@
 </style>
 
 <body>
-
-  <!--include the three.js library-->
-  <script src="js/three.js">
-  </script>
-  <!--and the trackball code-->
+  <script src="js/three.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script src="js/PLYLoader.js"></script>
   <script src="js/dat.gui.min.js"></script>
   <script src="js/house.js"></script>
   <script src="js/gui.js"></script>
-
-  <!-- <div id="texture">
-  Introduce the texture:
-  <form id="texture_form">
-    <select id="txt">
-      <option value="img/brick_bump.jpg">Bricks</option>
-      <option value="img/wood_1.jpg">Wood 1</option>
-      <option value="img/wood_2.jpg">Wood 2</option>
-    </select>
-  </form>
-  </div> -->
 
   <script>
     //Create the scene
@@ -203,7 +187,6 @@
 
       lamp_mesh_1.castShadow = true;
       scene.add(lamp_mesh_1);
-	lamp_mesh_1.add(bedroom_light);
     });
 
     //treasurechest2 bedroom Model
