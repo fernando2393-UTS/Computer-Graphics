@@ -125,10 +125,9 @@
       scene.add(door_bedroom);
 
       var door_toilet = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
-      door_toilet.applyMatrix(rotate90Degrees);
       door_toilet.position.y+=DOOR_HEIGHT/2;
-      door_toilet.position.z+=45.5;
-      door_toilet.position.x-=FLOOR_WIDTH/2-FLOOR_WIDTH/2*(1-WALL_TOP_WIDTH) + 6;
+      door_toilet.position.z+=FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
+      door_toilet.position.x-=26;
       scene.add(door_toilet);
 
       var door_bathroom = new THREE.Mesh(geometry_door, loadTexture('http://localhost:8000/img/txtr_door.png', 1, WallSideEnum.none));
@@ -1714,25 +1713,25 @@
 
     document.onkeydown = function(evt) {
       if (evt.keyCode == 27) {
-	  selectedObj_clothesrack1= false;
+	      selectedObj_clothesrack1= false;
         clothesrack1_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
-	  selectedObj_smalltable= false;
+	      selectedObj_smalltable= false;
         smalltable_mesh.material.color = new THREE.Color(1, 1, 1);
-	  selectedObj_lampbathroom= false;
+	      selectedObj_lampbathroom= false;
         lampbathroom_mesh.material.color = new THREE.Color(1, 0.8, 0);
-	  selectedObj_carpet2= false;
+	      selectedObj_carpet2= false;
         carpet2_mesh.material.color = new THREE.Color(0, 0.75, 0.65);
-	  selectedObj_carpet1 = false;
+	      selectedObj_carpet1 = false;
         carpet1_mesh.material.color = new THREE.Color(0, 0.75, 0.65);
-	  selectedObj_bathtube1 = false;
+	      selectedObj_bathtube1 = false;
         bathtube1_mesh.material.color = new THREE.Color(0, 0.75, 0.65);
-	  selectedObj_toilet1 = false;
+	      selectedObj_toilet1 = false;
         toilet1_mesh.material.color = new THREE.Color(1, 1, 1);
-	  selectedObj_sink3 = false;
+	      selectedObj_sink3 = false;
         sink3_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
-	  selectedObj_treasurechest = false;
+	      selectedObj_treasurechest = false;
         treasurechest_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
-	  selectedObj_treasurechest2 = false;
+	      selectedObj_treasurechest2 = false;
         treasurechest2_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
         selectedObj_bed = false;
         bed_mesh.material.color = new THREE.Color(1, 1, 1);
@@ -1740,9 +1739,9 @@
         car_mesh.material.color = new THREE.Color(0.6,0,0);
         selectedObj_shelf = false;
         shelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
-	  selectedObj_bookshelf = false;
+	      selectedObj_bookshelf = false;
         bookshelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
-	  selectedObj_bookshelf2= false;
+	      selectedObj_bookshelf2= false;
         bookshelf2_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
         selectedObj_fridge = false;
         fridge_mesh.material.color = new THREE.Color(1, 1, 1);
@@ -1760,7 +1759,7 @@
         chair_mesh_1.material.color = new THREE.Color(1, 1, 1);
         selectedObj_chair_2 = false;
         chair_mesh_2.material.color = new THREE.Color(1, 1, 1);
-	   selectedObj_fancychair1 = false;
+	      selectedObj_fancychair1 = false;
         fancychair1_mesh.material.color = new THREE.Color(1, 0.647, 0);
         selectedObj_fancychair2 = false;
         fancychair2_mesh.material.color = new THREE.Color(1, 0.647, 0);
@@ -1770,9 +1769,9 @@
         tv_mesh.material.color = new THREE.Color(0.5, 0.5, 0.5);
         selectedObj_painting = false;
         painting_mesh.material.color = new THREE.Color(0.8, 0.5, 0.8);
-	  selectedObj_nightstand1 = false;
+	      selectedObj_nightstand1 = false;
         nightstand1_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
-	  selectedObj_nightstand2 = false;
+	      selectedObj_nightstand2 = false;
         nightstand2_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
       }
     };
