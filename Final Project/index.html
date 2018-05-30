@@ -307,6 +307,7 @@
 
     var lamp_color_1 = new THREE.Color(1, 0.8, 0);
     var lamp_material_1 = new THREE.MeshPhongMaterial();
+  
 
     lamp_material_1.color = lamp_color_1;
     lamp_material_1.shininess = 100;
@@ -340,6 +341,7 @@
 
       lamp_mesh_1.castShadow = true;
       scene.add(lamp_mesh_1);
+	lamp_mesh_1.add(bedroom_light);
     });
 
     //treasurechest2 bedroom Model
@@ -2408,15 +2410,15 @@
     var bathroom_light;
     function addLighting() {
       livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-      livingroom_light.position.set(5, 13, 0);
+      livingroom_light.position.set(5, 10, 0);
       scene.add(livingroom_light);
 
       bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-      bedroom_light.position.set(-10, 13, 0);
-      scene.add(bedroom_light);
+      //bedroom_light.position.set(-10, 10, 0);
+      //scene.add(bedroom_light);
 
 	bathroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-      bathroom_light.position.set(-3, 13, 43);
+      bathroom_light.position.set(-3, 10, 43);
       scene.add(bathroom_light);
     }
 
