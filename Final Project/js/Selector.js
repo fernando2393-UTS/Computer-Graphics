@@ -144,13 +144,21 @@
           intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
           selectedObj_car = true;
         }
-        if ((intersects[0].object.name != "loaded_mesh_1") && (selectedObj_car) && (!computeCollision(car_mesh))) {
-          car_mesh.material.color = new THREE.Color(0.6,0,0);
+        if ((intersects[0].object.name != "loaded_mesh_1") && (selectedObj_car)) {
           var pos = intersects[0].point;
-          console.log("Item placed");
+          var oldx = car_mesh.position.x;
+          var oldz = car_mesh.position.z;
           car_mesh.position.x = pos.x;
           car_mesh.position.z = pos.z;
-          selectedObj_car = false;
+          if(computeCollision(car_mesh)){
+            car_mesh.position.x = oldx;
+            car_mesh.position.z = oldz;
+          }
+          else{
+            console.log("Item placed");
+            car_mesh.material.color = new THREE.Color(0.6, 0, 0);
+            selectedObj_car = false;
+          }
         }
 
         //Shelf selector
@@ -161,12 +169,20 @@
           selectedObj_shelf = true;
         }
         if ((intersects[0].object.name != "loaded_mesh_2") && (selectedObj_shelf)) {
-          shelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
           var pos = intersects[0].point;
-          console.log("Item placed");
+          var oldx = shelf_mesh.position.x;
+          var oldz = shelf_mesh.position.z;
           shelf_mesh.position.x = pos.x;
           shelf_mesh.position.z = pos.z;
-          selectedObj_shelf = false;
+          if(computeCollision(shelf_mesh)){
+            shelf_mesh.position.x = oldx;
+            shelf_mesh.position.z = oldz;
+          }
+          else{
+            console.log("Item placed");
+            shelf_mesh.material.color = new THREE.Color(0.6, 0.3, 0.2);
+            selectedObj_shelf = false;
+          }
         }
 
 	   //bookshelf extraroom selector
