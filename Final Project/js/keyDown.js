@@ -16,5 +16,5 @@ document.onkeydown = function(evt) {
           selected_obj.material.color = selected_obj_color;
           selected_obj = null;
         }
-      }
+    }
 };
