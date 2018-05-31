@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <title>Final Computer Graphics Project</title>
   <link rel="stylesheet" type="text/css" href="CSS/style.css">
@@ -22,8 +23,8 @@
   <script src="js/dat.gui.min.js"></script>
   <script src="js/house.js"></script>
   <script src="js/gui.js"></script>
-  <script src="js/Selector.js"></script>
   <script src="js/modeladder.js"></script>
+  <script src="js/Selector.js"></script>
   <script src="js/meshOps.js"></script>
   <script src="js/cameramotion.js"></script>
 
@@ -45,12 +46,12 @@
     camera.add(cameraLight);
     scene.add(camera);
     //Add an Axis Helper
-    var axesHelper = new THREE.AxesHelper(300,300,300);
-    scene.add( axesHelper );
+    var axesHelper = new THREE.AxesHelper(300, 300, 300);
+    scene.add(axesHelper);
 
 
     //Resizing function -> adjust cube position and size to the window size
-    var MyResize = function() {
+    var MyResize = function () {
       var width = window.innerWidth;
       var height = window.innerHeight;
       //Update renderer size
@@ -66,7 +67,7 @@
     controls = new THREE.OrbitControls(camera);
 
     //Updating function
-    var MyUpdateLoop = function() {
+    var MyUpdateLoop = function () {
       controls.update();
       //Call the render with the scene and the camera
       renderer.render(scene, camera);
@@ -76,12 +77,10 @@
     };
 
     requestAnimationFrame(MyUpdateLoop);
-    var render = function() {
+    var render = function () {
       requestAnimationFrame(render);
       renderer.render(scene, camera);
     };
-
-
 
     ///////////////////////////
     //// house.js
