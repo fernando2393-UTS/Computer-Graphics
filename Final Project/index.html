@@ -24,6 +24,7 @@
   <script src="js/gui.js"></script>
   <script src="js/Selector.js"></script>
   <script src="js/modeladder.js"></script>
+  <script src="js/meshOps.js"></script>
 
   <script>
     //Create the scene
@@ -80,35 +81,6 @@
     };
 
 
-    function loadTexture(uri, rep, outsideWall) {
-      return createMaterialsArray(createTextureMaterial(uri, rep), 'http://localhost:8000/img/txtr_brick_brown_light.jpg', outsideWall);
-    }
-
-    function createMaterialsArray(baseMaterial, specialTexture, side) {
-      var materials = [
-        baseMaterial, // Right side 0
-        baseMaterial, // Left side 1
-        baseMaterial, // Top side 2
-        baseMaterial, // Bottom side 3
-        baseMaterial, // Front side 4
-        baseMaterial  // Back side 5
-      ];
-      if (side != WallSideEnum.none)
-        materials[side] = createTextureMaterial(specialTexture, 8);
-      return materials;
-    }
-
-    function createTextureMaterial(uri, repeats) {
-      THREE.ImageUtils.crossOrigin = true;
-      var texture = new THREE.TextureLoader().load(uri);
-      texture.crossOrigin = true;
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(repeats, repeats);
-      var material = new THREE.MeshLambertMaterial({
-        map: texture
-      });
-      return material;
-    }
 
     ///////////////////////////
     //// house.js
@@ -118,7 +90,6 @@
     addWindows();
     addLighting();
     ///////////////////////////
-
     ///////////////////////////
     //// gui.js
     buildGui();
