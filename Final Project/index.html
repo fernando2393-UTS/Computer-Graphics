@@ -24,7 +24,7 @@
   <script src="js/house.js"></script>
   <script src="js/gui.js"></script>
   <script src="js/modeladder.js"></script>
-  <script src="js/Selector.js"></script>
+  <script src="js/selector.js"></script>
   <script src="js/meshOps.js"></script>
   <script src="js/cameramotion.js"></script>
 
@@ -89,6 +89,8 @@
     addDoors();
     addWindows();
     addLighting();
+
+    updateTexture(floor, 'http://localhost:8000/img/txtr_wood2.jpg', WallSideEnum.top, 10);
     ///////////////////////////
     ///////////////////////////
     //// gui.js

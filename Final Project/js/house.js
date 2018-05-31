@@ -221,9 +221,9 @@ function addWalls() {
   scene.add(wall_diagonaltop_left);
 }
 
+var floor;
 function addFloor() {
-
-  var floor = new THREE.Mesh(geometry_floor, createTextureMaterial('http://localhost:8000/img/txtr_floor.jpg', 5));
+  floor = new THREE.Mesh(geometry_floor, createTextureMaterialsArray('http://localhost:8000/img/txtr_floor.jpg', 5));
   scene.add(floor);
 }
 
@@ -233,7 +233,7 @@ var bathroom_light;
 
 function addLighting() {
   livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-  livingroom_light.position.set(2, 5, 0);
+  livingroom_light.position.set(2, 8, 0);
   scene.add(livingroom_light);
 
   bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);

@@ -77,5 +77,4 @@ function isInObjectArray(mesh) {
   return found;
 }
 
-//This allows to capture the clicks of the mouse for moving elements
 document.addEventListener('mousedown', onDocumentMouseDown, false);
