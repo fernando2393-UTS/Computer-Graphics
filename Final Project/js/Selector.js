@@ -5,14 +5,6 @@ var raycaster = new THREE.Raycaster();
 var selected_obj;
 var selected_obj_color;
 
-document.onkeydown = function (evt) {
-  if (evt.keyCode == 27) {
-    if (selected_obj) {
-      selected_obj.material.color = selected_obj_color;
-      selected_obj = null;
-    }
-  }
-};
 
 function onDocumentMouseDown(event) {
   var mouse = new THREE.Vector2;
