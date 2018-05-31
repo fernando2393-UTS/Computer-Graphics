@@ -121,12 +121,20 @@
           selectedObj_bed = true;
         }
         if ((intersects[0].object.name != "loaded_mesh") && (selectedObj_bed)) {
-          bed_mesh.material.color = new THREE.Color(1, 1, 1);
           var pos = intersects[0].point;
-          console.log("Item placed");
+          var oldx = bed_mesh.position.x;
+          var oldz = bed_mesh.position.z;
           bed_mesh.position.x = pos.x;
           bed_mesh.position.z = pos.z;
-          selectedObj_bed = false;
+          if(computeCollision(bed_mesh)){
+            bed_mesh.position.x = oldx;
+            bed_mesh.position.z = oldz;
+          }
+          else{
+            console.log("Item placed");
+            bed_mesh.material.color = new THREE.Color(1, 1, 1);
+            selectedObj_bed = false;
+          }          
         }
 
         //Car selector
@@ -136,7 +144,7 @@
           intersects[0].object.material.color = new THREE.Color(1, 0.5, 0.5);
           selectedObj_car = true;
         }
-        if ((intersects[0].object.name != "loaded_mesh_1") && (selectedObj_car)) {
+        if ((intersects[0].object.name != "loaded_mesh_1") && (selectedObj_car) && (!computeCollision(car_mesh))) {
           car_mesh.material.color = new THREE.Color(0.6,0,0);
           var pos = intersects[0].point;
           console.log("Item placed");
@@ -627,6 +635,27 @@
         }
 
       }
+    }
+
+    function computeCollision(firstObject){
+      
+      var objectsArray = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
+                          fancychair2_mesh, smalltable_mesh, fridge_mesh, dishwasher_mesh, sink_mesh, stove_mesh, aboveoven1_mesh, cabinet1_mesh,
+                          cabinet2_mesh, bathtube1_mesh, sink3_mesh, toilet1_mesh, treasurechest_mesh, carpet1_mesh, carpet2_mesh, lampbathroom_mesh,
+                          clothesrack1_mesh, lamp_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh];
+            
+      var firstBB = new THREE.Box3().setFromObject(firstObject);
+
+      for(i = 0; i < objectsArray.length; i++){
+        if(objectsArray[i] != firstObject){
+          var secondBB = new THREE.Box3().setFromObject(objectsArray[i]);
+          var collision = firstBB.intersectsBox(secondBB);
+          if(collision){
+            return true;
+          }
+        }
+      }   
+      return false;        
     }
 
     //This allows to capture the clicks of the mouse for moving elements
