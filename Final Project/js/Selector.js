@@ -15,7 +15,7 @@ function onDocumentMouseDown(event) {
 
   if (intersects.length > 0) {
     if (!selected_obj) {
-      if (isInObjectArray(intersects[0].object)) {
+      if (isSelectable(intersects[0].object)) {
         selected_obj = intersects[0].object;
         selected_obj_color = intersects[0].object.material.color;
         selected_obj.material.color = new THREE.Color(1, 0.5, 0.5);
@@ -56,14 +56,14 @@ function computeCollision(firstObject) {
   return false;
 }
 
-function isInObjectArray(mesh) {
-  var objectsArray = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
+function isSelectable(mesh) {
+  var selectableObjects = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
     fancychair2_mesh, smalltable_mesh, fridge_mesh, dishwasher_mesh, sink_mesh, stove_mesh, aboveoven1_mesh, cabinet1_mesh,
     cabinet2_mesh, bathtube1_mesh, sink3_mesh, toilet1_mesh, treasurechest_mesh, carpet1_mesh, carpet2_mesh, lampbathroom_mesh,
     clothesrack1_mesh, lamp_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh
   ];
   var found = false;
-  found = objectsArray.some(function (element, index, _arr) {
+  found = selectableObjects.some(function (element, index, _arr) {
     return mesh.uuid === element.uuid;
   });
   return found;
