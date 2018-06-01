@@ -1,20 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!--
+______________________________________________________________________________________________________________________
+F I N A L   P R O J E C T
+Computer Graphics
+
+@author Alexander Ebner
+@author Hendrik Hangen
+@author Fernando García
+@author Marlies Wagner
+  
+This project is submitted by the abovementioned authors as their final project for 32501 Computer Graphics, Autumn 2018
+The structure of the files and code is as follows:
+  - index.html contains the HTML-Webpage and the main Javascript application
+  - folder 'css' contains the css stylesheet for the HTML-Webpage 
+  - folder 'js' contains all referenced scripts
+  - folder 'Final Modals' ???????
+  - folder 'img' contains all the textures and images used for this project
+
+_____________________________________________________________________________________________________________________
+-->
+
+
 <html>
 
 <head>
+  <meta charset="utf-8" />
   <title>Final Computer Graphics Project</title>
-  <link rel="stylesheet" type="text/css" href="CSS/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
-<style>
-  body {
-    margin: 0;
-  }
-
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
-</style>
 
 <body>
   <script src="js/three.js"></script>
@@ -24,76 +40,80 @@
   <script src="js/house.js"></script>
   <script src="js/gui.js"></script>
   <script src="js/modeladder.js"></script>
-  <script src="js/Selector.js"></script>
+  <script src="js/selector.js"></script>
   <script src="js/meshOps.js"></script>
   <script src="js/keyDown.js"></script>
 
   <script>
-    //Create the scene
-    var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x93C47D);
-    //Create the webgl renderer
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    //Add the renderer to the current document
-    document.body.appendChild(renderer.domElement);
-    //Camera creation
-    var ratio = window.innerWidth / window.innerHeight;
-    //Create the perspective camera
-    var camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
-    camera.position.set(60, 25, 60);
-    var cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.2));
-    camera.add(cameraLight);
-    scene.add(camera);
-    //Add an Axis Helper
-    var axesHelper = new THREE.AxesHelper(300, 300, 300);
-    scene.add(axesHelper);
+    var scene;
+    var camera;
+    var cameraLight;
+    var renderer;
 
 
-    //Resizing function -> adjust cube position and size to the window size
-    var MyResize = function () {
-      var width = window.innerWidth;
-      var height = window.innerHeight;
-      //Update renderer size
-      renderer.setSize(width, height);
-      //Update camera aspect ratio
-      camera.aspect = width / height;
-      //Update projection matrix from the new values
-      camera.updateProjectionMatrix();
-      //Render the scene again
-      renderer.render(scene, camera);
-    }
+    createScene();
+    addCamera();
 
-    controls = new THREE.OrbitControls(camera);
-
-    //Updating function
-    var MyUpdateLoop = function () {
-      controls.update();
-      //Call the render with the scene and the camera
-      renderer.render(scene, camera);
-      //Finally perform a recursive call to update again
-      //This must be called because the mouse changes the camera position
-      requestAnimationFrame(MyUpdateLoop);
-    };
-
-    requestAnimationFrame(MyUpdateLoop);
-    var render = function () {
-      requestAnimationFrame(render);
-      renderer.render(scene, camera);
-    };
-
-    ///////////////////////////
-    //// house.js
     addFloor();
     addWalls();
     addDoors();
     addWindows();
     addLighting();
-    ///////////////////////////
-    ///////////////////////////
-    //// gui.js
+
     buildGui();
-    //////////////////////////
+
+    //updateTexture(floor, 'http://localhost:8000/img/txtr_wood2.jpg', WallSideEnum.top, 10);
+
+
+
+    var resize = function () {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.render(scene, camera);
+    }
+
+    var updateLoop = function () {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(updateLoop);
+    };
+
+    var render = function () {
+      requestAnimationFrame(render);
+      renderer.render(scene, camera);
+    };
+
+    requestAnimationFrame(updateLoop);
+    window.addEventListener('resize', resize);
+
+
+    function createScene() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x93C47D);
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      document.body.appendChild(renderer.domElement);
+    }
+
+    function addCamera() {
+      var ratio = window.innerWidth / window.innerHeight;
+      camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
+      camera.position.set(60, 25, 60);
+      cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.2));
+      camera.add(cameraLight);
+      scene.add(camera);
+      controls = new THREE.OrbitControls(camera);
+    }
+
+    function addAxisHelper() {
+      var axesHelper = new THREE.AxesHelper(300, 300, 300);
+      scene.add(axesHelper);
+    }
   </script>
 
 </body>
