@@ -75,7 +75,7 @@
       lamp_mesh_1.position.x -= FLOOR_WIDTH / 3 + 6;
       lamp_mesh_1.position.y += 5;
 
-      lamp_mesh_1.castShadow = true;
+      lamp_mesh_1.castShadow = false;
       scene.add(lamp_mesh_1);
       lamp_mesh_1.add(bedroom_light);
     });
@@ -982,10 +982,10 @@
       lampbathroom_mesh.position.x += -8;
       lampbathroom_mesh.position.y += 5;
       lampbathroom_mesh.position.z += 43;
-
-
-      lampbathroom_mesh.castShadow = true;
+	    
+      lampbathroom_mesh.castShadow = false;
       scene.add(lampbathroom_mesh);
+	lampbathroom_mesh.add(bathroom_light);
     });
 
     //clothesrack1 Model
@@ -1066,8 +1066,9 @@
       lamp_mesh.position.x += 2;
       lamp_mesh.position.y += 5;
 
-      lamp_mesh.castShadow = true;
+      lamp_mesh.castShadow = false;
       scene.add(lamp_mesh);
+	lamp_mesh.add(livingroom_light);
     });
 
     //Shelf model

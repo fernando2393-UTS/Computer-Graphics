@@ -233,14 +233,14 @@ var bathroom_light;
 
 function addLighting() {
   livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-  livingroom_light.position.set(2, 8, 0);
-  scene.add(livingroom_light);
+  livingroom_light.position.set(5, 10, 3);
+  //scene.add(livingroom_light);
 
   bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-  bedroom_light.position.set(-10, 13, 0);
-  scene.add(bedroom_light);
+  bedroom_light.position.set(-10, 10, 0);
+  //scene.add(bedroom_light);
 
   bathroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (1), (150) ,2);
-  bathroom_light.position.set(-3, 13, 43);
-  scene.add(bathroom_light);
+  bathroom_light.position.set(-3, 10, 43);
+ // scene.add(bathroom_light);
 }
