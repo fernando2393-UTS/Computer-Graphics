@@ -11,7 +11,8 @@ function buildGui() {
     livingroom_light: livingroom_light.intensity,
     bedroom_light: bedroom_light.intensity,
     bathroom_light: bathroom_light.intensity,
-    turn_off_lights: false
+    turn_off_lights: false,
+    Speed: 'Speed'
   }
   gui.add(params, 'cameralight_intensity', 0, 3).onChange(function (val) {
     cameraLight.intensity = val;
@@ -39,6 +40,7 @@ function buildGui() {
       bedroom_light.intensity = old_bedroom_light_intensity;
     }
   });
+  gui.add(params, 'Speed', { 0: 'A', 1: 'B', 2: 'C' } );
 
   //TODO Add Texture Changer
 
