@@ -50,7 +50,7 @@
 
     var loader8 = new THREE.PLYLoader();
     var lamp_mesh_1 = null;
-    loader8.load('Final Models/lamp1.ply', function (geometry) {
+    loader8.load('Final Models/lamp2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -957,7 +957,7 @@
 
     var loaderL = new THREE.PLYLoader();
     var lampbathroom_mesh = null;
-    loaderL.load('Final Models/lamp1.ply', function (geometry) {
+    loaderL.load('Final Models/lamp2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1030,7 +1030,7 @@
       scene.add(clothesrack1_mesh);
     });
 
-    //Living room
+    //Livingroom
     //Lamp model
 
     var lamp_color = new THREE.Color(1, 0.8, 0);
@@ -1041,7 +1041,7 @@
 
     var loader4 = new THREE.PLYLoader();
     var lamp_mesh = null;
-    loader4.load('Final Models/lamp1.ply', function (geometry) {
+    loader4.load('Final Models/lamp2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
