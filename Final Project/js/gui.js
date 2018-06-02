@@ -4,16 +4,18 @@ var old_livingroom_light_intensity = 0;
 var old_bathroom_light_intensity = 0;
 var old_bedroom_light_intensity = 0;
 
+var FizzyText = function() {
+  this.cameralight_intensity = cameraLight.intensity;
+  this.livingroom_light = livingroom_light.intensity;
+  this.bedroom_light = bedroom_light.intensity;
+  this.bathroom_light = bathroom_light.intensity;
+  this.turn_off_lights = false;
+  this.floor_texture = 'http://localhost:8000/img/txtr_floor.jpg'
+};
+
 function buildGui() {
+  var params = new FizzyText();
   gui = new dat.GUI();
-  var params = {
-    cameralight_intensity: cameraLight.intensity,
-    livingroom_light: livingroom_light.intensity,
-    bedroom_light: bedroom_light.intensity,
-    bathroom_light: bathroom_light.intensity,
-    turn_off_lights: false,
-    Speed: 'Speed'
-  }
   gui.add(params, 'cameralight_intensity', 0, 3).onChange(function (val) {
     cameraLight.intensity = val;
   });
@@ -40,9 +42,9 @@ function buildGui() {
       bedroom_light.intensity = old_bedroom_light_intensity;
     }
   });
-  gui.add(params, 'Speed', { 0: 'A', 1: 'B', 2: 'C' } );
-
-  //TODO Add Texture Changer
+  gui.add(params, 'floor_texture', { 'Darkbrown Wood': 'http://localhost:8000/img/txtr_floor.jpg', 'Lightbrown Wood': 'http://localhost:8000/img/txtr_wood2.jpg', 'Grey Wood': 'http://localhost:8000/img/txtr_wood1.jpg' } ).onChange(function (val) {
+    updateTexture(floor, val, WallSideEnum.top, 10);
+  });
 
   gui.open();
 }
