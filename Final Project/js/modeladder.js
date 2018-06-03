@@ -61,7 +61,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -73,7 +73,7 @@
       lamp_mesh_1.name = "loaded_mesh_8";
 
       lamp_mesh_1.position.x -= FLOOR_WIDTH / 3 + 6;
-      lamp_mesh_1.position.y += 5;
+      lamp_mesh_1.position.y += 11;
 
       lamp_mesh_1.castShadow = false;
       scene.add(lamp_mesh_1);
@@ -968,7 +968,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      sca.makeScale( 10 / size.length(), 10 / size.length(), 10 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -980,7 +980,7 @@
       lampbathroom_mesh.name = "loaded_mesh_L";
 
       lampbathroom_mesh.position.x += -8;
-      lampbathroom_mesh.position.y += 5;
+      lampbathroom_mesh.position.y += 11;
       lampbathroom_mesh.position.z += 43;
 	    
       lampbathroom_mesh.castShadow = false;
@@ -1052,7 +1052,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
+      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -1064,7 +1064,7 @@
       lamp_mesh.name = "loaded_mesh_4";
 
       lamp_mesh.position.x += 2;
-      lamp_mesh.position.y += 5;
+      lamp_mesh.position.y += 11;
 
       lamp_mesh.castShadow = false;
       scene.add(lamp_mesh);
