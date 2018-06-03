@@ -232,16 +232,16 @@ var bedroom_light;
 var bathroom_light;
 
 function addLighting() {
-  livingroom_light = new THREE.PointLight(new THREE.Color(0xff0000));
+  livingroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.5));
 	
   //livingroom_light.position.set(5, 20, 3);
   //scene.add(livingroom_light);
 
-  bedroom_light = new THREE.PointLight(new THREE.Color(0xff0000));
+  bedroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.5));
   //bedroom_light.position.set(-10, 20, 0);
   //scene.add(bedroom_light);
 
-  bathroom_light = new THREE.PointLight(new THREE.Color(0xff0000), (0.5));
+  bathroom_light = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.5));
   //bathroom_light.position.set(-3, 20, 43);
   //scene.add(bathroom_light);
 }

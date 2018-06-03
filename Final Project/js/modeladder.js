@@ -50,7 +50,7 @@
 
     var loader8 = new THREE.PLYLoader();
     var lamp_mesh_1 = null;
-    loader8.load('Final Models/lamp2.ply', function (geometry) {
+    loader8.load('Final Models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -73,7 +73,7 @@
       lamp_mesh_1.name = "loaded_mesh_8";
 
       lamp_mesh_1.position.x -= FLOOR_WIDTH / 3 + 6;
-      lamp_mesh_1.position.y += 11;
+      lamp_mesh_1.position.y += 8;
 
       lamp_mesh_1.castShadow = false;
       scene.add(lamp_mesh_1);
@@ -957,7 +957,7 @@
 
     var loaderL = new THREE.PLYLoader();
     var lampbathroom_mesh = null;
-    loaderL.load('Final Models/lamp2.ply', function (geometry) {
+    loaderL.load('Final Models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -980,7 +980,7 @@
       lampbathroom_mesh.name = "loaded_mesh_L";
 
       lampbathroom_mesh.position.x += -8;
-      lampbathroom_mesh.position.y += 11;
+      lampbathroom_mesh.position.y += 8;
       lampbathroom_mesh.position.z += 43;
 
       lampbathroom_mesh.castShadow = false;
@@ -1041,7 +1041,7 @@
 
     var loader4 = new THREE.PLYLoader();
     var lamp_mesh = null;
-    loader4.load('Final Models/lamp2.ply', function (geometry) {
+    loader4.load('Final Models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1064,7 +1064,7 @@
       lamp_mesh.name = "loaded_mesh_4";
 
       lamp_mesh.position.x += 2;
-      lamp_mesh.position.y += 11;
+      lamp_mesh.position.y += 8;
 
       lamp_mesh.castShadow = false;
       scene.add(lamp_mesh);
