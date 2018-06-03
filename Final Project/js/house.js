@@ -133,13 +133,18 @@ function addWindows() {
   scene.add(window_livingroom);
 }
 
-
 var wall_bottom_out;
 var wall_top_out;
 var wall_left_out;
 var wall_right_out;
 var wall_diagonaltop_right;
 var wall_diagonaltop_left;
+var wall_bottom_10;
+var wall_top_left;
+var wall_top_right;
+var wall_left_04;
+var wall_left_02;
+var wall_right_02;
 function addWalls() {
   wall_bottom_out = new THREE.Mesh(geometry_wall_parallel_out, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_bottom_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.front, 8);
@@ -172,13 +177,13 @@ function addWalls() {
   wall_right_out.castShadow = true;
   scene.add(wall_right_out);
 
-  var wall_bottom_10 = new THREE.Mesh(geometry_wall_parallel, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_bottom_10 = new THREE.Mesh(geometry_wall_parallel, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
   wall_bottom_10.castShadow = true;
   scene.add(wall_bottom_10);
 
-  var wall_top_left = new THREE.Mesh(geometry_wall_parallel_03, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_top_left = new THREE.Mesh(geometry_wall_parallel_03, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_top_left, 'http://localhost:8000/img/wall_pisa.jpg', WallSideEnum.front, 1);
   wall_top_left.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_top_left.position.x -= FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) - OFFSET;
@@ -186,28 +191,28 @@ function addWalls() {
   wall_top_left.castShadow = true;
   scene.add(wall_top_left);
 
-  var wall_top_right = new THREE.Mesh(geometry_wall_parallel_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_top_right = new THREE.Mesh(geometry_wall_parallel_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_top_right.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_top_right.position.x += FLOOR_WIDTH / 2 * (1 - 0.25) - OFFSET + 1.6;
   wall_top_right.position.z -= FLOOR_LENGTH / 2 - FLOOR_LENGTH * (1 - WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth / 2 - 12;
   wall_top_right.castShadow = true;
   scene.add(wall_top_right);
 
-  var wall_left_04 = new THREE.Mesh(geometry_wall_orthogonal_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_left_04 = new THREE.Mesh(geometry_wall_orthogonal_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_left_04.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_left_04.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) - 2;
   wall_left_04.position.z += FLOOR_LENGTH / 2 * (1 - WALL_LEFT_LENGTH) - FLOOR_LENGTH * 0.1 - OFFSET;
   wall_left_04.castShadow = true;
   scene.add(wall_left_04);
 
-  var wall_left_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_left_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_left_02.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_left_02.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 6;
   wall_left_02.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2;
   wall_left_02.castShadow = true;
   scene.add(wall_left_02);
 
-  var wall_right_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_right_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_right_02.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_right_02.position.x += FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 5;
   wall_right_02.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2;
