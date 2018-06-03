@@ -27,6 +27,7 @@ function onDocumentMouseDown(event) {
       selected_obj.position.x = pos.x;
       selected_obj.position.z = pos.z;
       if (computeCollision(selected_obj)) {
+        alert("You cannot place the item here. Collision detected.");
         selected_obj.position.x = oldx;
         selected_obj.position.z = oldz;
       } else {
