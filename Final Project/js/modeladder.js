@@ -61,7 +61,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -73,7 +73,7 @@
       lamp_mesh_1.name = "loaded_mesh_8";
 
       lamp_mesh_1.position.x -= FLOOR_WIDTH / 3 + 6;
-      lamp_mesh_1.position.y += 11;
+      lamp_mesh_1.position.y += 5;
 
       lamp_mesh_1.castShadow = false;
       scene.add(lamp_mesh_1);
@@ -968,7 +968,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale( 10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -980,7 +980,7 @@
       lampbathroom_mesh.name = "loaded_mesh_L";
 
       lampbathroom_mesh.position.x += -8;
-      lampbathroom_mesh.position.y += 11;
+      lampbathroom_mesh.position.y += 5;
       lampbathroom_mesh.position.z += 43;
 
       lampbathroom_mesh.castShadow = false;
@@ -1052,7 +1052,7 @@
       var tra = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(17 / size.length(), 17 / size.length(), 17 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
 
       combined.multiply(tra);
@@ -1064,55 +1064,12 @@
       lamp_mesh.name = "loaded_mesh_4";
 
       lamp_mesh.position.x += 2;
-      lamp_mesh.position.y += 11;
+      lamp_mesh.position.y += 5;
 
       lamp_mesh.castShadow = false;
       scene.add(lamp_mesh);
       lamp_mesh.add(livingroom_light);
     });
-
-    //sofa model
-
-    var sofa_color = new THREE.Color(0.3, 0.3, 0.3);
-    var sofa_material = new THREE.MeshPhongMaterial();
-
-    sofa_material.color = sofa_color;
-    sofa_material.shininess = 0;
-
-    var loaderU = new THREE.PLYLoader();
-    var sofa_mesh = null;
-    loaderU.load('Final Models/sofa9.ply', function (geometry) {
-      geometry.computeVertexNormals();
-      geometry.computeBoundingBox();
-
-      var center = geometry.boundingBox.getCenter();
-      var size = geometry.boundingBox.getSize();
-
-      var sca = new THREE.Matrix4();
-      var tra = new THREE.Matrix4();
-      var rot = new THREE.Matrix4();
-      var combined = new THREE.Matrix4();
-
-      sca.makeScale(35 / size.length(), 35 / size.length(), 35 / size.length());
-      tra.makeTranslation(-center.x, -center.y, -center.z);
-      rot.makeRotationY(1.5 * Math.PI);
-
-      combined.multiply(tra);
-      combined.multiply(sca);
-
-      sofa_mesh = new THREE.Mesh(geometry, sofa_material);
-
-      sofa_mesh.applyMatrix(sca);
-      sofa_mesh.applyMatrix(rot);
-
-      sofa_mesh.name = "loaded_mesh_U";
-      sofa_mesh.position.x -= 162;
-      sofa_mesh.position.z -= 160;
-
-      sofa_mesh.castShadow = true;
-      scene.add(sofa_mesh);
-    });
-
 
     //Shelf model
 
