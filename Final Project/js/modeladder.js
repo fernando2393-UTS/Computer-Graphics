@@ -1322,10 +1322,143 @@
       painting_mesh.name = "loaded_mesh_10";
 
       painting_mesh.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 13.75;
+      painting_mesh.position.y += 3;
       painting_mesh.position.z -= FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2 + OFFSET;
 
       painting_mesh.castShadow = true;
       scene.add(painting_mesh);
+    });
+
+     //Sofa model
+
+     var sofa_color = new THREE.Color(0.4, 0.4, 0.4);
+     var sofa_material = new THREE.MeshPhongMaterial();
+ 
+     sofa_material.color = sofa_color;
+     sofa_material.shininess = 0;
+ 
+     var loader11 = new THREE.PLYLoader();
+     var sofa_mesh = null;
+     loader10.load('Final Models/sofa8.ply', function (geometry) {
+       geometry.computeVertexNormals();
+       geometry.computeBoundingBox();
+ 
+       var center = geometry.boundingBox.getCenter();
+       var size = geometry.boundingBox.getSize();
+ 
+       var sca = new THREE.Matrix4();
+       var tra = new THREE.Matrix4();
+       var rot = new THREE.Matrix4();
+       var combined = new THREE.Matrix4();
+ 
+       sca.makeScale(30 / size.length(), 30 / size.length(), 30 / size.length());
+       tra.makeTranslation(-center.x, -center.y, -center.z);
+       rot.makeRotationY(Math.PI);
+ 
+       combined.multiply(tra);
+       combined.multiply(sca);
+ 
+       sofa_mesh = new THREE.Mesh(geometry, sofa_material);
+ 
+       sofa_mesh.applyMatrix(sca);
+       sofa_mesh.applyMatrix(rot);
+       sofa_mesh.name = "loaded_mesh_11";
+      
+       sofa_mesh.position.x += 10;
+       sofa_mesh.position.z -= FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - 22;
+ 
+       sofa_mesh.castShadow = true;
+       scene.add(sofa_mesh);
+     });
+
+     //fancychair3 model
+
+    var fancychair3_color = new THREE.Color(0.4, 0.4, 0.4);
+    var fancychair3_material = new THREE.MeshPhongMaterial();
+
+    fancychair3_material.color = fancychair3_color;
+    fancychair3_material.shininess = 0;
+
+    var loader12 = new THREE.PLYLoader();
+    var fancychair3_mesh = null;
+    loaderP.load('Final Models/fancychair1.ply', function (geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var rot1 = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(12 / size.length(), 12 / size.length(), 12 / size.length());
+      tra.makeTranslation(-center.x, -center.y, -center.z);
+      rot1.makeRotationX(3 * Math.PI / 2);
+      rot.makeRotationY(Math.PI);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      fancychair3_mesh = new THREE.Mesh(geometry, fancychair3_material);
+
+      fancychair3_mesh.applyMatrix(sca);
+      fancychair3_mesh.applyMatrix(rot1);
+      fancychair3_mesh.applyMatrix(rot);
+      fancychair3_mesh.name = "loaded_mesh_12";
+
+      fancychair3_mesh.position.x -= 6;
+      fancychair3_mesh.position.z -= FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - 24;
+
+      fancychair3_mesh.castShadow = true;
+      scene.add(fancychair3_mesh);
+    });
+
+    //fancychair4 model
+
+    var fancychair4_color = new THREE.Color(0.4, 0.4, 0.4);
+    var fancychair4_material = new THREE.MeshPhongMaterial();
+
+    fancychair4_material.color = fancychair4_color;
+    fancychair4_material.shininess = 0;
+
+    var loader13 = new THREE.PLYLoader();
+    var fancychair4_mesh = null;
+    loaderP.load('Final Models/fancychair1.ply', function (geometry) {
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      var center = geometry.boundingBox.getCenter();
+      var size = geometry.boundingBox.getSize();
+
+      var sca = new THREE.Matrix4();
+      var tra = new THREE.Matrix4();
+      var rot = new THREE.Matrix4();
+      var rot1 = new THREE.Matrix4();
+      var combined = new THREE.Matrix4();
+
+      sca.makeScale(12 / size.length(), 12 / size.length(), 12 / size.length());
+      tra.makeTranslation(-center.x, -center.y, -center.z);
+      rot1.makeRotationX(3 * Math.PI / 2);
+      rot.makeRotationY(Math.PI * 0.75);
+
+      combined.multiply(tra);
+      combined.multiply(sca);
+
+      fancychair4_mesh = new THREE.Mesh(geometry, fancychair4_material);
+
+      fancychair4_mesh.applyMatrix(sca);
+      fancychair4_mesh.applyMatrix(rot1);
+      fancychair4_mesh.applyMatrix(rot);
+      fancychair4_mesh.name = "loaded_mesh_13";
+
+      fancychair4_mesh.position.x -= 15;
+      fancychair4_mesh.position.z -= FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - 18;
+
+      fancychair4_mesh.castShadow = true;
+      scene.add(fancychair4_mesh);
     });
 
     //car room
