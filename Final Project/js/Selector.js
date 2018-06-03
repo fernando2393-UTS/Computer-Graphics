@@ -42,7 +42,7 @@ function computeCollision(firstObject) {
   var objectsArray = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
     fancychair2_mesh, smalltable_mesh, fridge_mesh, dishwasher_mesh, sink_mesh, stove_mesh, aboveoven1_mesh, cabinet1_mesh,
     cabinet2_mesh, bathtube1_mesh, sink3_mesh, toilet1_mesh, treasurechest_mesh, carpet1_mesh, carpet2_mesh, lampbathroom_mesh,
-    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh
+    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh, fancychair3_mesh, fancychair4_mesh
   ];
   var firstBB = new THREE.Box3().setFromObject(firstObject);
   for (i = 0; i < objectsArray.length; i++) {
@@ -61,7 +61,7 @@ function isSelectable(mesh) {
   var selectableObjects = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
     fancychair2_mesh, smalltable_mesh, fridge_mesh, dishwasher_mesh, sink_mesh, stove_mesh, aboveoven1_mesh, cabinet1_mesh,
     cabinet2_mesh, bathtube1_mesh, sink3_mesh, toilet1_mesh, treasurechest_mesh, carpet1_mesh, carpet2_mesh, lampbathroom_mesh,
-    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh
+    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh, fancychair3_mesh, fancychair4_mesh
   ];
   var found = false;
   found = selectableObjects.some(function (element, index, _arr) {
