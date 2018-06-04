@@ -38,11 +38,14 @@ function onDocumentMouseDown(event) {
   }
 }
 
+
+
 function computeCollision(firstObject) {
   var objectsArray = [bed_mesh, lamp_mesh_1, treasurechest2_mesh, nightstand1_mesh, nightstand2_mesh, bookshelf_mesh, fancychair1_mesh,
     fancychair2_mesh, smalltable_mesh, fridge_mesh, dishwasher_mesh, sink_mesh, stove_mesh, aboveoven1_mesh, cabinet1_mesh,
     cabinet2_mesh, bathtube1_mesh, sink3_mesh, toilet1_mesh, treasurechest_mesh, carpet1_mesh, carpet2_mesh, lampbathroom_mesh,
-    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh, fancychair3_mesh, fancychair4_mesh
+    clothesrack1_mesh, lamp_mesh, sofa_mesh, shelf_mesh, table_mesh, chair_mesh_1, chair_mesh_2, tv_mesh, painting_mesh, car_mesh, fancychair3_mesh, fancychair4_mesh, wall_bottom_out,
+    wall_top_out, wall_left_out, wall_right_out, wall_diagonaltop_right, wall_diagonaltop_left, wall_bottom_10, wall_top_left, wall_top_right, wall_left_04, wall_left_02, wall_right_02
   ];
   var firstBB = new THREE.Box3().setFromObject(firstObject);
   for (i = 0; i < objectsArray.length; i++) {

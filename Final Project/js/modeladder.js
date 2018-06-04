@@ -1072,7 +1072,7 @@
 
       lamp_mesh.castShadow = false;
       scene.add(lamp_mesh);
-      lamp_mesh.add(livingroom_light);
+      lamp_mesh.add(livingroom_light);	    
     });
 
     //Shelf model
