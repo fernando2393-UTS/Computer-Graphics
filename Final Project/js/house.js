@@ -146,14 +146,14 @@ var wall_left_04;
 var wall_left_02;
 var wall_right_02;
 function addWalls() {
-  wall_bottom_out = new THREE.Mesh(geometry_wall_parallel_out, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_bottom_out = new THREE.Mesh(geometry_wall_parallel_out, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_bottom_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.front, 8);
   wall_bottom_out.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_bottom_out.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2;
   wall_bottom_out.castShadow = true;
   scene.add(wall_bottom_out);
 
-  wall_top_out = new THREE.Mesh(geometry_wall_parallel_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_top_out = new THREE.Mesh(geometry_wall_parallel_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_top_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.back, 8);
   updateTexture(wall_top_out, 'http://localhost:8000/img/wand_pattern.jpg', WallSideEnum.front, 1);
   wall_top_out.position.y += (geometry_wall_parallel.parameters.height / 2);
@@ -161,7 +161,7 @@ function addWalls() {
   wall_top_out.castShadow = true;
   scene.add(wall_top_out);
 
-  wall_left_out = new THREE.Mesh(geometry_wall_orthogonal_08, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_left_out = new THREE.Mesh(geometry_wall_orthogonal_08, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_left_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.left, 8);
   wall_left_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_left_out.position.x -= FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
@@ -169,7 +169,7 @@ function addWalls() {
   wall_left_out.castShadow = true;
   scene.add(wall_left_out);
 
-  wall_right_out = new THREE.Mesh(geometry_wall_orthogonal_08, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_right_out = new THREE.Mesh(geometry_wall_orthogonal_08, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_right_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.right, 8);
   wall_right_out.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_right_out.position.x += FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2;
@@ -177,13 +177,13 @@ function addWalls() {
   wall_right_out.castShadow = true;
   scene.add(wall_right_out);
 
-  wall_bottom_10 = new THREE.Mesh(geometry_wall_parallel, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_bottom_10 = new THREE.Mesh(geometry_wall_parallel, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_bottom_10.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_bottom_10.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2;
   wall_bottom_10.castShadow = true;
   scene.add(wall_bottom_10);
 
-  wall_top_left = new THREE.Mesh(geometry_wall_parallel_03, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_top_left = new THREE.Mesh(geometry_wall_parallel_03, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_top_left, 'http://localhost:8000/img/wall_pisa.jpg', WallSideEnum.front, 1);
   wall_top_left.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_top_left.position.x -= FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) - OFFSET;
@@ -191,28 +191,28 @@ function addWalls() {
   wall_top_left.castShadow = true;
   scene.add(wall_top_left);
 
-  wall_top_right = new THREE.Mesh(geometry_wall_parallel_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_top_right = new THREE.Mesh(geometry_wall_parallel_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_top_right.position.y += (geometry_wall_parallel.parameters.height / 2);
   wall_top_right.position.x += FLOOR_WIDTH / 2 * (1 - 0.25) - OFFSET + 1.6;
   wall_top_right.position.z -= FLOOR_LENGTH / 2 - FLOOR_LENGTH * (1 - WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth / 2 - 12;
   wall_top_right.castShadow = true;
   scene.add(wall_top_right);
 
-  wall_left_04 = new THREE.Mesh(geometry_wall_orthogonal_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_left_04 = new THREE.Mesh(geometry_wall_orthogonal_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_left_04.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_left_04.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) - 2;
   wall_left_04.position.z += FLOOR_LENGTH / 2 * (1 - WALL_LEFT_LENGTH) - FLOOR_LENGTH * 0.1 - OFFSET;
   wall_left_04.castShadow = true;
   scene.add(wall_left_04);
 
-  wall_left_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_left_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_left_02.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_left_02.position.x -= FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 6;
   wall_left_02.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2;
   wall_left_02.castShadow = true;
   scene.add(wall_left_02);
 
-  wall_right_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_right_02 = new THREE.Mesh(geometry_wall_orthogonal_02, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_right_02.position.y += (geometry_wall_orthogonal.parameters.height / 2);
   wall_right_02.position.x += FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 5;
   wall_right_02.position.z += FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2;
@@ -220,7 +220,7 @@ function addWalls() {
   scene.add(wall_right_02);
 
   var rot = new THREE.Matrix4();
-  wall_diagonaltop_right = new THREE.Mesh(geometry_wall_diagonal, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_diagonaltop_right = new THREE.Mesh(geometry_wall_diagonal, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   rot.makeRotationY(0.8);
   wall_diagonaltop_right.applyMatrix(rot);
   updateTexture(wall_diagonaltop_right, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.right, 8);
@@ -230,7 +230,7 @@ function addWalls() {
   wall_diagonaltop_right.castShadow = true;
   scene.add(wall_diagonaltop_right);
 
-  wall_diagonaltop_left = new THREE.Mesh(geometry_wall_diagonal, createTextureMaterialsArray('http://localhost:8000/img/txtr_wall_sand.jpg', 1));
+  wall_diagonaltop_left = new THREE.Mesh(geometry_wall_diagonal, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   rot.makeRotationY(-0.8);
   wall_diagonaltop_left.applyMatrix(rot);
   updateTexture(wall_diagonaltop_left, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.left, 8);
