@@ -53,7 +53,9 @@ ________________________________________________________________________________
 
     createScene();
     addCamera();
-
+	
+	addHorizon();
+	addGround();
     addFloor();
     addWalls();
     addDoors();
@@ -86,8 +88,7 @@ ________________________________________________________________________________
     requestAnimationFrame(updateLoop);
     window.addEventListener('resize', resize);
 
-
-    function createScene() {
+ 	function createScene() {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x93C47D);
       renderer = new THREE.WebGLRenderer();
@@ -96,6 +97,7 @@ ________________________________________________________________________________
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       document.body.appendChild(renderer.domElement);
     }
+	
 
     function addCamera() {
       var ratio = window.innerWidth / window.innerHeight;
@@ -105,6 +107,7 @@ ________________________________________________________________________________
       camera.add(cameraLight);
       scene.add(camera);
       controls = new THREE.OrbitControls(camera);
+	  
       /*
       var ratio = window.innerWidth / window.innerHeight;
       camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
