@@ -54,6 +54,7 @@ ________________________________________________________________________________
     createScene();
     addCamera();
 	
+	addRoof();
 	addHorizon();
 	addGround();
     addFloor();
@@ -90,7 +91,7 @@ ________________________________________________________________________________
 
  	function createScene() {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x0080FF);
+      scene.background = new THREE.Color('lightblue');
       renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.shadowMap.enabled = true;
@@ -122,6 +123,7 @@ ________________________________________________________________________________
       var axesHelper = new THREE.AxesHelper(300, 300, 300);
       scene.add(axesHelper);
     }
+	
   </script>
 
 </body>
