@@ -11,52 +11,6 @@ var direction = new THREE.Vector3();
 var vertex = new THREE.Vector3();
 var color = new THREE.Color();
 
-var onKeyDown = function (event) {
-    switch (event.keyCode) {
-        case 38: // up
-        case 87: // w
-            moveForward = true;
-            break;
-        case 37: // left
-        case 65: // a
-            moveLeft = true;
-            break;
-        case 40: // down
-        case 83: // s
-            moveBackward = true;
-            break;
-        case 39: // right
-        case 68: // d
-            moveRight = true;
-            break;
-        case 32: // space
-            if (canJump === true) velocity.y += 350;
-            canJump = false;
-            break;
-    }
-};
-
-var onKeyUp = function (event) {
-    switch (event.keyCode) {
-        case 38: // up
-        case 87: // w
-            moveForward = false;
-            break;
-        case 37: // left
-        case 65: // a
-            moveLeft = false;
-            break;
-        case 40: // down
-        case 83: // s
-            moveBackward = false;
-            break;
-        case 39: // right
-        case 68: // d
-            moveRight = false;
-            break;
-    }
-};
-
 function addMovingCamera() {
     instructions.addEventListener('click', function (event) {
         instructions.style.display = 'none';
@@ -74,16 +28,6 @@ function addMovingCamera() {
     controls = new THREE.PointerLockControls(camera);
     controls.enabled = true;
     scene.add(controls.getObject());
-
-    document.addEventListener('keydown', onKeyDown, false);
-    document.addEventListener('keyup', onKeyUp, false);
-
-    renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
 }
 
 function animate() {
@@ -94,7 +38,6 @@ function animate() {
         velocity.x -= velocity.x * 10.0 * delta;
         velocity.z -= velocity.z * 10.0 * delta;
         velocity.y = 0;
-        //velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
         direction.z = Number(moveForward) - Number(moveBackward);
         direction.x = Number(moveLeft) - Number(moveRight);
         direction.normalize();
