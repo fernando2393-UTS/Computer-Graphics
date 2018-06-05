@@ -38,7 +38,7 @@ ________________________________________________________________________________
   <script src="js/PointerLockControls.js"></script>
   <script src="js/PLYLoader.js"></script>
   <script src="js/dat.gui.min.js"></script>
-  
+
   <script src="js/house.js"></script>
   <script src="js/modeladder.js"></script>
   <script src="js/meshOps.js"></script>
@@ -63,16 +63,17 @@ ________________________________________________________________________________
     var element = document.body;
 
     createScene();
-    //addMovingCamera();
-	addOrbitCamera();
-
+    
      //addRoof();
     //addHorizon();
-    //addGround();
+    addMovingCamera();
+    // addOrbitCamera();
 	
     var scene, camera, cameraLight, renderer, controls;
     var element = document.body;
 
+    addGround();
+    addSphere();
     addFloor();
     addWalls();
     addDoors();
@@ -155,6 +156,7 @@ ________________________________________________________________________________
     scene.add(dome);
     }
 
+    
   </script>
 
 </body>

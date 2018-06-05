@@ -1,13 +1,10 @@
 //////////////////////////////////////////////////////
 //// Define global variables for the house
 //////////////////////////////////////////////////////
-/*var GROUND_WIDTH = 1500;
+var GROUND_WIDTH = 1500;
 var GROUND_HEIGHT = 0.1;
-var GROUND_LENGTH = 1500;*/
+var GROUND_LENGTH = 1500;
 
-/*var ROOF_WIDTH = 1500;
-var ROOF_HEIGHT = 0.1;
-var ROOF_LENGTH = 1500;*/
 
 var FLOOR_WIDTH = 80; //x-axis
 var FLOOR_HEIGHT = 0.1; //y-axis
@@ -21,10 +18,6 @@ var WALL_LEFT2_LENGTH = 0.45;
 var WALL_LEFT3_LENGTH = 0.2;
 var WALL_RIGHT_LENGTH = 0.8;
 var WALL_TOP_WIDTH = 0.35;
-
-/*var HORIZON_HEIGHT = 500;
-var HORIZON_THICKNESS = 0.6;
-var HORIZON_LENGTH = 1050;*/
 
 var DOOR_THICKNESS = WALL_THICKNESS + 2 * OFFSET;
 var DOOR_HEIGHT = WALL_HEIGHT * 0.85;
@@ -53,8 +46,7 @@ var WallSideEnum = Object.freeze({
 //////////////////////////////////////////////////////
 //// Define geometries
 //////////////////////////////////////////////////////
-//var geometry_ground = new THREE.CubeGeometry(GROUND_WIDTH, GROUND_HEIGHT, GROUND_LENGTH);
-//var geometry_roof = new THREE.CubeGeometry(ROOF_WIDTH, ROOF_HEIGHT, ROOF_LENGTH);
+var geometry_ground = new THREE.CubeGeometry(GROUND_WIDTH, GROUND_HEIGHT, GROUND_LENGTH);
 var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
 var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH - 0.2, WALL_HEIGHT, WALL_THICKNESS);
 var geometry_wall_parallel_out = new THREE.CubeGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
@@ -67,11 +59,6 @@ var geometry_wall_orthogonal_06 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HE
 var geometry_wall_orthogonal_04 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * WALL_LEFT2_LENGTH - 0.2);
 var geometry_wall_orthogonal_02 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * WALL_LEFT3_LENGTH);
 var geometry_wall_diagonal = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * 0.287);
-
-/*var geometry_horizon_right = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, HORIZON_THICKNESS);
-var geometry_horizon_left = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, HORIZON_THICKNESS);
-var geometry_horizon_top = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, HORIZON_THICKNESS);
-var geometry_horizon_bottom = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, HORIZON_THICKNESS);*/
 
 var geometry_door = new THREE.CubeGeometry(DOOR_WIDTH, DOOR_HEIGHT, DOOR_THICKNESS);
 var geometry_entrance = new THREE.CubeGeometry(DOOR_WIDTH*2.75, DOOR_HEIGHT, DOOR_THICKNESS);
@@ -265,41 +252,7 @@ wall_top_right = new THREE.Mesh(geometry_wall_parallel_02, createTextureMaterial
   scene.add(wall_diagonaltop_left);
 }
 
-/*var horizon_right;
-var horizon_left;
-var horizon_top;
-var horizon_bottom;
 
-function addHorizon() {
-	horizon_bottom = new THREE.Mesh(geometry_horizon_bottom, createTextureMaterialsArray('http://localhost:8000/img/left.jpg', 1));
-	horizon_bottom.position.y += (geometry_horizon_bottom.parameters.height / 2) - 80;
-	horizon_bottom.position.z += GROUND_LENGTH / 2;
-	scene.add(horizon_bottom);
-	
-	horizon_top = new THREE.Mesh(geometry_horizon_bottom, createTextureMaterialsArray('http://localhost:8000/img/front.jpg', 1));
-	horizon_top.position.y += (geometry_horizon_bottom.parameters.height / 2) - 80;
-	horizon_top.position.z -= GROUND_LENGTH / 2;
-	scene.add(horizon_top);
-	
-	
-	var rot = new THREE.Matrix4();
-	horizon_right = new THREE.Mesh(geometry_horizon_bottom, createTextureMaterialsArray('http://localhost:8000/img/right.jpg', 1));
-	rot.makeRotationY(1.57);
-	horizon_right.applyMatrix(rot);
-	horizon_right.position.y += (geometry_horizon_right.parameters.height / 2) - 80;
-	horizon_right.position.x += GROUND_WIDTH / 2;
-	horizon_right.position.z += GROUND_LENGTH * 0;
-	scene.add(horizon_right);
-
-	var rot = new THREE.Matrix4();
-	horizon_left = new THREE.Mesh(geometry_horizon_bottom, createTextureMaterialsArray('http://localhost:8000/img/back.jpg', 1));
-	rot.makeRotationY(-1.57);
-	horizon_left.applyMatrix(rot);
-	horizon_left.position.y += (geometry_horizon_left.parameters.height / 2) - 80;
-	horizon_left.position.x -=GROUND_WIDTH / 2;
-	horizon_left.position.z -= GROUND_LENGTH * 0;
-	scene.add(horizon_left);
-}*/
 
 var floor;
 
@@ -308,21 +261,44 @@ function addFloor() {
   scene.add(floor);
 }
 
-/*var ground;
 
 function addGround() {
-	ground = new THREE.Mesh(geometry_ground, createTextureMaterialsArray('http://localhost:8000/img/bottom.jpg', 1));
-	ground.position.y -= 80;
+  var texture = new THREE.TextureLoader().load('http://localhost:8000/img/grass7.jpg');
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(20, 20);
+  var groundMaterial = new THREE.MeshBasicMaterial({
+    map: texture
+  });
+
+	var ground = new THREE.Mesh(geometry_ground, groundMaterial);
+	ground.position.y -= 0.1;
 	scene.add(ground);
-}*/
+}
 
-/*var roof;
 
-function addRoof() {
-	roof = new THREE.Mesh(geometry_ground, createTextureMaterialsArray('http://localhost:8000/img/top.jpg', 1));
-	roof.position.y -= 400;
-	scene.add(roof);
-}*/
+function addSphere() {
+
+  var texture = new THREE.TextureLoader().load('http://localhost:8000/img/testText.jpg')
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1, 1);
+  var domeGeometry = new THREE.SphereGeometry(375, 128, 128, 0.5 * Math.PI, Math.PI, 0.5*Math.PI); // Parameters to generate a semisphere
+  var domeMaterial = new THREE.MeshBasicMaterial({
+    map: texture
+  });
+
+  var rot = new THREE.Matrix4();
+  rot.makeRotationX(Math.PI);
+
+  var dome = new THREE.Mesh(domeGeometry, domeMaterial);
+
+  dome.applyMatrix(rot);
+
+  dome.position.y -= 100;
+
+  dome.material.side = THREE.DoubleSide;
+  scene.add(dome);
+}
+
 
 var livingroom_light;
 var bedroom_light;
