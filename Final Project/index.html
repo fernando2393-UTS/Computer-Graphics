@@ -56,7 +56,7 @@ ________________________________________________________________________________
   </div>
 
   <script>
-    var scene, camera, cameraLight, renderer, controls, txtLoader;
+    var scene, camera, cameraLight, renderer, controls;
     var element = document.body;
 
     createScene();
@@ -65,6 +65,12 @@ ________________________________________________________________________________
 
 	//addRoof();
     //addHorizon();
+    var scene, camera, cameraLight, renderer, controls;
+    var element = document.body;
+
+    createScene();
+    addMovingCamera();
+
     addGround();
 
     addFloor();
@@ -103,8 +109,7 @@ ________________________________________________________________________________
       renderer = new THREE.WebGLRenderer({
         antialias: true
       });
-	  
-	 
+
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -114,8 +119,7 @@ ________________________________________________________________________________
     function addAxisHelper() {
       var axesHelper = new THREE.AxesHelper(300, 300, 300);
       scene.add(axesHelper);
-    }
-	
+    }	
 	
 	function addSphere(){
 	
@@ -132,8 +136,6 @@ ________________________________________________________________________________
 			}
     )  };
 	
-	//"http://localhost:8000/img/top.jpg"
-	
     uniforms['color'] = { type: "t", value: 
 	txtLoader.load('http://localhost:8000/img/sky.jpg',
 			function( texture ){
@@ -142,8 +144,6 @@ ________________________________________________________________________________
 				} );    
 			}
     )  };
-    
-	//"http://localhost:8000/Final Project/img/top.jpg"
 	
     var mySky = new THREE.ShaderMaterial ({
 	uniforms : uniforms,
