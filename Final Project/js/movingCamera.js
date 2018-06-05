@@ -12,11 +12,11 @@ var vertex = new THREE.Vector3();
 var color = new THREE.Color();
 
 function addMovingCamera() {
-    instructions.addEventListener('click', function (event) {
-        instructions.style.display = 'none';
-        element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-        element.requestPointerLock();
-    }, false);
+    // instructions.addEventListener('click', function (event) {
+    //     instructions.style.display = 'none';
+    //     element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+    //     element.requestPointerLock();
+    // }, false);
     
     var ratio = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
@@ -37,7 +37,7 @@ function animate() {
         var delta = (time - prevTime) / 1000;
         velocity.x -= velocity.x * 10.0 * delta;
         velocity.z -= velocity.z * 10.0 * delta;
-        velocity.y = 0;
+        // velocity.y = 0;
         direction.z = Number(moveForward) - Number(moveBackward);
         direction.x = Number(moveLeft) - Number(moveRight);
         direction.normalize();
