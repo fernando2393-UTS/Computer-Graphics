@@ -56,15 +56,21 @@ ________________________________________________________________________________
   </div>
 
   <script>
-    var scene, camera, cameraLight, renderer, controls;
+    var scene, camera, cameraLight, renderer, controls, txtLoader;
+    var element = document.body;
+
+ cameraLight, renderer, controls;
     var element = document.body;
 
     createScene();
     addMovingCamera();
 
-    addHorizon();
-    addGround();
+	
+    var scene, camera, cameraLight, renderer, controls;
+    var element = document.body;
 
+    addGround();
+    addSphere();
     addFloor();
     addWalls();
     addDoors();
@@ -72,6 +78,7 @@ ________________________________________________________________________________
     addLighting();
 
     buildGui();
+    addSphere();
 
     var resize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -100,6 +107,7 @@ ________________________________________________________________________________
       renderer = new THREE.WebGLRenderer({
         antialias: true
       });
+
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -110,6 +118,8 @@ ________________________________________________________________________________
       var axesHelper = new THREE.AxesHelper(300, 300, 300);
       scene.add(axesHelper);
     }
+
+    
   </script>
 
 </body>
