@@ -301,7 +301,7 @@ function addFloor() {
 var ground;
 
 function addGround() {
-	ground = new THREE.Mesh(geometry_ground, createTextureMaterialsArray('http://localhost:8000/img/gras2.png', 1));
+	ground = new THREE.Mesh(geometry_ground, createTextureMaterialsArray('http://localhost:8000/img/grass7.jpg', 5));
 	ground.position.y -= 0.1;
 	scene.add(ground);
 }
