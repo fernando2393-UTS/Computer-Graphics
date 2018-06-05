@@ -17,8 +17,9 @@ var onKeyDown = function (event) {
             moveRight = true;
             break;
         case 32: // space
-            if (canJump === true) velocity.y += 350;
-            canJump = false;
+            instructions.style.display = 'none';
+            element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+            element.requestPointerLock();
             break;
         case 27:
             if (selected_obj) {
