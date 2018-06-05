@@ -61,7 +61,7 @@ var geometry_wall_orthogonal_02 = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HE
 var geometry_wall_diagonal = new THREE.CubeGeometry(WALL_THICKNESS, WALL_HEIGHT, FLOOR_LENGTH * 0.287);
 
 var geometry_door = new THREE.CubeGeometry(DOOR_WIDTH, DOOR_HEIGHT, DOOR_THICKNESS);
-var geometry_entrance = new THREE.CubeGeometry(DOOR_WIDTH*2.75, DOOR_HEIGHT, DOOR_THICKNESS);
+var geometry_entrance = new THREE.CubeGeometry(DOOR_WIDTH * 2.75, DOOR_HEIGHT, DOOR_THICKNESS);
 
 var geometry_window = new THREE.CubeGeometry(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_THICKNESS);
 var geometry_window_large = new THREE.CubeGeometry(WINDOW_WIDTH * 2 - 8, WINDOW_HEIGHT, WINDOW_THICKNESS);
@@ -102,7 +102,7 @@ function addDoors() {
   scene.add(door_garage);
 
   var garage_entrance = new THREE.Mesh(geometry_entrance, createTextureMaterial('http://localhost:8000/img/txtr_garage_door.jpg', 1));
-  garage_entrance.position.set(29.40, DOOR_HEIGHT / 2 , FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2);
+  garage_entrance.position.set(29.40, DOOR_HEIGHT / 2, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2);
   scene.add(garage_entrance);
 }
 
@@ -137,14 +137,14 @@ function addWindows() {
 
   var window_livingroom = new THREE.Mesh(geometry_window_tall, material_window);
   window_livingroom.applyMatrix(rotate90Degrees);
-  window_livingroom.position.set(FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2, Y_POS, -15);
+  window_livingroom.position.set(FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2, Y_POS-2, -15);
   scene.add(window_livingroom);
 
   var rot = new THREE.Matrix4();
   rot.makeRotationY(-0.77);
   var window_livingroom_diagonalright = new THREE.Mesh(geometry_window_tall, material_window);
   window_livingroom_diagonalright.applyMatrix(rot);
-  window_livingroom_diagonalright.position.set(FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 14.5, Y_POS, -43.9);
+  window_livingroom_diagonalright.position.set(FLOOR_WIDTH / 2 - FLOOR_WIDTH / 2 * (1 - WALL_TOP_WIDTH) + 14.5, Y_POS-2, -43.9);
   scene.add(window_livingroom_diagonalright);
 
 }
@@ -170,7 +170,7 @@ function addWalls() {
   wall_bottom_out.castShadow = true;
   scene.add(wall_bottom_out);
 
- wall_top_out = new THREE.Mesh(geometry_wall_parallel_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
+  wall_top_out = new THREE.Mesh(geometry_wall_parallel_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   updateTexture(wall_top_out, 'http://localhost:8000/img/txtr_brick_brown.jpg', WallSideEnum.back, 8);
   updateTexture(wall_top_out, 'http://localhost:8000/img/wand_pattern.jpg', WallSideEnum.front, 1);
   wall_top_out.position.y += (geometry_wall_parallel.parameters.height / 2);
@@ -213,7 +213,7 @@ function addWalls() {
   wall_top_right.position.x += FLOOR_WIDTH / 2 * (1 - 0.25) - OFFSET + 1.6;
   wall_top_right.position.z -= FLOOR_LENGTH / 2 - FLOOR_LENGTH * (1 - WALL_LEFT_LENGTH) - geometry_wall_parallel.parameters.depth / 2 - 12;
   wall_top_right.castShadow = true;
-  scene.add(wall_top_right);  
+  scene.add(wall_top_right);
 
   wall_left_04 = new THREE.Mesh(geometry_wall_orthogonal_04, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   wall_left_04.position.y += (geometry_wall_orthogonal.parameters.height / 2);
@@ -246,7 +246,7 @@ function addWalls() {
   wall_diagonaltop_right.position.z -= FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - (FLOOR_LENGTH * 0.2) / 2 + OFFSET;
   wall_diagonaltop_right.castShadow = true;
   scene.add(wall_diagonaltop_right);
-	
+
   wall_diagonaltop_left = new THREE.Mesh(geometry_wall_diagonal, createTextureMaterialsArray('http://localhost:8000/img/txtr_white_wall.jpg', 1));
   rot.makeRotationY(-0.8);
   wall_diagonaltop_left.applyMatrix(rot);
@@ -259,6 +259,7 @@ function addWalls() {
 }
 
 var floor;
+
 function addFloor() {
   floor = new THREE.Mesh(geometry_floor, createTextureMaterialsArray('http://localhost:8000/img/txtr_floor.jpg', 5));
   scene.add(floor);
@@ -272,22 +273,23 @@ function addGround() {
     map: texture
   });
 
-	var ground = new THREE.Mesh(geometry_ground, groundMaterial);
-	ground.position.y -= 0.1;
-	scene.add(ground);
+  var ground = new THREE.Mesh(geometry_ground, groundMaterial);
+  ground.position.y -= 0.1;
+  scene.add(ground);
 }
 
+var dome;
 function addSphere() {
   var texture = new THREE.TextureLoader().load('http://localhost:8000/img/testText.jpg');
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(1, 1);
-  var domeGeometry = new THREE.SphereGeometry(375, 128, 128, 0.5 * Math.PI, Math.PI, 0.5*Math.PI); // Parameters to generate a semisphere
+  var domeGeometry = new THREE.SphereGeometry(375, 128, 128, 0.5 * Math.PI, Math.PI, 0.5 * Math.PI); // Parameters to generate a semisphere
   var domeMaterial = new THREE.MeshBasicMaterial({
     map: texture
   });
   var rot = new THREE.Matrix4();
   rot.makeRotationX(Math.PI);
-  var dome = new THREE.Mesh(domeGeometry, domeMaterial);
+  dome = new THREE.Mesh(domeGeometry, domeMaterial);
   dome.applyMatrix(rot);
   dome.position.y -= 100;
   dome.material.side = THREE.DoubleSide;
@@ -302,23 +304,23 @@ var horizon_light;
 
 function addLighting() {
   livingroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  livingroom_light.position.set(0,0,0);
+  livingroom_light.position.set(0, 0, 0);
   livingroom_light.decay = 2;
   livingroom_light.penumbra = 0.3;
-  livingroom_light.angle = Math.PI*3/4;
+  livingroom_light.angle = Math.PI * 3 / 4;
   livingroom_light.distance = 150;
 
   bedroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  bedroom_light.position.set(0,0,0);
+  bedroom_light.position.set(0, 0, 0);
   bedroom_light.decay = 2;
   bedroom_light.penumbra = 0.3;
-  bedroom_light.angle = Math.PI*3/4;
+  bedroom_light.angle = Math.PI * 3 / 4;
   bedroom_light.distance = 150;
 
   bathroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  bathroom_light.position.set(0,0,0);
+  bathroom_light.position.set(0, 0, 0);
   bathroom_light.decay = 2;
   bathroom_light.penumbra = 0.3;
-  bathroom_light.angle = Math.PI*3/4;
+  bathroom_light.angle = Math.PI * 3 / 4;
   bathroom_light.distance = 150;
 }
