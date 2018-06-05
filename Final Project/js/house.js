@@ -280,10 +280,10 @@ function addGround() {
 
 var dome;
 function addSphere() {
-  var texture = new THREE.TextureLoader().load('http://localhost:8000/img/testText.jpg');
+  var texture = new THREE.TextureLoader().load('http://localhost:8000/img/sky12.jpg');
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1, 1);
-  var domeGeometry = new THREE.SphereGeometry(375, 128, 128, 0.5 * Math.PI, Math.PI, 0.5 * Math.PI); // Parameters to generate a semisphere
+  texture.repeat.set(0,0);
+  var domeGeometry = new THREE.SphereGeometry(375, 128, 128, 0.5 * Math.PI, Math.PI, 0.5*Math.PI); // Parameters to generate a semisphere
   var domeMaterial = new THREE.MeshBasicMaterial({
     map: texture
   });
