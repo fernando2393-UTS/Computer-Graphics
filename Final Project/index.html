@@ -38,7 +38,7 @@ ________________________________________________________________________________
   <script src="js/PointerLockControls.js"></script>
   <script src="js/PLYLoader.js"></script>
   <script src="js/dat.gui.min.js"></script>
-  
+
   <script src="js/house.js"></script>
   <script src="js/modeladder.js"></script>
   <script src="js/meshOps.js"></script>
@@ -60,16 +60,16 @@ ________________________________________________________________________________
     var element = document.body;
 
     createScene();
-    //addMovingCamera();
-	addOrbitCamera();
+    // addMovingCamera();
+    addOrbitCamera();
 
-	//addRoof();
+    //addRoof();
     //addHorizon();
     var scene, camera, cameraLight, renderer, controls;
     var element = document.body;
 
     addGround();
-
+    addSphere();
     addFloor();
     addWalls();
     addDoors();
@@ -116,42 +116,9 @@ ________________________________________________________________________________
     function addAxisHelper() {
       var axesHelper = new THREE.AxesHelper(300, 300, 300);
       scene.add(axesHelper);
-    }	
-	
-	function addSphere(){
-	
-    var uniforms = [ ] ;
-    
-    txtLoader = new THREE.TextureLoader();
-    
-    uniforms['glow'] = { type: "t", value: 
-	txtLoader.load('http://localhost:8000/img/glow.jpg',
-			function( texture ){
-			    var material = new THREE.MeshBasicMaterial( {
-				map: texture
-				} ); 
-			}
-    )  };
-	
-    uniforms['color'] = { type: "t", value: 
-	txtLoader.load('http://localhost:8000/img/sky.jpg',
-			function( texture ){
-			    var material = new THREE.MeshBasicMaterial( {
-				map: texture
-				} );    
-			}
-    )  };
-	
-    var mySky = new THREE.ShaderMaterial ({
-	uniforms : uniforms,
-	side : THREE.BackSide
-	});
-    
-    var domeGeometry = new THREE.SphereGeometry(100, 128, 128);
-    var dome = new THREE.Mesh(domeGeometry, mySky);
-    scene.add(dome);
     }
 
+    
   </script>
 
 </body>
