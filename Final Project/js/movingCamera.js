@@ -28,8 +28,9 @@ function addMovingCamera() {
     animate();
 }
 
+var animateId;
 function animate() {
-    requestAnimationFrame(animate);
+    animateId = requestAnimationFrame(animate);
     if (controlsEnabled == true) {
         var time = performance.now();
         var delta = (time - prevTime) / 1000;

@@ -48,6 +48,7 @@ ________________________________________________________________________________
   <script src="js/orbitCamera.js"></script>
   <script src="js/gui.js"></script>
 
+  <div id="authors">Computer Graphics: Final Project by Alexander Ebner, Fernando Garcia, Hendrik Hangen, Marlies Wagner</div>
   <div id="blocker">
     <div id="instructions">
       <span style="font-size:40px">Press space to play</span>
@@ -59,15 +60,8 @@ ________________________________________________________________________________
     var scene, camera, cameraLight, renderer, controls, txtLoader;
     var element = document.body;
 
- cameraLight, renderer, controls;
-    var element = document.body;
-
     createScene();
     addMovingCamera();
-
-	
-    var scene, camera, cameraLight, renderer, controls;
-    var element = document.body;
 
     addGround();
     addSphere();
@@ -78,7 +72,6 @@ ________________________________________________________________________________
     addLighting();
 
     buildGui();
-    addSphere();
 
     var resize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -91,7 +84,6 @@ ________________________________________________________________________________
     var updateLoop = function () {
       requestAnimationFrame(updateLoop);
       renderer.render(scene, camera);
-      //controls.update();
     };
     requestAnimationFrame(updateLoop);
 
@@ -118,8 +110,6 @@ ________________________________________________________________________________
       var axesHelper = new THREE.AxesHelper(300, 300, 300);
       scene.add(axesHelper);
     }
-
-    
   </script>
 
 </body>

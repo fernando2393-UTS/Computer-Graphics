@@ -77,7 +77,7 @@ function buildGui() {
       addMovingCamera();
     }
     if (val == 1) {
-      scene.remove(controls.getObject());
+      cancelAnimationFrame(animateId);
       addOrbitCamera();
     }
   });
