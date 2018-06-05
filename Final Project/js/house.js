@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////
 //// Define global variables for the house
 //////////////////////////////////////////////////////
-var GROUND_WIDTH = 1500;
+/*var GROUND_WIDTH = 1500;
 var GROUND_HEIGHT = 0.1;
-var GROUND_LENGTH = 1500;
+var GROUND_LENGTH = 1500;*/
 
 /*var ROOF_WIDTH = 1500;
 var ROOF_HEIGHT = 0.1;
@@ -53,7 +53,7 @@ var WallSideEnum = Object.freeze({
 //////////////////////////////////////////////////////
 //// Define geometries
 //////////////////////////////////////////////////////
-var geometry_ground = new THREE.CubeGeometry(GROUND_WIDTH, GROUND_HEIGHT, GROUND_LENGTH);
+//var geometry_ground = new THREE.CubeGeometry(GROUND_WIDTH, GROUND_HEIGHT, GROUND_LENGTH);
 //var geometry_roof = new THREE.CubeGeometry(ROOF_WIDTH, ROOF_HEIGHT, ROOF_LENGTH);
 var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
 var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH - 0.2, WALL_HEIGHT, WALL_THICKNESS);
@@ -308,13 +308,13 @@ function addFloor() {
   scene.add(floor);
 }
 
-var ground;
+/*var ground;
 
 function addGround() {
 	ground = new THREE.Mesh(geometry_ground, createTextureMaterialsArray('http://localhost:8000/img/bottom.jpg', 1));
 	ground.position.y -= 80;
 	scene.add(ground);
-}
+}*/
 
 /*var roof;
 
