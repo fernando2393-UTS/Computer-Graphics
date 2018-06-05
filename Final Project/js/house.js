@@ -300,7 +300,6 @@ function addSphere() {
 var livingroom_light;
 var bedroom_light;
 var bathroom_light;
-var horizon_light;
 
 function addLighting() {
   livingroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
