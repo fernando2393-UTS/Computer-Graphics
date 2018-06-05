@@ -39,23 +39,31 @@ ________________________________________________________________________________
   <script src="js/dat.gui.min.js"></script>
   <script src="js/house.js"></script>
   <script src="js/modeladder.js"></script>
-  <script src="js/selector.js"></script>
   <script src="js/meshOps.js"></script>
-  <script src="js/keyDown.js"></script>
+  <script src="js/Selector.js"></script>
+  <script src="js/keyControls.js"></script>
+  <script src="js/movingCamera.js"></script>
+  <script src="js/orbitCamera.js"></script>
+  <script src="js/PointerLockControls.js"></script>
   <script src="js/gui.js"></script>
 
-  <script>
-    var scene;
-    var camera;
-    var cameraLight;
-    var renderer;
+  <div id="blocker">
+    <div id="instructions">
+      <span style="font-size:40px">Press space to play</span>
+      <br /> (W, A, S, D = Move, MOUSE = Look around)
+    </div>
+  </div>
 
+  <script>
+    var scene, camera, cameraLight, renderer, controls;
+    var element = document.body;
 
     createScene();
-    addCamera();
+    addMovingCamera();
 
     addHorizon();
     addGround();
+
     addFloor();
     addWalls();
     addDoors();
@@ -66,56 +74,36 @@ ________________________________________________________________________________
 
 
     var resize = function () {
-      var width = window.innerWidth;
-      var height = window.innerHeight;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      renderer.setSize(window.innerWidth, window.innerHeight);
       camera.updateProjectionMatrix();
       renderer.render(scene, camera);
     }
+    window.addEventListener('resize', resize);
 
     var updateLoop = function () {
-      controls.update();
-      renderer.render(scene, camera);
       requestAnimationFrame(updateLoop);
+      renderer.render(scene, camera);
+      //controls.update();
     };
+    requestAnimationFrame(updateLoop);
 
     var render = function () {
       requestAnimationFrame(render);
       renderer.render(scene, camera);
     };
 
-    requestAnimationFrame(updateLoop);
-    window.addEventListener('resize', resize);
 
     function createScene() {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x0080FF);
-      renderer = new THREE.WebGLRenderer();
+      scene.background = new THREE.Color(0x93C47D);
+      renderer = new THREE.WebGLRenderer({
+        antialias: true
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       document.body.appendChild(renderer.domElement);
-    }
-
-
-    function addCamera() {
-      var ratio = window.innerWidth / window.innerHeight;
-      camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
-      camera.position.set(60, 25, 60);
-      cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.2));
-      camera.add(cameraLight);
-      scene.add(camera);
-      controls = new THREE.OrbitControls(camera);
-
-      /*
-      var ratio = window.innerWidth / window.innerHeight;
-      camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
-      camera.position.set(60, 25, 60);
-      cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), (0.2));
-      camera.add(cameraLight);
-      scene.add(camera);
-      controls = new THREE.OrbitControls(camera);*/
     }
 
     function addAxisHelper() {
