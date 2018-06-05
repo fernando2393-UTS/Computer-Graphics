@@ -5,9 +5,6 @@ var GROUND_WIDTH = 1500;
 var GROUND_HEIGHT = 0.1;
 var GROUND_LENGTH = 1500;
 
-/*var ROOF_WIDTH = 1500;
-var ROOF_HEIGHT = 0.1;
-var ROOF_LENGTH = 1500;*/
 
 var FLOOR_WIDTH = 80; //x-axis
 var FLOOR_HEIGHT = 0.1; //y-axis
@@ -21,10 +18,6 @@ var WALL_LEFT2_LENGTH = 0.45;
 var WALL_LEFT3_LENGTH = 0.2;
 var WALL_RIGHT_LENGTH = 0.8;
 var WALL_TOP_WIDTH = 0.35;
-
-/*var HORIZON_HEIGHT = 500;
-var HORIZON_THICKNESS = 0.6;
-var HORIZON_LENGTH = 1050;*/
 
 var DOOR_THICKNESS = WALL_THICKNESS + 2 * OFFSET;
 var DOOR_HEIGHT = WALL_HEIGHT * 0.85;
@@ -54,7 +47,6 @@ var WallSideEnum = Object.freeze({
 //// Define geometries
 //////////////////////////////////////////////////////
 var geometry_ground = new THREE.CubeGeometry(GROUND_WIDTH, GROUND_HEIGHT, GROUND_LENGTH);
-//var geometry_roof = new THREE.CubeGeometry(ROOF_WIDTH, ROOF_HEIGHT, ROOF_LENGTH);
 var geometry_floor = new THREE.CubeGeometry(FLOOR_WIDTH, FLOOR_HEIGHT, FLOOR_LENGTH);
 var geometry_wall_parallel = new THREE.CubeGeometry(FLOOR_WIDTH - 0.2, WALL_HEIGHT, WALL_THICKNESS);
 var geometry_wall_parallel_out = new THREE.CubeGeometry(FLOOR_WIDTH, WALL_HEIGHT, WALL_THICKNESS);
@@ -268,6 +260,7 @@ function addFloor() {
   floor = new THREE.Mesh(geometry_floor, createTextureMaterialsArray('http://localhost:8000/img/txtr_floor.jpg', 5));
   scene.add(floor);
 }
+
 
 function addGround() {
   var texture = new THREE.TextureLoader().load('http://localhost:8000/img/grass7.jpg');
