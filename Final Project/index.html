@@ -56,7 +56,7 @@ ________________________________________________________________________________
   </div>
 
   <script>
-    var scene, camera, cameraLight, renderer, controls;
+    var scene, camera, cameraLight, renderer, controls, txtLoader;
     var element = document.body;
 
  cameraLight, renderer, controls;
@@ -66,9 +66,13 @@ ________________________________________________________________________________
     //addMovingCamera();
 	addOrbitCamera();
 
-    //addGround();
 	//addRoof();
-	//addHorizon();
+    //addHorizon();
+	
+    var scene, camera, cameraLight, renderer, controls;
+    var element = document.body;
+
+    //addGround();
     addFloor();
     addWalls();
     addDoors();
@@ -76,7 +80,7 @@ ________________________________________________________________________________
     addLighting();
 
     buildGui();
-	addSphere();
+    addSphere();
 
     var resize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
