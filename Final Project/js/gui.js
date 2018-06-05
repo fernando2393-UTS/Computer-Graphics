@@ -10,15 +10,16 @@ var FizzyText = function () {
   this.bedroom_light = bedroom_light.intensity;
   this.bathroom_light = bathroom_light.intensity;
   this.turn_off_lights = false;
-  this.floor_texture = 'http://localhost:8000/img/txtr_floor.jpg'
-  this.wall_texture = 'http://localhost:8000/img/txtr_brick_brown.jpg'
+  this.floor_texture = 'http://localhost:8000/img/txtr_floor.jpg';
+  this.wall_texture = 'http://localhost:8000/img/txtr_brick_brown.jpg';
+  this.camera = 0
 };
 
 function buildGui() {
   var params = new FizzyText();
   gui = new dat.GUI();
   gui.add(params, 'cameralight_intensity', 0, 3).onChange(function (val) {
-  cameraLight.intensity = val;
+    cameraLight.intensity = val;
   });
   gui.add(params, 'livingroom_light', 0, 3).onChange(function (val) {
     livingroom_light.intensity = val;
@@ -64,6 +65,21 @@ function buildGui() {
     updateTexture(wall_right_out, val, WallSideEnum.right, 8);
     updateTexture(wall_diagonaltop_right, val, WallSideEnum.right, 8);
     updateTexture(wall_diagonaltop_left, val, WallSideEnum.left, 8);
+  });
+  gui.add(params, 'camera', {
+    'Moving Camera': 0,
+    'Orbit Camera': 1
+  }).onChange(function (val) {
+    scene.remove(cameraLight);
+    scene.remove(ambientlight);
+    scene.remove(camera);
+    if (val == 0) {
+      addMovingCamera();
+    }
+    if (val == 1) {
+      scene.remove(controls.getObject());
+      addOrbitCamera();
+    }
   });
   gui.open();
 }

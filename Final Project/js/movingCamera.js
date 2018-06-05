@@ -11,16 +11,13 @@ var direction = new THREE.Vector3();
 var vertex = new THREE.Vector3();
 var color = new THREE.Color();
 
+var ambientlight;
+
 function addMovingCamera() {
-    // instructions.addEventListener('click', function (event) {
-    //     instructions.style.display = 'none';
-    //     element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-    //     element.requestPointerLock();
-    // }, false);
-    
     var ratio = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 2000);
-    var ambientlight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 0.2);
+    camera.position.set(0, 0, 0);
+    ambientlight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 0.2);
     scene.add(ambientlight);
     cameraLight = new THREE.PointLight(new THREE.Color(1, 1, 1), 0.8);
     camera.add(cameraLight);
@@ -28,6 +25,7 @@ function addMovingCamera() {
     controls = new THREE.PointerLockControls(camera);
     controls.enabled = true;
     scene.add(controls.getObject());
+    animate();
 }
 
 function animate() {
@@ -37,7 +35,6 @@ function animate() {
         var delta = (time - prevTime) / 1000;
         velocity.x -= velocity.x * 10.0 * delta;
         velocity.z -= velocity.z * 10.0 * delta;
-        // velocity.y = 0;
         direction.z = Number(moveForward) - Number(moveBackward);
         direction.x = Number(moveLeft) - Number(moveRight);
         direction.normalize();
@@ -49,5 +46,4 @@ function animate() {
         prevTime = time;
     }
     renderer.render(scene, camera);
-
 }
