@@ -59,16 +59,19 @@ ________________________________________________________________________________
     var scene, camera, cameraLight, renderer, controls, txtLoader;
     var element = document.body;
 
+ cameraLight, renderer, controls;
+    var element = document.body;
+
     createScene();
     //addMovingCamera();
 	addOrbitCamera();
 
-	//addRoof();
+     //addRoof();
     //addHorizon();
+    //addGround();
+	
     var scene, camera, cameraLight, renderer, controls;
     var element = document.body;
-
-    addGround();
 
     addFloor();
     addWalls();
@@ -125,7 +128,7 @@ ________________________________________________________________________________
     txtLoader = new THREE.TextureLoader();
     
     uniforms['glow'] = { type: "t", value: 
-	txtLoader.load('http://localhost:8000/img/glow.jpg',
+	txtLoader.load('http://localhost:8000/img/top.jpg',
 			function( texture ){
 			    var material = new THREE.MeshBasicMaterial( {
 				map: texture
@@ -134,7 +137,7 @@ ________________________________________________________________________________
     )  };
 	
     uniforms['color'] = { type: "t", value: 
-	txtLoader.load('http://localhost:8000/img/sky.jpg',
+	txtLoader.load('http://localhost:8000/img/top.jpg',
 			function( texture ){
 			    var material = new THREE.MeshBasicMaterial( {
 				map: texture
@@ -146,8 +149,8 @@ ________________________________________________________________________________
 	uniforms : uniforms,
 	side : THREE.BackSide
 	});
-    
-    var domeGeometry = new THREE.SphereGeometry(1250, 320, 320);
+
+    var domeGeometry = new THREE.SphereGeometry(250, 320, 320);
     var dome = new THREE.Mesh(domeGeometry, mySky);
     scene.add(dome);
     }
