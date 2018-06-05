@@ -41,7 +41,7 @@ ________________________________________________________________________________
   <script src="js/modeladder.js"></script>
   <script src="js/selector.js"></script>
   <script src="js/meshOps.js"></script>
-  <!-- <script src="js/keyDown.js"></script> -->
+  <script src="js/keyControls.js"></script>
   <script src="js/movingCamera.js"></script>
   <script src="js/PointerLockControls.js"></script>
   <script src="js/gui.js"></script>
@@ -71,8 +71,8 @@ ________________________________________________________________________________
 
     var resize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
       camera.updateProjectionMatrix();
       renderer.render(scene, camera);
     }
@@ -91,7 +91,9 @@ ________________________________________________________________________________
     function createScene() {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x93C47D);
-      renderer = new THREE.WebGLRenderer();
+      renderer = new THREE.WebGLRenderer({
+        antialias: true
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
