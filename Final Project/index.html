@@ -61,6 +61,10 @@ ________________________________________________________________________________
     createScene();
     addMovingCamera();
 
+	
+	addHorizon();
+  addGround();
+  
     addFloor();
     addWalls();
     addDoors();
@@ -102,6 +106,7 @@ ________________________________________________________________________________
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       document.body.appendChild(renderer.domElement);
     }
+	
 
 
     function addAxisHelper() {
