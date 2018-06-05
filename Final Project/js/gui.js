@@ -18,7 +18,7 @@ function buildGui() {
   var params = new FizzyText();
   gui = new dat.GUI();
   gui.add(params, 'cameralight_intensity', 0, 3).onChange(function (val) {
-    cameraLight.intensity = val;
+  cameraLight.intensity = val;
   });
   gui.add(params, 'livingroom_light', 0, 3).onChange(function (val) {
     livingroom_light.intensity = val;
