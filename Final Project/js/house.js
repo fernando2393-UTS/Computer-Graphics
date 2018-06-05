@@ -69,6 +69,7 @@ var geometry_horizon_top = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, 
 var geometry_horizon_bottom = new THREE.CubeGeometry(GROUND_WIDTH, HORIZON_HEIGHT, HORIZON_THICKNESS);
 
 var geometry_door = new THREE.CubeGeometry(DOOR_WIDTH, DOOR_HEIGHT, DOOR_THICKNESS);
+var geometry_entrance = new THREE.CubeGeometry(DOOR_WIDTH*2.75, DOOR_HEIGHT, DOOR_THICKNESS);
 
 var geometry_window = new THREE.CubeGeometry(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_THICKNESS);
 var geometry_window_large = new THREE.CubeGeometry(WINDOW_WIDTH * 2 - 8, WINDOW_HEIGHT, WINDOW_THICKNESS);
@@ -107,6 +108,10 @@ function addDoors() {
   var door_garage = new THREE.Mesh(geometry_door, createTextureMaterial('http://localhost:8000/img/txtr_door.png', 1));
   door_garage.position.set(24, DOOR_HEIGHT / 2, FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2 - FLOOR_LENGTH * 0.2);
   scene.add(door_garage);
+
+  var garage_entrance = new THREE.Mesh(geometry_entrance, createTextureMaterial('http://localhost:8000/img/txtr_garage_door.jpg', 1));
+  garage_entrance.position.set(29.40, DOOR_HEIGHT / 2 , FLOOR_LENGTH / 2 - geometry_wall_parallel.parameters.depth / 2);
+  scene.add(garage_entrance);
 }
 
 function addWindows() {
