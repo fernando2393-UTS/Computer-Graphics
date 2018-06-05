@@ -463,8 +463,8 @@
       dishwasher_mesh.applyMatrix(rot);
       dishwasher_mesh.name = "loaded_mesh_A";
 
-      dishwasher_mesh.position.x -= -37.4;
-      dishwasher_mesh.position.z -= -24;
+      dishwasher_mesh.position.x = +37.6;
+      dishwasher_mesh.position.z = +24.6;
 
       dishwasher_mesh.castShadow = true;
       scene.add(dishwasher_mesh);
@@ -535,7 +535,7 @@
       var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(11 / size.length(), 11 / size.length(), 11 / size.length());
+      sca.makeScale(11.5 / size.length(), 11.5 / size.length(), 11.5 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
       rot.makeRotationY(1.5 * Math.PI);
 
@@ -549,8 +549,8 @@
       stove_mesh.applyMatrix(rot);
       stove_mesh.name = "loaded_mesh_C";
 
-      stove_mesh.position.x -= -36.8;
-      stove_mesh.position.z -= -13.5;
+      stove_mesh.position.x += 36.7;
+      stove_mesh.position.z += 14.2;
 
       stove_mesh.castShadow = true;
       scene.add(stove_mesh);
@@ -595,8 +595,8 @@
       aboveoven1_mesh.name = "loaded_mesh_Z";
 
       aboveoven1_mesh.position.x += 38;
-      aboveoven1_mesh.position.z += 13.5;
-      aboveoven1_mesh.position.y += 10;
+      aboveoven1_mesh.position.z += 14.2;
+      aboveoven1_mesh.position.y += 14;
 
       aboveoven1_mesh.castShadow = true;
       scene.add(aboveoven1_mesh);
@@ -624,7 +624,7 @@
       var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(9.8 / size.length(), 9.8 / size.length(), 9.8 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
       rot.makeRotationY(1.5 * Math.PI);
 
@@ -638,8 +638,8 @@
       cabinet1_mesh.applyMatrix(rot);
       cabinet1_mesh.name = "loaded_mesh_D";
 
-      cabinet1_mesh.position.x -= -36.7;
-      cabinet1_mesh.position.z -= -29.9;
+      cabinet1_mesh.position.x += 36.8;
+      cabinet1_mesh.position.z += 30.4;
 
       cabinet1_mesh.castShadow = true;
       scene.add(cabinet1_mesh);
@@ -667,7 +667,7 @@
       var rot = new THREE.Matrix4();
       var combined = new THREE.Matrix4();
 
-      sca.makeScale(10 / size.length(), 10 / size.length(), 10 / size.length());
+      sca.makeScale(9.8 / size.length(), 9.8 / size.length(), 9.8 / size.length());
       tra.makeTranslation(-center.x, -center.y, -center.z);
       rot.makeRotationY(1.5 * Math.PI);
 
@@ -681,8 +681,8 @@
       cabinet2_mesh.applyMatrix(rot);
       cabinet2_mesh.name = "loaded_mesh_E";
 
-      cabinet2_mesh.position.x -= -36.7;
-      cabinet2_mesh.position.z -= -18.9;
+      cabinet2_mesh.position.x += 36.8;
+      cabinet2_mesh.position.z += 19.6;
 
       cabinet2_mesh.castShadow = true;
       scene.add(cabinet2_mesh);
