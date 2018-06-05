@@ -70,6 +70,7 @@ function buildGui() {
     'Moving Camera': 0,
     'Orbit Camera': 1
   }).onChange(function (val) {
+    cameraLight.intensity = 0;
     scene.remove(cameraLight);
     scene.remove(ambientlight);
     scene.remove(camera);
