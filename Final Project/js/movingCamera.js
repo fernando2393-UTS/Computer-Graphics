@@ -1,4 +1,4 @@
-var controlsEnabled = true;
+var controlsEnabled = false;
 var moveForward = false;
 var moveBackward = false;
 var moveLeft = false;

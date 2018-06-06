@@ -12,31 +12,128 @@
     <h1>Manual Page Final Computer Graphics Project</h1>
     <h4>Contributors: Alexander Ebner, Fernando Garcia, Hendrik Hangen, Marlies Wagner</h4>
     <br>
-    <ol>
-        <li>Main Features
-            <ol type="a">
-                <li>Change from a first person camera (Moving Camera) to an orbit camera (Orbit Camera)</li>
-                <li>Move around the house using the keys W,A,S,D</li>
-                <li>Move objects by clicking on them and placing them to a free space (collision detection available)</li>
-                <li>Deselect items by pressing ESC</li>
-                <li>Change texture of the floor and the outer wall</li>
-                <li>Adjust individual lighting for all lamps and the camera light as well</li>
+    <a href="/">
+        <-Back to project</a>
+            <br>
+            <ol>
+                <li>Main Features
+                    <ol type="a">
+                        <li>Change from a first person camera (Moving Camera) to an orbit camera (Orbit Camera)</li>
+                        <li>Move around the house using the keys W,A,S,D, press ESC to get control over the mouse again, press
+                            SPACE to switch back to the first person movement without mouse pointer</li>
+                        <li>Move objects by clicking on them and placing them to a free space (collision detection available)</li>
+                        <li>Only specific objects are selectable (e.g. no walls can be selected)</li>
+                        <li>Deselect items by pressing ESC</li>
+                        <li>Change texture of the floor and the outer wall</li>
+                        <li>Adjust individual lighting for all lamps and the camera light as well</li>
+                    </ol>
+                </li>
+                <br>
+                <li>Programming Insights
+                    <ol type="a">
+                        <li>Code is structured in separate JS files</li>
+                        <li>Index file does only contain the project basics like creating the scene and setting up the renderer</li>
+                        <li>Main procedure is done by calling functions from other scripts and therefore creating the house and
+                            its objects</li>
+                        <li>Models used are in .ply-format and can be adjusted with MeshLab</li>
+                        <li>Bounding Boxes are used for collision detection and an alert is displayed in that case</li>
+                        <li>Texture loading is done with customized methods which also allows for updating specific sides of
+                            a mesh</li>
+                        <li>A css-file in 'css'-folder is used to style the HTML elements</li>
+                        <li>All textures can be found inside the 'img'-folder</li>
+                        <li>All models can be found inside the 'models'-folder</li>
+                    </ol>
+                </li>
+                <br>
+                <li>Scripts Overview
+                    <table>
+                        <tr>
+                            <td>
+                                <strong>dat.gui.min.js</strong>
+                            </td>
+                            <td>Third party script to build the GUI</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>gui.js</strong>
+                            </td>
+                            <td>Custom script to build the GUI using dat.gui.min.js library</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>house.js</strong>
+                            </td>
+                            <td>Custom script to create the walls, floor, windows, doors, lighting, sphere, and ground</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>keyControls.js</strong>
+                            </td>
+                            <td>Custom script defining all key controls like W,A,S,D movement or ESC function</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>meshOps.js</strong>
+                            </td>
+                            <td>Custom script performing all texture creating and updating</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>modeladder.js</strong>
+                            </td>
+                            <td>Custom script adding and adjusting all objects/models to the correct position</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>movingCamera.js</strong>
+                            </td>
+                            <td>Custom script creating a moving camera</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>orbitCamera.js</strong>
+                            </td>
+                            <td>Custom script creating an orbit camera</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>OrbitControls.js</strong>
+                            </td>
+                            <td>Third party script managing the controls for the orbit camera</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>PLYLoader.js</strong>
+                            </td>
+                            <td>Third party script allowing to load .ply-models and adding them to a three.js-scene</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>PointerLockControls.js</strong>
+                            </td>
+                            <td>Third party script managing the controls for the moving camera</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>selector.js</strong>
+                            </td>
+                            <td>Custom script containing the engine for selecting and placing specific objects including collision
+                                detection
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>three.js / three.min.js / three.module.js</strong>
+                            </td>
+                            <td>Third party scripts - core libaries</td>
+                        </tr>
+                    </table>
+                </li>
             </ol>
-        </li>
-        <br>
-        <li>Programming Insights
-            <ol type="a">
-                <li>Code is structured in separate JS files</li>
-                <li>Index file does only contain the project basics like creating the scene and setting up the renderer</li>
-                <li>Main procedure is done by calling functions from other scripts and therefore creating the house and its objects</li>
-                <li>Models used are in .ply-format and can be adjusted with MeshLab</li>
-                <li>Bounding Boxes are used for collision detection and an alert is displayed in that case</li>
-                <li>Texture loading is done with customized methods which also allows for updating specific sides of a mesh</li>
-            </ol>
-        </li>
-    </ol>
-    <br><br>
-    <a href="index.html"><-Back to project</a>
+            <br>
+            <br>
+            <a href="/">
+                <-Back to project</a>
 
 </body>
 

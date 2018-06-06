@@ -17,6 +17,7 @@ var onKeyDown = function (event) {
             moveRight = true;
             break;
         case 32: // space
+            controlsEnabled = true;
             instructions.style.display = 'none';
             element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
             element.requestPointerLock();
