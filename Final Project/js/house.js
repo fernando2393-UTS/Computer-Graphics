@@ -114,6 +114,7 @@ function addWindows() {
 
   var window_bedroom = new THREE.Mesh(geometry_window, material_window);
   window_bedroom.applyMatrix(rotate90Degrees);
+  ++
   window_bedroom.position.set(-(FLOOR_WIDTH / 2 - geometry_wall_orthogonal.parameters.width / 2), Y_POS, 10);
   scene.add(window_bedroom);
 
