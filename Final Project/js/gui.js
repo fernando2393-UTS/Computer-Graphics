@@ -12,7 +12,8 @@ var FizzyText = function () {
   this.turn_off_lights = false;
   this.floor_texture = 'img/txtr_floor.jpg';
   this.wall_texture = 'img/txtr_brick_brown.jpg';
-  this.camera = 0
+  this.camera = 0,
+  this.help = function(){ window.location.href = 'manual.html'; }
 };
 
 function buildGui() {
@@ -82,5 +83,6 @@ function buildGui() {
       addOrbitCamera();
     }
   });
+  gui.add(params, 'help');
   gui.open();
 }

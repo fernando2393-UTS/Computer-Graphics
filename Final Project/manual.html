@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Final Computer Graphics Project - Manual</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <h1>Manual Page Final Computer Graphics Project</h1>
+    <h4>Contributors: Alexander Ebner, Fernando Garcia, Hendrik Hangen, Marlies Wagner</h4>
+    <br>
+    <ol>
+        <li>Main Features
+            <ol type="a">
+                <li>Change from a first person camera (Moving Camera) to an orbit camera (Orbit Camera)</li>
+                <li>Move around the house using the keys W,A,S,D</li>
+                <li>Move objects by clicking on them and placing them to a free space (collision detection available)</li>
+                <li>Deselect items by pressing ESC</li>
+                <li>Change texture of the floor and the outer wall</li>
+                <li>Adjust individual lighting for all lamps and the camera light as well</li>
+            </ol>
+        </li>
+        <br>
+        <li>Programming Insights
+            <ol type="a">
+                <li>Code is structured in separate JS files</li>
+                <li>Index file does only contain the project basics like creating the scene and setting up the renderer</li>
+                <li>Main procedure is done by calling functions from other scripts and therefore creating the house and its objects</li>
+                <li>Models used are in .ply-format and can be adjusted with MeshLab</li>
+                <li>Bounding Boxes are used for collision detection and an alert is displayed in that case</li>
+                <li>Texture loading is done with customized methods which also allows for updating specific sides of a mesh</li>
+            </ol>
+        </li>
+    </ol>
+    <br><br>
+    <a href="index.html"><-Back to project</a>
+
+</body>
+
+</html>
