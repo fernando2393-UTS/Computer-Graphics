@@ -11,7 +11,7 @@
 
     var loader = new THREE.PLYLoader();
     var bed_mesh = null;
-    loader.load('Final Models/Bed1.ply', function (geometry) {
+    loader.load('models/Bed1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -50,7 +50,7 @@
 
     var loader8 = new THREE.PLYLoader();
     var lamp_mesh_1 = null;
-    loader8.load('Final Models/lamp3.ply', function (geometry) {
+    loader8.load('models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -90,7 +90,7 @@
 
     var loaderN = new THREE.PLYLoader();
     var treasurechest2_mesh = null;
-    loaderN.load('Final Models/treasurechest.ply', function (geometry) {
+    loaderN.load('models/treasurechest.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -132,7 +132,7 @@
 
     var loaderS = new THREE.PLYLoader();
     var nightstand1_mesh = null;
-    loaderS.load('Final Models/nightstand1.ply', function (geometry) {
+    loaderS.load('models/nightstand1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -174,7 +174,7 @@
 
     var loaderT = new THREE.PLYLoader();
     var nightstand2_mesh = null;
-    loaderT.load('Final Models/nightstand1.ply', function (geometry) {
+    loaderT.load('models/nightstand1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -219,7 +219,7 @@
 
     var loaderO = new THREE.PLYLoader();
     var bookshelf_mesh = null;
-    loaderO.load('Final Models/bookshelf2.ply', function (geometry) {
+    loaderO.load('models/bookshelf2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -263,7 +263,7 @@
 
     var loaderP = new THREE.PLYLoader();
     var fancychair1_mesh = null;
-    loaderP.load('Final Models/fancychair1.ply', function (geometry) {
+    loaderP.load('models/fancychair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -308,7 +308,7 @@
 
     var loaderQ = new THREE.PLYLoader();
     var fancychair2_mesh = null;
-    loaderQ.load('Final Models/fancychair1.ply', function (geometry) {
+    loaderQ.load('models/fancychair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -353,7 +353,7 @@
 
     var loaderR = new THREE.PLYLoader();
     var smalltable_mesh = null;
-    loaderR.load('Final Models/smalltable2.ply', function (geometry) {
+    loaderR.load('models/smalltable2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -396,7 +396,7 @@
 
     var loader3 = new THREE.PLYLoader();
     var fridge_mesh = null;
-    loader3.load('Final Models/fridge1.ply', function (geometry) {
+    loader3.load('models/fridge1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -438,7 +438,7 @@
 
     var loaderA = new THREE.PLYLoader();
     var dishwasher_mesh = null;
-    loaderA.load('Final Models/dishwasher1.ply', function (geometry) {
+    loaderA.load('models/dishwasher1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -480,7 +480,7 @@
 
     var loaderB = new THREE.PLYLoader();
     var sink_mesh = null;
-    loaderB.load('Final Models/sink1.ply', function (geometry) {
+    loaderB.load('models/sink1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -523,7 +523,7 @@
 
     var loaderC = new THREE.PLYLoader();
     var stove_mesh = null;
-    loaderC.load('Final Models/stove1.ply', function (geometry) {
+    loaderC.load('models/stove1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -566,7 +566,7 @@
 
     var loaderZ = new THREE.PLYLoader();
     var aboveoven1_mesh = null;
-    loaderZ.load('Final Models/aboveoven1.ply', function (geometry) {
+    loaderZ.load('models/aboveoven1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -612,7 +612,7 @@
 
     var loaderD = new THREE.PLYLoader();
     var cabinet1_mesh = null;
-    loaderD.load('Final Models/cabinet1.ply', function (geometry) {
+    loaderD.load('models/cabinet1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -655,7 +655,7 @@
 
     var loaderE = new THREE.PLYLoader();
     var cabinet2_mesh = null;
-    loaderE.load('Final Models/cabinet2.ply', function (geometry) {
+    loaderE.load('models/cabinet2.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -699,7 +699,7 @@
 
     var loaderF = new THREE.PLYLoader();
     var bathtube1_mesh = null;
-    loaderF.load('Final Models/bathtube1.ply', function (geometry) {
+    loaderF.load('models/bathtube1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -741,7 +741,7 @@
 
     var loaderG = new THREE.PLYLoader();
     var sink3_mesh = null;
-    loaderG.load('Final Models/sink3.ply', function (geometry) {
+    loaderG.load('models/sink3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -786,7 +786,7 @@
 
     var loaderH = new THREE.PLYLoader();
     var toilet1_mesh = null;
-    loaderH.load('Final Models/toilet1.ply', function (geometry) {
+    loaderH.load('models/toilet1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -831,7 +831,7 @@
 
     var loaderI = new THREE.PLYLoader();
     var treasurechest_mesh = null;
-    loaderI.load('Final Models/treasurechest.ply', function (geometry) {
+    loaderI.load('models/treasurechest.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -873,7 +873,7 @@
 
     var loaderJ = new THREE.PLYLoader();
     var carpet1_mesh = null;
-    loaderJ.load('Final Models/carpet1.ply', function (geometry) {
+    loaderJ.load('models/carpet1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -915,7 +915,7 @@
 
     var loaderK = new THREE.PLYLoader();
     var carpet2_mesh = null;
-    loaderK.load('Final Models/carpet1.ply', function (geometry) {
+    loaderK.load('models/carpet1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -958,7 +958,7 @@
 
     var loaderL = new THREE.PLYLoader();
     var lampbathroom_mesh = null;
-    loaderL.load('Final Models/lamp3.ply', function (geometry) {
+    loaderL.load('models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1000,7 +1000,7 @@
 
     var loaderM = new THREE.PLYLoader();
     var clothesrack1_mesh = null;
-    loaderM.load('Final Models/clothesrack1.ply', function (geometry) {
+    loaderM.load('models/clothesrack1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1044,7 +1044,7 @@
 
     var loader4 = new THREE.PLYLoader();
     var lamp_mesh = null;
-    loader4.load('Final Models/lamp3.ply', function (geometry) {
+    loader4.load('models/lamp3.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1085,7 +1085,7 @@
 
     var loader2 = new THREE.PLYLoader();
     var shelf_mesh = null;
-    loader2.load('Final Models/shelf1.ply', function (geometry) {
+    loader2.load('models/shelf1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1124,7 +1124,7 @@
 
     var loader5 = new THREE.PLYLoader();
     var table_mesh = null;
-    loader5.load('Final Models/tablestyle1.ply', function (geometry) {
+    loader5.load('models/tablestyle1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1170,7 +1170,7 @@
 
     var loader6 = new THREE.PLYLoader();
     var chair_mesh_1 = null;
-    loader6.load('Final Models/chair1.ply', function (geometry) {
+    loader6.load('models/chair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1212,7 +1212,7 @@
 
     var loader7 = new THREE.PLYLoader();
     var chair_mesh_2 = null;
-    loader7.load('Final Models/chair1.ply', function (geometry) {
+    loader7.load('models/chair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1255,7 +1255,7 @@
 
     var loader9 = new THREE.PLYLoader();
     var tv_mesh = null;
-    loader9.load('Final Models/tv.ply', function (geometry) {
+    loader9.load('models/tv.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1296,7 +1296,7 @@
 
     var loader10 = new THREE.PLYLoader();
     var painting_mesh = null;
-    loader10.load('Final Models/painting1.ply', function (geometry) {
+    loader10.load('models/painting1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1339,7 +1339,7 @@
  
      var loader11 = new THREE.PLYLoader();
      var sofa_mesh = null;
-     loader10.load('Final Models/sofa8.ply', function (geometry) {
+     loader10.load('models/sofa8.ply', function (geometry) {
        geometry.computeVertexNormals();
        geometry.computeBoundingBox();
  
@@ -1381,7 +1381,7 @@
 
     var loader12 = new THREE.PLYLoader();
     var fancychair3_mesh = null;
-    loaderP.load('Final Models/fancychair1.ply', function (geometry) {
+    loaderP.load('models/fancychair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1426,7 +1426,7 @@
 
     var loader13 = new THREE.PLYLoader();
     var fancychair4_mesh = null;
-    loaderP.load('Final Models/fancychair1.ply', function (geometry) {
+    loaderP.load('models/fancychair1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
@@ -1472,7 +1472,7 @@
 
     var loader1 = new THREE.PLYLoader();
     var car_mesh = null;
-    loader1.load('Final Models/car1.ply', function (geometry) {
+    loader1.load('models/car1.ply', function (geometry) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
