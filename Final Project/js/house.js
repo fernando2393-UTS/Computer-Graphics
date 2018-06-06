@@ -303,21 +303,18 @@ var bathroom_light;
 
 function addLighting() {
   livingroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  livingroom_light.position.set(0, 0, 0);
   livingroom_light.decay = 2;
   livingroom_light.penumbra = 0.3;
   livingroom_light.angle = Math.PI * 3 / 4;
   livingroom_light.distance = 150;
 
   bedroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  bedroom_light.position.set(0, 0, 0);
   bedroom_light.decay = 2;
   bedroom_light.penumbra = 0.3;
   bedroom_light.angle = Math.PI * 3 / 4;
   bedroom_light.distance = 150;
 
   bathroom_light = new THREE.SpotLight(new THREE.Color(1, 1, 1), (1));
-  bathroom_light.position.set(0, 0, 0);
   bathroom_light.decay = 2;
   bathroom_light.penumbra = 0.3;
   bathroom_light.angle = Math.PI * 3 / 4;
