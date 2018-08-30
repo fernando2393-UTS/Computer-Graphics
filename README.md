@@ -1,5 +1,5 @@
 # Computer-Graphics
-##### Computer Graphics Project of UTS using OpenGL
+#### Computer Graphics Project of UTS using OpenGL
 
 This project consists of an interactive 3D house model programmed using OpenGL (WebGL).
 
