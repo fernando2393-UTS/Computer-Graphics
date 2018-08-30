@@ -12,3 +12,5 @@ There are two cameras available, which will provide the user a different point o
 Between the options provided in the GUI, there is a manual in which provides a further understanding of the controls.
 
 This project was considered as one of the best ones during the semester. The calification obtained was "High Distinction".
+
+![alt text](Computer-Graphics/Screenshot_1.png)
