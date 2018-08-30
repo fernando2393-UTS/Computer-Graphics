@@ -13,4 +13,4 @@ Between the options provided in the GUI, there is a manual in which provides a f
 
 This project was considered as one of the best ones during the semester. The calification obtained was "High Distinction".
 
-![alt text](Computer-Graphics/Screenshot_1.png)
+![alt text](https://github.com/fernando2393/Computer-Graphics/blob/master/Screenshot_1.png)
