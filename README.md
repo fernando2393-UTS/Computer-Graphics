@@ -1,5 +1,5 @@
 # Computer Graphics
-#### UTS Introduction Computer Graphics course project.
+#### UTS Introduction to Computer Graphics course project.
 
 This project consists of an interactive 3D house model programmed using OpenGL (WebGL).
 
